@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rest-client version="2.4"><request><http-version>1.1</http-version><http-follow-redirects>true</http-follow-redirects><URL>http://localhost:8080/auth/token/test</URL><method>GET</method><auth-methods>BASIC</auth-methods><auth-preemptive>true</auth-preemptive><auth-username>test</auth-username><auth-password>rO0ABXQACHBhc3N3b3Jk</auth-password><headers><header key="" value=""/><header key="" value=""/></headers></request></rest-client>

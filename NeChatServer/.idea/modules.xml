@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/NeChatCore/NeChatCore.iml" filepath="$PROJECT_DIR$/NeChatCore/NeChatCore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/NeChatServer.iml" filepath="$PROJECT_DIR$/.idea/NeChatServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NeChatWebService/NeChatWebService.iml" filepath="$PROJECT_DIR$/NeChatWebService/NeChatWebService.iml" />
+    </modules>
+  </component>
+</project>

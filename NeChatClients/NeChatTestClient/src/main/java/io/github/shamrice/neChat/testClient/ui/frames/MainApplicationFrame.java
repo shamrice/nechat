@@ -1,10 +1,9 @@
-package io.github.shamrice.neChat.testClient.frames;
+package io.github.shamrice.neChat.testClient.ui.frames;
 
-import io.github.shamrice.neChat.testClient.frames.panels.CommandPanel;
-import io.github.shamrice.neChat.testClient.frames.panels.LoginPanel;
+import io.github.shamrice.neChat.testClient.ui.frames.panels.CommandPanel;
+import io.github.shamrice.neChat.testClient.ui.frames.panels.LoginPanel;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

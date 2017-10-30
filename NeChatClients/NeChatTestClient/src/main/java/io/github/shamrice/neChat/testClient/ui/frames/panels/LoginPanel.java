@@ -1,4 +1,8 @@
-package io.github.shamrice.neChat.testClient.frames.panels;
+package io.github.shamrice.neChat.testClient.ui.frames.panels;
+
+import io.github.shamrice.neChat.testClient.state.ApplicationState;
+import io.github.shamrice.neChat.testClient.web.services.NeChatRestClient;
+import io.github.shamrice.neChat.testClient.web.services.configuration.ClientConfiguration;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,14 +37,33 @@ public class LoginPanel implements ActionListener {
         return loginPanel;
     }
 
-    public String getAuthToken() {
-        return tokenTextField.getText();
-    }
-
     public void actionPerformed(ActionEvent event) {
         String eventName = event.getActionCommand();
         System.out.println("EventName: " + eventName);
-        tokenTextField.setText("TEST-TOKEN");
+
+
+
+        if (eventName.toLowerCase().equals("get-auth-token")) {
+
+            ApplicationState.setLogin(loginTextField.getText());
+            char[] passwordArray = passwordTextField.getPassword();
+            String password = "";
+
+            for (int i = 0; i < passwordArray.length; i++) {
+                password += passwordArray[i];
+            }
+            ApplicationState.setPassword(password);
+
+            String token = ApplicationState
+                    .getNeChatRestClient()
+                    .getAuthToken(
+                            loginTextField.getText(),
+                            password
+                    );
+
+            ApplicationState.setAuthToken(token);
+            tokenTextField.setText(token);
+        }
 
     }
 
@@ -55,7 +78,7 @@ public class LoginPanel implements ActionListener {
         tokenTextField = new JTextField(10);
         tokenTextField.setEnabled(false);
 
-        getTokenButton = new JButton("Get Auth Token");
+        getTokenButton = new JButton("Get-Auth-Token");
         getTokenButton.addActionListener(this);
 
         loginPanel.add(loginLabel);

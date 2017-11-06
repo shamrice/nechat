@@ -99,8 +99,8 @@
       <file leaf-file-name="NeChatRestClient.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/github/shamrice/neChat/testClient/web/services/NeChatRestClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="64" column="13" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="13" />
+            <state relative-caret-position="902">
+              <caret line="71" column="24" selection-start-line="71" selection-start-column="24" selection-end-line="71" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -144,11 +144,11 @@
         <option value="$PROJECT_DIR$/src/main/java/io/github/shamrice/neChat/testClient/frames/panels/LoginPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/shamrice/neChat/testClient/web/services/configuration/ClientConfiguration.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/shamrice/neChat/testClient/web/services/NeChatRestClient.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/shamrice/neChat/testClient/state/ApplicationState.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/shamrice/neChat/testClient/NeChatTestClient.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/shamrice/neChat/testClient/ui/frames/panels/CommandPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/shamrice/neChat/testClient/ui/frames/panels/LoginPanel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/shamrice/neChat/testClient/web/services/NeChatRestClient.java" />
       </list>
     </option>
   </component>
@@ -925,15 +925,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1509177973360</updated>
-      <workItem from="1509177976074" duration="12485000" />
+      <workItem from="1509177976074" duration="14904000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12485000" />
+    <option name="totallyTimeSpent" value="14904000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1444" y="-4" width="1448" height="908" extended-state="6" />
+    <frame x="-1444" y="-4" width="1448" height="908" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -1072,8 +1072,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/github/shamrice/neChat/testClient/web/services/NeChatRestClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="64" column="13" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="13" />
+        <state relative-caret-position="902">
+          <caret line="71" column="24" selection-start-line="71" selection-start-column="24" selection-end-line="71" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

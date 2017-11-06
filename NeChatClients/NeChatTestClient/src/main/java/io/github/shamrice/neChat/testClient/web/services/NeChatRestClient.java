@@ -72,7 +72,7 @@ public class NeChatRestClient {
             String line;
             while ((line = reader.readLine()) != null) {
                 response.append(line);
-                response.equals('\r');
+                response.append('\r');
             }
             reader.close();
 

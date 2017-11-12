@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: json-20171018.jar
+Main-Class: io.github.shamrice.neChat.testClient.NeChatTestClient
+

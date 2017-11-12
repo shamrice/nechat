@@ -4,6 +4,7 @@ import io.github.shamrice.nechat.core.CoreContext;
 import io.github.shamrice.nechat.core.db.dto.MessageDto;
 import io.github.shamrice.nechat.core.db.MessageService;
 import io.github.shamrice.nechat.core.db.TokenAuthService;
+import io.github.shamrice.nechat.core.db.dto.MessagesDto;
 import io.github.shamrice.nechat.webservice.security.util.AuthAccessUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
@@ -19,10 +20,10 @@ import java.util.List;
 public class MessagesController {
 
     @RequestMapping(value = "/messages", method = RequestMethod.GET)
-    public @ResponseBody List<MessageDto> getMessagesForUser(
+    public @ResponseBody MessagesDto getMessagesForUser(
             @RequestHeader(value = "token", required = true) String token
     ) throws AccessDeniedException {
-        List<MessageDto> messages = null;
+        MessagesDto messages = null;
 
         String login = AuthAccessUtil.getCurrentLoginPrincipal();
 

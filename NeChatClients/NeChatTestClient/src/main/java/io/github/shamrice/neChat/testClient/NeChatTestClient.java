@@ -4,6 +4,7 @@ import io.github.shamrice.neChat.testClient.state.ApplicationState;
 import io.github.shamrice.neChat.testClient.ui.frames.MainApplicationFrame;
 import io.github.shamrice.neChat.testClient.web.services.NeChatRestClient;
 import io.github.shamrice.neChat.testClient.web.services.configuration.ClientConfiguration;
+import io.github.shamrice.neChat.testClient.web.services.configuration.ConfigurationBuilder;
 
 import javax.swing.*;
 
@@ -18,12 +19,11 @@ public class NeChatTestClient {
                 createAndShowGUI();
             }
         });
-
     }
 
     private static void createAndShowGUI() {
 
-        NeChatRestClient neChatRestClient = new NeChatRestClient(new ClientConfiguration());
+        NeChatRestClient neChatRestClient = new NeChatRestClient(ConfigurationBuilder.build());
         ApplicationState.setNeChatRestClient(neChatRestClient);
 
         JFrame.setDefaultLookAndFeelDecorated(true);

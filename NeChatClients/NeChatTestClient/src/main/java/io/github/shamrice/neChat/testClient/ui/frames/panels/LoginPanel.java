@@ -1,8 +1,7 @@
 package io.github.shamrice.neChat.testClient.ui.frames.panels;
 
 import io.github.shamrice.neChat.testClient.state.ApplicationState;
-import io.github.shamrice.neChat.testClient.web.services.NeChatRestClient;
-import io.github.shamrice.neChat.testClient.web.services.configuration.ClientConfiguration;
+import io.github.shamrice.neChat.testClient.web.services.credentials.UserCredentials;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,27 +40,25 @@ public class LoginPanel implements ActionListener {
         String eventName = event.getActionCommand();
         System.out.println("EventName: " + eventName);
 
-
-
         if (eventName.toLowerCase().equals("get-auth-token")) {
 
-            ApplicationState.setLogin(loginTextField.getText());
+            String login = loginTextField.getText();
             char[] passwordArray = passwordTextField.getPassword();
             String password = "";
 
             for (int i = 0; i < passwordArray.length; i++) {
                 password += passwordArray[i];
             }
-            ApplicationState.setPassword(password);
+            String userPassword = password;
+
+            ApplicationState.getNeChatRestClient().setUserCredentials(
+                    new UserCredentials(login, userPassword)
+            );
 
             String token = ApplicationState
                     .getNeChatRestClient()
-                    .getAuthToken(
-                            loginTextField.getText(),
-                            password
-                    );
+                    .getAuthToken();
 
-            ApplicationState.setAuthToken(token);
             tokenTextField.setText(token);
         }
 

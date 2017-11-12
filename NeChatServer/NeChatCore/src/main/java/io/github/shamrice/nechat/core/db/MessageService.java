@@ -2,6 +2,7 @@ package io.github.shamrice.nechat.core.db;
 
 import io.github.shamrice.nechat.core.CoreContext;
 import io.github.shamrice.nechat.core.db.dto.MessageDto;
+import io.github.shamrice.nechat.core.db.dto.MessagesDto;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -51,8 +52,8 @@ public class MessageService extends DbService {
 
     }
 
-    public List<MessageDto> getUnreadMessages(String login) {
-        List<MessageDto> results = new ArrayList<>();
+    public MessagesDto getUnreadMessages(String login) {
+        List<MessageDto> messageDtos = new ArrayList<>();
 
         String query =  "" +
                 "select " +
@@ -97,7 +98,7 @@ public class MessageService extends DbService {
                             createDate
                     );
 
-                    results.add(messageDao);
+                    messageDtos.add(messageDao);
                 }
 
             } catch (SQLException sqlExc) {
@@ -112,6 +113,8 @@ public class MessageService extends DbService {
             }
         }
 
-        return results;
+        MessagesDto messagesDto = new MessagesDto(login);
+        messagesDto.setMessageDtos(messageDtos);
+        return messagesDto;
     }
 }

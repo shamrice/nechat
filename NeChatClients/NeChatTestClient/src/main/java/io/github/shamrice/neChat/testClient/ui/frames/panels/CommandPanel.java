@@ -1,8 +1,6 @@
 package io.github.shamrice.neChat.testClient.ui.frames.panels;
 
 import io.github.shamrice.neChat.testClient.state.ApplicationState;
-import io.github.shamrice.neChat.testClient.web.services.NeChatRestClient;
-import io.github.shamrice.neChat.testClient.web.services.configuration.ClientConfiguration;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,17 +31,28 @@ public class CommandPanel implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         String eventName = event.getActionCommand();
         System.out.println("CommandPanel-EventName: " + eventName);
-        System.out.println("Login: " + ApplicationState.getLogin());
-        System.out.println("Password: " + ApplicationState.getPassword());
-        System.out.println("Auth_Token: " + ApplicationState.getAuthToken());
 
-        String result = ApplicationState
-                .getNeChatRestClient()
-                .getBuddies(
-                        ApplicationState.getLogin(),
-                        ApplicationState.getPassword(),
-                        ApplicationState.getAuthToken()
-                );
+        String result = "";
+
+        switch(eventName) {
+
+            case "Get Messages":
+                result = ApplicationState
+                        .getNeChatRestClient()
+                        .getMessages();
+                break;
+
+            case "Get Buddies":
+                result = ApplicationState
+                        .getNeChatRestClient()
+                        .getBuddies();
+                break;
+
+            default:
+                result = "event not found: " + eventName;
+                break;
+        }
+
         ApplicationState.setResult(result);
         resultsTextField.setText(result);
     }
@@ -64,6 +73,7 @@ public class CommandPanel implements ActionListener {
 
         commandPanel.add(getMessagesButton);
         commandPanel.add(getBuddiesButton);
+        commandPanel.add(getMessagesButton);
         commandPanel.add(resultsTextField);
     }
 }

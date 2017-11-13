@@ -2,19 +2,13 @@ package io.github.shamrice.neChat.testClient.web.services;
 
 import io.github.shamrice.neChat.testClient.web.services.configuration.ClientConfiguration;
 import io.github.shamrice.neChat.testClient.web.services.credentials.UserCredentials;
-import io.github.shamrice.neChat.testClient.web.services.requests.AuthorizationRequests;
-import io.github.shamrice.neChat.testClient.web.services.requests.BuddiesRequests;
-import io.github.shamrice.neChat.testClient.web.services.requests.MessagesRequests;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.Map;
+import io.github.shamrice.neChat.testClient.web.services.requests.StatusResponse;
+import io.github.shamrice.neChat.testClient.web.services.requests.authorization.AuthorizationRequests;
+import io.github.shamrice.neChat.testClient.web.services.requests.authorization.AuthorizationResponse;
+import io.github.shamrice.neChat.testClient.web.services.requests.buddies.BuddiesRequests;
+import io.github.shamrice.neChat.testClient.web.services.requests.messages.MessagesRequests;
+import io.github.shamrice.neChat.testClient.web.services.requests.buddies.BuddiesResponse;
+import io.github.shamrice.neChat.testClient.web.services.requests.messages.MessagesResponse;
 
 /**
  * Created by Erik on 10/30/2017.
@@ -33,18 +27,21 @@ public class NeChatRestClient {
         this.userCredentials = userCredentials;
     }
 
-    public String getAuthToken() {
-        userCredentials.setAuthToken(
-                new AuthorizationRequests(userCredentials, clientConfiguration).getAuthToken()
-        );
-        return userCredentials.getAuthToken();
+    public AuthorizationResponse getAuthToken() {
+        AuthorizationResponse response = new AuthorizationRequests(userCredentials, clientConfiguration).getAuthToken();
+        userCredentials.setAuthToken(response.getAuthToken());
+        return response;
     }
 
-    public String getBuddies() {
+    public StatusResponse addBuddy(String buddyLogin) {
+        return new BuddiesRequests(userCredentials, clientConfiguration).addBuddy(buddyLogin);
+    }
+
+    public BuddiesResponse getBuddies() {
         return new BuddiesRequests(userCredentials, clientConfiguration).getBuddies();
     }
 
-    public String getMessages() {
+    public MessagesResponse getMessages() {
         return new MessagesRequests(userCredentials, clientConfiguration).getMessages();
     }
 

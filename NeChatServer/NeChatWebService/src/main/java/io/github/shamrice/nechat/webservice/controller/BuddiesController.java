@@ -4,6 +4,8 @@ import io.github.shamrice.nechat.core.CoreContext;
 import io.github.shamrice.nechat.core.db.BuddiesService;
 import io.github.shamrice.nechat.core.db.dto.BuddiesDto;
 import io.github.shamrice.nechat.core.db.TokenAuthService;
+import io.github.shamrice.nechat.webservice.response.Status;
+import io.github.shamrice.nechat.webservice.response.StatusResponse;
 import io.github.shamrice.nechat.webservice.security.util.AuthAccessUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
@@ -38,7 +40,7 @@ public class BuddiesController {
 
     @RequestMapping(value = "buddies/{buddy}", method = RequestMethod.PUT)
     public @ResponseBody
-    HttpStatus addBuddy(
+    StatusResponse addBuddy(
             @RequestHeader(value = "token", required = true) String token,
             @PathVariable(value = "buddy") String buddy
     ) {
@@ -49,13 +51,13 @@ public class BuddiesController {
         if (tokenAuthService.authorizeToken(token, login)) {
             BuddiesService buddiesService = new BuddiesService(CoreContext.getInstance());
             if (buddiesService.addBuddy(login, buddy)) {
-                return HttpStatus.CREATED;
+                return new StatusResponse(Status.SUCCESS, "Buddy added");
             } else {
-                return HttpStatus.CONFLICT;
+                return new StatusResponse(Status.FAILURE, "Buddy exists");
             }
         }
 
-        return HttpStatus.FORBIDDEN;
+        return new StatusResponse(Status.INVALID, "FORBIDDEN");
     }
 
     @RequestMapping(value = "buddies/{buddy}", method = RequestMethod.DELETE)

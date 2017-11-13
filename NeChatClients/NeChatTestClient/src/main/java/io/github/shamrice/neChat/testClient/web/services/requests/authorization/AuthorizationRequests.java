@@ -1,8 +1,11 @@
-package io.github.shamrice.neChat.testClient.web.services.requests;
+package io.github.shamrice.neChat.testClient.web.services.requests.authorization;
 
 import io.github.shamrice.neChat.testClient.web.services.configuration.ClientConfiguration;
 import io.github.shamrice.neChat.testClient.web.services.credentials.UserCredentials;
+import io.github.shamrice.neChat.testClient.web.services.requests.RequestsBase;
 import org.json.JSONObject;
+
+import java.sql.Date;
 
 /**
  * Created by Erik on 11/12/2017.
@@ -13,7 +16,9 @@ public class AuthorizationRequests extends RequestsBase {
         super(userCredentials, clientConfiguration);
     }
 
-    public String getAuthToken() {
+    public AuthorizationResponse getAuthToken() {
+
+        AuthorizationResponse result = null;
 
         JSONObject response = executeRequest(
                 "GET",
@@ -23,8 +28,14 @@ public class AuthorizationRequests extends RequestsBase {
         String authToken = response.get("authToken").toString();
         userCredentials.setAuthToken(authToken);
 
-        return authToken;
+        result = new AuthorizationResponse(
+                response.getInt("tokenAuthId"),
+                response.getInt("userId"),
+                response.getString("authToken"),
+                Date.valueOf(response.getString("create")),
+                Date.valueOf(response.getString("expire"))
+        );
+
+        return result;
     }
-
-
 }

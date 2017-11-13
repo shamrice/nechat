@@ -15,6 +15,7 @@ public class CommandPanel implements ActionListener {
     private JPanel commandPanel;
     private JButton getMessagesButton;
     private JButton getBuddiesButton;
+    private JButton addBuddyButton;
     private JTextField resultsTextField;
 
     public CommandPanel() {
@@ -39,13 +40,21 @@ public class CommandPanel implements ActionListener {
             case "Get Messages":
                 result = ApplicationState
                         .getNeChatRestClient()
-                        .getMessages();
+                        .getMessages().getLogin();
                 break;
 
             case "Get Buddies":
                 result = ApplicationState
                         .getNeChatRestClient()
-                        .getBuddies();
+                        .getBuddies()
+                        .toString();
+                break;
+
+            case "Add Buddy":
+                result = ApplicationState
+                        .getNeChatRestClient()
+                        .addBuddy("test3")
+                        .getMessage();
                 break;
 
             default:
@@ -68,12 +77,16 @@ public class CommandPanel implements ActionListener {
         getBuddiesButton = new JButton("Get Buddies");
         getBuddiesButton.addActionListener(this);
 
+        addBuddyButton = new JButton("Add Buddy");
+        addBuddyButton.addActionListener(this);
+
         resultsTextField = new JTextField();
         resultsTextField.setSize(new Dimension(100, 100));
 
         commandPanel.add(getMessagesButton);
         commandPanel.add(getBuddiesButton);
         commandPanel.add(getMessagesButton);
+        commandPanel.add(addBuddyButton);
         commandPanel.add(resultsTextField);
     }
 }

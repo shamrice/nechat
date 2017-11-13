@@ -57,6 +57,7 @@ public class LoginPanel implements ActionListener {
 
             String token = ApplicationState
                     .getNeChatRestClient()
+                    .getAuthToken()
                     .getAuthToken();
 
             tokenTextField.setText(token);

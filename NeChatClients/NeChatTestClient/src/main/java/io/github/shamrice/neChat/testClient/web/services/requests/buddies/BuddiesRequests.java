@@ -8,9 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Erik on 11/12/2017.
@@ -22,22 +20,27 @@ public class BuddiesRequests extends RequestsBase {
     }
 
     public StatusResponse addBuddy(String buddyLogin) {
-        Map<String, String> requestHeaders = new HashMap<>();
-        requestHeaders.put("token", userCredentials.getAuthToken());
 
         JSONObject response = executeRequest(
                 "PUT",
                 "buddies/" + buddyLogin + "/",
-                requestHeaders
+                getTokenRequestHeader()
         );
 
-        boolean success = false;
-        if (response.getString("status").equals("SUCCESS")) {
-            success = true;
-        }
+        return new StatusResponse(
+                response.getString("status"),
+                response.getString("message")
+        );
+    }
+
+    public StatusResponse removeBuddy(String buddyLogin) {
+        JSONObject response = executeRequest(
+                "DELETE",
+                "buddies/" + buddyLogin + "/",
+                getTokenRequestHeader()
+        );
 
         return new StatusResponse(
-                success,
                 response.getString("status"),
                 response.getString("message")
         );
@@ -45,13 +48,10 @@ public class BuddiesRequests extends RequestsBase {
 
     public BuddiesResponse getBuddies() {
 
-        Map<String, String> requestHeaders = new HashMap<>();
-        requestHeaders.put("token", userCredentials.getAuthToken());
-
         JSONObject response = executeRequest(
                 "GET",
                 "buddies",
-                requestHeaders
+                getTokenRequestHeader()
         );
 
         List<Buddy> buddyList = new ArrayList<>();

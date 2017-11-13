@@ -37,12 +37,20 @@ public class NeChatRestClient {
         return new BuddiesRequests(userCredentials, clientConfiguration).addBuddy(buddyLogin);
     }
 
+    public StatusResponse removeBuddy(String buddyLogin) {
+        return new BuddiesRequests(userCredentials, clientConfiguration).removeBuddy(buddyLogin);
+    }
+
     public BuddiesResponse getBuddies() {
         return new BuddiesRequests(userCredentials, clientConfiguration).getBuddies();
     }
 
     public MessagesResponse getMessages() {
         return new MessagesRequests(userCredentials, clientConfiguration).getMessages();
+    }
+
+    public StatusResponse sendMessage(String buddyLogin, String message) {
+        return new MessagesRequests(userCredentials, clientConfiguration).sendMessage(buddyLogin, message);
     }
 
 }

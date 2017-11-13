@@ -4,15 +4,10 @@ import io.github.shamrice.neChat.testClient.web.services.configuration.ClientCon
 import io.github.shamrice.neChat.testClient.web.services.credentials.UserCredentials;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Erik on 11/12/2017.
@@ -27,7 +22,17 @@ public abstract class RequestsBase {
         this.clientConfiguration = clientConfiguration;
     }
 
+    protected Map<String, String> getTokenRequestHeader() {
+        Map<String, String> requestHeaders = new HashMap<>();
+        requestHeaders.put("token", userCredentials.getAuthToken());
+        return requestHeaders;
+    }
+
     protected JSONObject executeRequest(String method, String resource, Map<String, String> requestHeaders) {
+        return executeRequest(method, resource, requestHeaders, "");
+    }
+
+    protected JSONObject executeRequest(String method, String resource, Map<String, String> requestHeaders, String body) {
 
         JSONObject jsonObject = null;
         HttpURLConnection connection = null;
@@ -40,7 +45,8 @@ public abstract class RequestsBase {
 
             URL url = new URL(clientConfiguration.getServiceUrl() + resource);
             connection = (HttpURLConnection) url.openConnection();
-
+            connection.setUseCaches(false);
+            connection.setDoOutput(true);
             connection.setRequestMethod(method);
             connection.setRequestProperty("Authorization", "Basic " + encoding);
 
@@ -49,8 +55,15 @@ public abstract class RequestsBase {
                     connection.setRequestProperty(key, requestHeaders.get(key));
                 }
             }
-            connection.setUseCaches(false);
-            connection.setDoOutput(true);
+
+            if (!body.equals("")) {
+                connection.setRequestProperty("Content-Type", "application/text; charset-UTF-8"); //TODO : SET TO JSON
+
+                OutputStream os = connection.getOutputStream();
+                os.write(body.getBytes("UTF-8"));
+                os.flush();
+                os.close();
+            }
 
             InputStream content = connection.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(content));
@@ -72,57 +85,6 @@ public abstract class RequestsBase {
 
         return jsonObject;
     }
-/*
-    protected List<JSONObject> executeRequestWithResultsList(String method, String resource, Map<String, String> requestHeaders) {
 
-        List<JSONObject> results = new ArrayList<>();
-        HttpURLConnection connection = null;
-
-        try {
-
-            String encoding = Base64.getEncoder().encodeToString(
-                    (userCredentials.getLogin() + ":" + userCredentials.getPassword()).getBytes("UTF-8")
-            );
-
-            URL url = new URL(clientConfiguration.getServiceUrl() + resource);
-            connection = (HttpURLConnection) url.openConnection();
-
-            connection.setRequestMethod(method);
-            connection.setRequestProperty("Authorization", "Basic " + encoding);
-
-            if (requestHeaders != null) {
-                for (String key : requestHeaders.keySet()) {
-                    connection.setRequestProperty(key, requestHeaders.get(key));
-                }
-            }
-            connection.setUseCaches(false);
-            connection.setDoOutput(true);
-
-            InputStream content = connection.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(content));
-          //  StringBuilder response = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-                JSONObject jsonObject = new JSONObject(line);
-                results.add(jsonObject);
-                //response.append(line);
-                //response.append('\r');
-            }
-            reader.close();
-
-           // System.out.println(resource + "-RESPONSE: " + response.toString());
-
-          //  JSONObject jsonObject = new JSONObject(response.toString());
-
-          //  results.add(jsonObject);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return results;
-    }
-    */
 
 }

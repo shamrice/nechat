@@ -6,16 +6,14 @@ package io.github.shamrice.neChat.testClient.web.services.requests;
 public class StatusResponse {
     private String status;
     private String message;
-    private boolean success;
 
-    public StatusResponse(boolean success, String status, String message) {
-        this.success = success;
+    public StatusResponse(String status, String message) {
         this.status = status;
         this.message = message;
     }
 
     public boolean isSuccess() {
-        return success;
+        return status.toLowerCase().equals("success");
     }
 
     public String getStatus() {

@@ -14,13 +14,15 @@ public class CommandPanel implements ActionListener {
 
     private JPanel commandPanel;
     private JButton getMessagesButton;
+    private JButton sendMessageButton;
     private JButton getBuddiesButton;
     private JButton addBuddyButton;
+    private JButton removeBuddyButton;
     private JTextField resultsTextField;
 
     public CommandPanel() {
         commandPanel = new JPanel();
-        commandPanel.setLayout(new GridLayout(2, 3));
+        commandPanel.setLayout(new GridLayout(2, 4));
         commandPanel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createTitledBorder("Commands"),
                 BorderFactory.createEmptyBorder(5, 5, 5, 5)
@@ -43,6 +45,13 @@ public class CommandPanel implements ActionListener {
                         .getMessages().getLogin();
                 break;
 
+            case "Send Message":
+                result = ApplicationState
+                        .getNeChatRestClient()
+                        .sendMessage("test3", "THIS IS A TEST MESSAGE FROM CLIENT")
+                        .getMessage();
+                break;
+
             case "Get Buddies":
                 result = ApplicationState
                         .getNeChatRestClient()
@@ -54,6 +63,13 @@ public class CommandPanel implements ActionListener {
                 result = ApplicationState
                         .getNeChatRestClient()
                         .addBuddy("test3")
+                        .getMessage();
+                break;
+
+            case "Remove Buddy":
+                result = ApplicationState
+                        .getNeChatRestClient()
+                        .removeBuddy("test3")
                         .getMessage();
                 break;
 
@@ -74,19 +90,27 @@ public class CommandPanel implements ActionListener {
         getMessagesButton = new JButton("Get Messages");
         getMessagesButton.addActionListener(this);
 
+        sendMessageButton = new JButton("Send Message");
+        sendMessageButton.addActionListener(this);
+
         getBuddiesButton = new JButton("Get Buddies");
         getBuddiesButton.addActionListener(this);
 
         addBuddyButton = new JButton("Add Buddy");
         addBuddyButton.addActionListener(this);
 
+        removeBuddyButton = new JButton("Remove Buddy");
+        removeBuddyButton.addActionListener(this);
+
         resultsTextField = new JTextField();
         resultsTextField.setSize(new Dimension(100, 100));
 
         commandPanel.add(getMessagesButton);
+        commandPanel.add(sendMessageButton);
         commandPanel.add(getBuddiesButton);
         commandPanel.add(getMessagesButton);
         commandPanel.add(addBuddyButton);
+        commandPanel.add(removeBuddyButton);
         commandPanel.add(resultsTextField);
     }
 }

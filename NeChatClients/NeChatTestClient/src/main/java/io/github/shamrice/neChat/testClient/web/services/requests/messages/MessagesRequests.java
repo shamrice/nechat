@@ -3,13 +3,12 @@ package io.github.shamrice.neChat.testClient.web.services.requests.messages;
 import io.github.shamrice.neChat.testClient.web.services.configuration.ClientConfiguration;
 import io.github.shamrice.neChat.testClient.web.services.credentials.UserCredentials;
 import io.github.shamrice.neChat.testClient.web.services.requests.RequestsBase;
+import io.github.shamrice.neChat.testClient.web.services.requests.StatusResponse;
 import org.json.JSONObject;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Erik on 11/12/2017.
@@ -20,15 +19,27 @@ public class MessagesRequests extends RequestsBase {
         super(userCredentials, clientConfiguration);
     }
 
-    public MessagesResponse getMessages() {
+    public StatusResponse sendMessage(String buddyLogin, String message) {
 
-        Map<String, String> requestHeaders = new HashMap<>();
-        requestHeaders.put("token", userCredentials.getAuthToken());
+        JSONObject response = executeRequest(
+                "POST",
+                "messages/" + buddyLogin + "/",
+                getTokenRequestHeader(),
+                message
+        );
+
+        return new StatusResponse(
+                response.getString("status"),
+                response.getString("message")
+        );
+    }
+
+    public MessagesResponse getMessages() {
 
         JSONObject response = executeRequest(
                 "GET",
                 "messages",
-                requestHeaders
+                getTokenRequestHeader()
         );
 
         List<Message> messageList = new ArrayList<>();

@@ -7,7 +7,6 @@ import io.github.shamrice.nechat.core.db.TokenAuthService;
 import io.github.shamrice.nechat.webservice.response.Status;
 import io.github.shamrice.nechat.webservice.response.StatusResponse;
 import io.github.shamrice.nechat.webservice.security.util.AuthAccessUtil;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,7 +61,7 @@ public class BuddiesController {
 
     @RequestMapping(value = "buddies/{buddy}", method = RequestMethod.DELETE)
     public @ResponseBody
-    HttpStatus deleteBuddy(
+    StatusResponse deleteBuddy(
             @RequestHeader(value = "token", required = true) String token,
             @PathVariable(value = "buddy") String buddy
     ) {
@@ -73,12 +72,12 @@ public class BuddiesController {
         if (tokenAuthService.authorizeToken(token, login)) {
             BuddiesService buddiesService = new BuddiesService(CoreContext.getInstance());
             if (buddiesService.deleteBuddy(buddy)) {
-                return HttpStatus.OK;
+                return new StatusResponse(Status.SUCCESS, "Buddy deleted");
             } else {
-                return HttpStatus.NOT_FOUND;
+                return new StatusResponse(Status.FAILURE, "Buddy not found.");
             }
         }
 
-        return HttpStatus.FORBIDDEN;
+        return new StatusResponse(Status.INVALID, "FORBIDDEN");
     }
 }

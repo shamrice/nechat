@@ -5,6 +5,8 @@ import io.github.shamrice.nechat.core.db.dto.MessageDto;
 import io.github.shamrice.nechat.core.db.MessageService;
 import io.github.shamrice.nechat.core.db.TokenAuthService;
 import io.github.shamrice.nechat.core.db.dto.MessagesDto;
+import io.github.shamrice.nechat.webservice.response.Status;
+import io.github.shamrice.nechat.webservice.response.StatusResponse;
 import io.github.shamrice.nechat.webservice.security.util.AuthAccessUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
@@ -39,7 +41,8 @@ public class MessagesController {
     }
 
     @RequestMapping(value = "messages/{login}", method = RequestMethod.POST)
-    public @ResponseBody HttpStatus sendMessageToUser(
+    public @ResponseBody
+    StatusResponse sendMessageToUser(
             @RequestHeader(value = "token", required = true) String token,
             @RequestBody String body,
             @PathVariable(value = "login") String toLogin
@@ -51,10 +54,12 @@ public class MessagesController {
         if (tokenAuthService.authorizeToken(token, fromLogin)) {
             MessageService messageService = new MessageService(CoreContext.getInstance());
             if (messageService.sendMessageToUser(fromLogin, toLogin, body)) {
-                return HttpStatus.CREATED;
+                return new StatusResponse(Status.SUCCESS, "Message sent");
+            } else {
+                return new StatusResponse(Status.FAILURE, "Message failed");
             }
         }
 
-        return HttpStatus.FORBIDDEN;
+        return new StatusResponse(Status.INVALID, "FORBIDDEN");
     }
 }

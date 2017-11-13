@@ -3,6 +3,7 @@ package io.github.shamrice.neChat.testClient.web.services.cache;
 import io.github.shamrice.neChat.testClient.web.services.requests.buddies.Buddy;
 import io.github.shamrice.neChat.testClient.web.services.requests.messages.Message;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,8 +13,8 @@ import java.util.List;
  */
 public class ResponseCache {
 
-    private List<Message> messageList;
-    private List<Buddy> buddyList;
+    private List<Message> messageList = new ArrayList<>();
+    private List<Buddy> buddyList = new ArrayList<>();
 
     public void setMessageList(List<Message> messageList) {
         this.messageList = messageList;

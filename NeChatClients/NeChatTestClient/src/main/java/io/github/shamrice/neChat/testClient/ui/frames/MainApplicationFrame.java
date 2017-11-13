@@ -1,5 +1,6 @@
 package io.github.shamrice.neChat.testClient.ui.frames;
 
+import io.github.shamrice.neChat.testClient.ui.frames.panels.BuddyListPanel;
 import io.github.shamrice.neChat.testClient.ui.frames.panels.CommandPanel;
 import io.github.shamrice.neChat.testClient.ui.frames.panels.LoginPanel;
 
@@ -18,6 +19,7 @@ public class MainApplicationFrame implements ActionListener {
 
     private LoginPanel loginPanel;
     private CommandPanel commandPanel;
+    private BuddyListPanel buddyListPanel;
 
 
     public MainApplicationFrame() {
@@ -27,11 +29,13 @@ public class MainApplicationFrame implements ActionListener {
 
         loginPanel = new LoginPanel();
         commandPanel = new CommandPanel();
+        buddyListPanel = new BuddyListPanel();
 
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
         mainPanel.add(loginPanel.getLoginPanel());
         mainPanel.add(commandPanel.getCommandPanel());
+        mainPanel.add(buddyListPanel.getBuddyListPanel());
 
         mainApplicationFrame.getContentPane().add(mainPanel, BorderLayout.CENTER);
 

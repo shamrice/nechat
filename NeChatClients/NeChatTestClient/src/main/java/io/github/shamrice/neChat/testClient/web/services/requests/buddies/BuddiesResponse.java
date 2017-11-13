@@ -1,11 +1,13 @@
 package io.github.shamrice.neChat.testClient.web.services.requests.buddies;
 
+import io.github.shamrice.neChat.testClient.web.services.requests.Response;
+
 import java.util.List;
 
 /**
  * Created by Erik on 11/13/2017.
  */
-public class BuddiesResponse {
+public class BuddiesResponse implements Response {
 
     private String login;
     private List<Buddy> buddyList;

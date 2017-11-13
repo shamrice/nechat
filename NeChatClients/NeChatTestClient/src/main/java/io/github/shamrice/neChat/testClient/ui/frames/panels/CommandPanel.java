@@ -1,7 +1,11 @@
 package io.github.shamrice.neChat.testClient.ui.frames.panels;
 
 import io.github.shamrice.neChat.testClient.state.ApplicationState;
+import io.github.shamrice.neChat.testClient.web.services.requests.StatusResponse;
+import io.github.shamrice.neChat.testClient.web.services.requests.buddies.BuddiesResponse;
+import io.github.shamrice.neChat.testClient.web.services.requests.messages.MessagesResponse;
 
+import javax.net.ssl.SSLEngineResult;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,11 +22,13 @@ public class CommandPanel implements ActionListener {
     private JButton getBuddiesButton;
     private JButton addBuddyButton;
     private JButton removeBuddyButton;
+    private JButton tempButton;
     private JTextField resultsTextField;
+    private JTextField inputTextField;
 
     public CommandPanel() {
         commandPanel = new JPanel();
-        commandPanel.setLayout(new GridLayout(2, 4));
+        commandPanel.setLayout(new GridLayout(4, 2));
         commandPanel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createTitledBorder("Commands"),
                 BorderFactory.createEmptyBorder(5, 5, 5, 5)
@@ -40,37 +46,43 @@ public class CommandPanel implements ActionListener {
         switch(eventName) {
 
             case "Get Messages":
-                result = ApplicationState
+                MessagesResponse response = (MessagesResponse)
+                        ApplicationState
                         .getNeChatRestClient()
-                        .getMessages().getLogin();
+                        .getMessages();
+                result = response.getLogin();
                 break;
 
             case "Send Message":
-                result = ApplicationState
+                StatusResponse sendMessageStatus = (StatusResponse)
+                        ApplicationState
                         .getNeChatRestClient()
-                        .sendMessage("test3", "THIS IS A TEST MESSAGE FROM CLIENT")
-                        .getMessage();
+                        .sendMessage(inputTextField.getText(), "THIS IS A TEST MESSAGE FROM CLIENT");
+                result = sendMessageStatus.getMessage();
                 break;
 
             case "Get Buddies":
-                result = ApplicationState
+                BuddiesResponse buddiesResponse = (BuddiesResponse)
+                        ApplicationState
                         .getNeChatRestClient()
-                        .getBuddies()
-                        .toString();
+                        .getBuddies();
+                result = buddiesResponse.getBuddy(1).getLogin();
                 break;
 
             case "Add Buddy":
-                result = ApplicationState
+                StatusResponse addBuddyStatus = (StatusResponse)
+                        ApplicationState
                         .getNeChatRestClient()
-                        .addBuddy("test3")
-                        .getMessage();
+                        .addBuddy(inputTextField.getText());
+                result = addBuddyStatus.getMessage();
                 break;
 
             case "Remove Buddy":
-                result = ApplicationState
+                StatusResponse removeBuddyStatus = (StatusResponse)
+                        ApplicationState
                         .getNeChatRestClient()
-                        .removeBuddy("test3")
-                        .getMessage();
+                        .removeBuddy(inputTextField.getText());
+                result = removeBuddyStatus.getMessage();
                 break;
 
             default:
@@ -80,6 +92,7 @@ public class CommandPanel implements ActionListener {
 
         ApplicationState.setResult(result);
         resultsTextField.setText(result);
+
     }
 
     public JPanel getCommandPanel() {
@@ -102,15 +115,20 @@ public class CommandPanel implements ActionListener {
         removeBuddyButton = new JButton("Remove Buddy");
         removeBuddyButton.addActionListener(this);
 
+        inputTextField = new JTextField();
+
         resultsTextField = new JTextField();
         resultsTextField.setSize(new Dimension(100, 100));
+
+        tempButton = new JButton("");
 
         commandPanel.add(getMessagesButton);
         commandPanel.add(sendMessageButton);
         commandPanel.add(getBuddiesButton);
-        commandPanel.add(getMessagesButton);
         commandPanel.add(addBuddyButton);
         commandPanel.add(removeBuddyButton);
+        commandPanel.add(tempButton);
+        commandPanel.add(inputTextField);
         commandPanel.add(resultsTextField);
     }
 }

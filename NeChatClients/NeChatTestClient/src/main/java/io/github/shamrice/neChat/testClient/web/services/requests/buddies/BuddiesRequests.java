@@ -63,6 +63,7 @@ public class BuddiesRequests extends RequestsBase {
                     buddyJSON.getInt("userId"),
                     buddyJSON.getString("login")
             );
+            buddyList.add(buddyToAdd);
         }
 
         return new BuddiesResponse(

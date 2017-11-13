@@ -1,7 +1,9 @@
 package io.github.shamrice.neChat.testClient.web.services;
 
+import io.github.shamrice.neChat.testClient.web.services.cache.ResponseCache;
 import io.github.shamrice.neChat.testClient.web.services.configuration.ClientConfiguration;
 import io.github.shamrice.neChat.testClient.web.services.credentials.UserCredentials;
+import io.github.shamrice.neChat.testClient.web.services.requests.Response;
 import io.github.shamrice.neChat.testClient.web.services.requests.StatusResponse;
 import io.github.shamrice.neChat.testClient.web.services.requests.authorization.AuthorizationRequests;
 import io.github.shamrice.neChat.testClient.web.services.requests.authorization.AuthorizationResponse;
@@ -17,40 +19,50 @@ public class NeChatRestClient {
 
     private ClientConfiguration clientConfiguration;
     private UserCredentials userCredentials;
+    private ResponseCache responseCache;
 
     public NeChatRestClient(ClientConfiguration clientConfiguration) {
         this.clientConfiguration = clientConfiguration;
         this.userCredentials = new UserCredentials();
+        this.responseCache = new ResponseCache();
     }
 
     public void setUserCredentials(UserCredentials userCredentials) {
         this.userCredentials = userCredentials;
     }
 
-    public AuthorizationResponse getAuthToken() {
+    public Response getAuthToken() {
         AuthorizationResponse response = new AuthorizationRequests(userCredentials, clientConfiguration).getAuthToken();
         userCredentials.setAuthToken(response.getAuthToken());
         return response;
     }
 
-    public StatusResponse addBuddy(String buddyLogin) {
+    public Response addBuddy(String buddyLogin) {
         return new BuddiesRequests(userCredentials, clientConfiguration).addBuddy(buddyLogin);
     }
 
-    public StatusResponse removeBuddy(String buddyLogin) {
+    public Response removeBuddy(String buddyLogin) {
         return new BuddiesRequests(userCredentials, clientConfiguration).removeBuddy(buddyLogin);
     }
 
-    public BuddiesResponse getBuddies() {
-        return new BuddiesRequests(userCredentials, clientConfiguration).getBuddies();
+    public Response getBuddies() {
+        BuddiesResponse response =  new BuddiesRequests(userCredentials, clientConfiguration).getBuddies();
+        responseCache.setBuddyList(response.getBuddyList());
+        return response;
     }
 
-    public MessagesResponse getMessages() {
-        return new MessagesRequests(userCredentials, clientConfiguration).getMessages();
+    public Response getMessages() {
+        MessagesResponse response = new MessagesRequests(userCredentials, clientConfiguration).getMessages();
+        responseCache.setMessageList(response.getMessageList());
+        return response;
     }
 
-    public StatusResponse sendMessage(String buddyLogin, String message) {
+    public Response sendMessage(String buddyLogin, String message) {
         return new MessagesRequests(userCredentials, clientConfiguration).sendMessage(buddyLogin, message);
+    }
+
+    public ResponseCache getResponseCache() {
+        return responseCache;
     }
 
 }

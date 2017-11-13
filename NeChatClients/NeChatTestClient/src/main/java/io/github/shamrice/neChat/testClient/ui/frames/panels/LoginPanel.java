@@ -2,6 +2,7 @@ package io.github.shamrice.neChat.testClient.ui.frames.panels;
 
 import io.github.shamrice.neChat.testClient.state.ApplicationState;
 import io.github.shamrice.neChat.testClient.web.services.credentials.UserCredentials;
+import io.github.shamrice.neChat.testClient.web.services.requests.authorization.AuthorizationResponse;
 
 import javax.swing.*;
 import java.awt.*;
@@ -55,12 +56,12 @@ public class LoginPanel implements ActionListener {
                     new UserCredentials(login, userPassword)
             );
 
-            String token = ApplicationState
+            AuthorizationResponse authorizationResponse = (AuthorizationResponse)
+                    ApplicationState
                     .getNeChatRestClient()
-                    .getAuthToken()
                     .getAuthToken();
 
-            tokenTextField.setText(token);
+            tokenTextField.setText(authorizationResponse.getAuthToken());
         }
 
     }

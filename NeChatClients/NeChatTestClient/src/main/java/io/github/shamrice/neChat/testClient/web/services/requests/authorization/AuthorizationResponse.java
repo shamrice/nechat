@@ -1,11 +1,13 @@
 package io.github.shamrice.neChat.testClient.web.services.requests.authorization;
 
+import io.github.shamrice.neChat.testClient.web.services.requests.Response;
+
 import java.util.Date;
 
 /**
  * Created by Erik on 11/13/2017.
  */
-public class AuthorizationResponse {
+public class AuthorizationResponse implements Response {
     private int tokenAuthId;
     private int userId;
     private String authToken;

@@ -1,11 +1,13 @@
 package io.github.shamrice.neChat.testClient.web.services.requests.messages;
 
+import io.github.shamrice.neChat.testClient.web.services.requests.Response;
+
 import java.util.List;
 
 /**
  * Created by Erik on 11/13/2017.
  */
-public class MessagesResponse {
+public class MessagesResponse implements Response {
 
     private String login;
     private List<Message> messageList;

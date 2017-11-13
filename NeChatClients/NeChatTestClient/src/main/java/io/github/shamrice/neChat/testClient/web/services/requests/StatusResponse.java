@@ -3,7 +3,7 @@ package io.github.shamrice.neChat.testClient.web.services.requests;
 /**
  * Created by Erik on 11/13/2017.
  */
-public class StatusResponse {
+public class StatusResponse implements Response {
     private String status;
     private String message;
 

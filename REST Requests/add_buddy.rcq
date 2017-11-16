@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rest-client version="2.4"><request><http-version>1.1</http-version><http-follow-redirects>true</http-follow-redirects><URL>http://localhost:8080/buddies/test</URL><method>PUT</method><auth-methods>BASIC</auth-methods><auth-preemptive>true</auth-preemptive><auth-username>test3</auth-username><auth-password>rO0ABXQACHBhc3N3b3Jk</auth-password><headers><header key="token" value="9544e28d0f2742c4938540ba91f932f7"/></headers></request></rest-client>

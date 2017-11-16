@@ -31,9 +31,9 @@ public class MessagesController {
 
         TokenAuthService tokenAuthService = new TokenAuthService(CoreContext.getInstance());
         if (tokenAuthService.authorizeToken(token, login)) {
-                MessageService messageService = new MessageService(CoreContext.getInstance());
-                messages = messageService.getUnreadMessages(login);
-            } else {
+            MessageService messageService = new MessageService(CoreContext.getInstance());
+            messages = messageService.getUnreadMessages(login);
+        } else {
             throw new AccessDeniedException("Unable to authenticate using token.");
         }
 
@@ -61,5 +61,25 @@ public class MessagesController {
         }
 
         return new StatusResponse(Status.INVALID, "FORBIDDEN");
+    }
+
+    @RequestMapping(value = "messages/{login}", method = RequestMethod.GET)
+    public @ResponseBody
+    MessagesDto getChronologicalMessageHistoryWithUser(
+            @RequestHeader(value = "token", required =  true) String token,
+            @PathVariable(value = "login") String withLogin
+    ) {
+        MessagesDto messagesDto = null;
+        String currentLogin = AuthAccessUtil.getCurrentLoginPrincipal();
+
+        TokenAuthService tokenAuthService = new TokenAuthService(CoreContext.getInstance());
+        if (tokenAuthService.authorizeToken(token, currentLogin)) {
+            MessageService messageService = new MessageService(CoreContext.getInstance());
+            messagesDto = messageService.getChronologicalMessageHistory(currentLogin, withLogin);
+        } else {
+            throw new AccessDeniedException("Unable to authenticate token.");
+        }
+
+        return messagesDto;
     }
 }

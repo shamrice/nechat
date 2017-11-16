@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="nechat-rest-client:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/nechat_rest_client_jar</output-path>
+    <root id="archive" name="nechat-rest-client_jar.jar">
+      <element id="archive" name="nechat-rest-client.jar">
+        <element id="module-output" name="nechat-rest-client" />
+      </element>
+      <element id="library" level="project" name="Maven: org.json:json:20171018" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>

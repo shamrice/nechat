@@ -117,4 +117,75 @@ public class MessageService extends DbService {
         messagesDto.setMessageDtos(messageDtos);
         return messagesDto;
     }
+
+    public MessagesDto getChronologicalMessageHistory(String login, String withLogin) {
+        List<MessageDto> messageDtos = new ArrayList<>();
+
+        String query =  "" +
+                "select " +
+                "    m.idmessages, " +
+                "    m.idusers, " +
+                "    u.login, " +
+                "    m.from_idusers, " +
+                "    uf.login as from_login, " +
+                "    m.message, " +
+                "    m.is_read, " +
+                "    m.create_dt " +
+                "from messages m " +
+                "join users u " +
+                "  on u.idusers = m.idusers " +
+                "join users uf " +
+                "  on uf.idusers = m.from_idusers " +
+                "where " +
+                "    (u.login = '" + login + "' " +
+                "     and uf.login = '" + withLogin + "') " +
+                "    or " +
+                "    (u.login = '" + withLogin + "' " +
+                "     and uf.login = '" + login + "') " +
+                "order by idmessages asc ";
+
+        if (null != conn) {
+            Statement statement = null;
+
+            try {
+                statement = conn.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+
+                //get last token
+                while (resultSet.next()) {
+
+                    Timestamp createTimestamp = resultSet.getTimestamp("create_dt");
+                    Date createDate = new Date(createTimestamp.getTime());
+
+                    MessageDto messageDao = new MessageDto(
+                            resultSet.getInt("idmessages"),
+                            resultSet.getInt("idusers"),
+                            resultSet.getString("login"),
+                            resultSet.getInt("from_idusers"),
+                            resultSet.getString("from_login"),
+                            resultSet.getString("message"),
+                            resultSet.getBoolean("is_read"),
+                            createDate
+                    );
+
+                    messageDtos.add(messageDao);
+                }
+
+            } catch (SQLException sqlExc) {
+                sqlExc.printStackTrace();
+            } finally {
+                if (statement != null) {
+                    try {
+                        statement.close();
+                    } catch (SQLException ex) {}
+                    statement = null;
+                }
+            }
+        }
+
+        MessagesDto messagesDto = new MessagesDto(login);
+        messagesDto.setMessageDtos(messageDtos);
+        return messagesDto;
+
+    }
 }

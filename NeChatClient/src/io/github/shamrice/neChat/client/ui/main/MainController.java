@@ -18,6 +18,8 @@ import javafx.scene.control.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 
@@ -42,6 +44,7 @@ public class MainController {
     private TextField sendMessageTextField;
 
     private Main main;
+    private Object chatTextAreaLockObj = null;
 
     public MainController() {}
 
@@ -53,13 +56,14 @@ public class MainController {
         buddyModelTableView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> setSelectedBuddy(newValue)
         );
-
+/*
         chatTextArea.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 chatTextArea.setScrollTop(Double.MAX_VALUE);
             }
         });
+        */
     }
 
     public void sendMessageKeyboardInput() {
@@ -77,11 +81,16 @@ public class MainController {
 
             if (response.isSuccess()) {
                 refreshChatTextArea();
+                chatTextAreaChanged();
             } else {
                 JOptionPane.showMessageDialog(null, "Error sending message: " + response.getMessage(), "ERROR", 1);
             }
         }
         sendMessageTextField.setText("");
+    }
+
+    public void chatTextAreaChanged() {
+        chatTextArea.setScrollTop(Double.MAX_VALUE);
     }
 
     public void setMain(Main main) {
@@ -104,35 +113,53 @@ public class MainController {
         ApplicationContext.get().setSelectedBuddyLogin(buddy.getBuddyLogin().getValue());
 
         refreshChatTextArea();
+
+        Timer timer = new Timer(3000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                refreshChatTextArea();
+                chatTextAreaChanged();
+            }
+        });
+        timer.start();
+
+
     }
 
     private void refreshChatTextArea() {
+        //HACK - concurrent modification lock. TODO: make rest client itself thread safe.
+        if (chatTextAreaLockObj == null) {
+            chatTextAreaLockObj = new Object();
 
-        String chatText = "";
+            String chatText = "";
 
-        MessagesResponse messagesResponse =
-                (MessagesResponse) ApplicationContext.get()
-                        .getNeChatRestClient()
-                        .getMessagesWithUser(
-                                ApplicationContext.get().getSelectedBuddyLogin()
-                        );
+            MessagesResponse messagesResponse =
+                    (MessagesResponse) ApplicationContext.get()
+                            .getNeChatRestClient()
+                            .getMessagesWithUser(
+                                    ApplicationContext.get().getSelectedBuddyLogin()
+                            );
 
-        if (messagesResponse != null) {
+            if (messagesResponse != null) {
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy hh:mm:ss a");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy hh:mm:ss a");
 
-            for (Message message : messagesResponse.getMessageList()) {
+                for (Message message : messagesResponse.getMessageList()) {
 
-                chatText +=  "(" + dateFormat.format(message.getCreateDate()) + ") "
-                        + message.getFromLogin() + ": "
-                        + message.getMessage();
-                chatText += "\n";
+                    chatText += "(" + dateFormat.format(message.getCreateDate()) + ") "
+                            + message.getFromLogin() + ": "
+                            + message.getMessage();
+                    chatText += "\n";
+                }
             }
+
+
+            //System.out.println(chatText);
+            chatTextArea.setText(chatText);
+            chatTextArea.appendText(""); //forces the change listener to scroll text area to bottom.
+            chatTextAreaLockObj = null;
         }
 
-        //System.out.println(chatText);
-        chatTextArea.setText(chatText);
-        chatTextArea.appendText(""); //forces the change listener to scroll text area to bottom.
     }
 
     public void test() {

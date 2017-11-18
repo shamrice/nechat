@@ -14,6 +14,7 @@ import io.github.shamrice.neChat.web.services.requests.buddies.BuddiesResponse;
 import io.github.shamrice.neChat.web.services.requests.messages.MessagesResponse;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -70,7 +71,15 @@ public class NeChatRestClient {
     }
 
     public Response sendMessage(String buddyLogin, String message) {
-        return new MessagesRequests(userCredentials, clientConfiguration).sendMessage(buddyLogin, message);
+        StatusResponse response = new MessagesRequests(userCredentials, clientConfiguration).sendMessage(buddyLogin, message);
+
+
+        if (response.isSuccess()) {
+            Message newMessageSent = new Message(-1, -1, userCredentials.getLogin(), -2, buddyLogin, message, new Date(), true);
+            responseCache.addUserMessage(userCredentials.getLogin(), newMessageSent);
+        }
+
+        return response;
     }
 
     public ResponseCache getResponseCache() {

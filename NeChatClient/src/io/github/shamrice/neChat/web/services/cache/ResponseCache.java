@@ -1,5 +1,6 @@
 package io.github.shamrice.neChat.web.services.cache;
 
+import io.github.shamrice.neChat.web.services.cache.conversation.Conversation;
 import io.github.shamrice.neChat.web.services.requests.buddies.Buddy;
 import io.github.shamrice.neChat.web.services.requests.messages.Message;
 
@@ -16,7 +17,7 @@ import java.util.Map;
 public class ResponseCache {
 
     private List<Message> messageList = new ArrayList<>();
-    private Map<String, List<Message>> userMessageList = new HashMap<>();
+    private Map<String, List<Conversation>> userMessageList = new HashMap<>();
     private List<Buddy> buddyList = new ArrayList<>();
 
     public void setMessageList(List<Message> messageList) {
@@ -36,16 +37,43 @@ public class ResponseCache {
     }
 
     public void setUserMessages(String login, List<Message> messages) {
-        userMessageList.put(login, messages);
+
+        List<Conversation> conversationList = new ArrayList<>();
+
+        for (Message message : messages) {
+            conversationList.add(new Conversation(message.getFromLogin(), message));
+        }
+
+        userMessageList.put(login, conversationList);
     }
 
     public List<Message> getUserMessages(String login) {
-        return userMessageList.get(login);
+
+        if (userMessageList.get(login) != null) {
+            List<Message> resultSet = new ArrayList<>();
+            for (Conversation conversation : userMessageList.get(login)) {
+                resultSet.add(conversation.getMessage());
+            }
+
+            return resultSet;
+        }
+
+        return null;
     }
 
     public void addUserMessages(String login, List<Message> messages) {
         for (Message message : messages) {
-            userMessageList.get(login).add(message);
+            userMessageList.get(login).add(new Conversation(message.getFromLogin(), message));
+        }
+    }
+
+    public void addUserMessage(String login, Message message) {
+        if (userMessageList.get(login) != null) {
+            userMessageList.get(login).add(new Conversation(message.getFromLogin(), message));
+        } else {
+            List<Conversation> newConversation = new ArrayList<>();
+            newConversation.add(new Conversation(message.getFromLogin(), message));
+            userMessageList.put(login, newConversation);
         }
     }
 }

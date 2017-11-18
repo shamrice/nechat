@@ -19,6 +19,14 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
+  <component name="DatabaseView">
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="NeChatServer" />
@@ -30,7 +38,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="323">
               <caret line="48" column="24" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="24" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -51,7 +61,7 @@
             <state relative-caret-position="281">
               <caret line="101" column="67" selection-start-line="101" selection-start-column="67" selection-end-line="101" selection-end-column="67" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <marker date="1510958660841" expanded="true" signature="3896:4496" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -63,8 +73,12 @@
             <state relative-caret-position="306">
               <caret line="24" column="21" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
               <folding>
-                <element signature="e#505#506#0" expanded="true" />
-                <element signature="e#533#534#0" expanded="true" />
+                <element signature="e#247#248#0" expanded="false" />
+                <element signature="e#281#282#0" expanded="false" />
+                <element signature="e#345#346#0" expanded="false" />
+                <element signature="e#391#392#0" expanded="false" />
+                <element signature="e#439#440#0" expanded="false" />
+                <element signature="e#473#474#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -76,7 +90,8 @@
             <state relative-caret-position="-34">
               <caret line="73" column="59" selection-start-line="73" selection-start-column="49" selection-end-line="73" selection-end-column="59" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#420#421#0" expanded="false" />
+                <element signature="e#454#455#0" expanded="false" />
                 <marker date="1509176928558" expanded="true" signature="638:643" ph="select m.idm... messages" />
                 <marker date="1509176928558" expanded="true" signature="638:976" ph="SELECT \n\tu... buddies" />
                 <marker date="1509176928558" expanded="true" signature="638:1057" ph="SELECT \n\tu... buddies" />
@@ -98,21 +113,20 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-340">
               <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CoreContext.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CoreContext.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NeChatCore/src/main/java/io/github/shamrice/nechat/core/CoreContext.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="34">
               <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
               <folding>
-                <element signature="e#1908#1909#0" expanded="true" />
-                <element signature="e#1941#1942#0" expanded="true" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#1819#1820#0" expanded="false" />
+                <element signature="e#1859#1860#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -124,37 +138,37 @@
             <state relative-caret-position="221">
               <caret line="15" column="27" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
               <folding>
-                <element signature="e#417#418#0" expanded="true" />
-                <element signature="e#455#456#0" expanded="true" />
+                <element signature="e#312#313#0" expanded="false" />
+                <element signature="e#366#367#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MessageService.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MessageService.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/NeChatCore/src/main/java/io/github/shamrice/nechat/core/db/MessageService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3298">
-              <caret line="256" column="0" selection-start-line="256" selection-start-column="0" selection-end-line="256" selection-end-column="0" />
+            <state relative-caret-position="510">
+              <caret line="266" column="48" selection-start-line="266" selection-start-column="48" selection-end-line="266" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1510960189359" expanded="true" signature="1824:2404" ph="insert into messages... " />
-                <marker date="1510960189359" expanded="true" signature="2018:2117" ph="select iduse... users" />
-                <marker date="1510960189359" expanded="true" signature="2210:2314" ph="select iduse... users" />
-                <marker date="1510960189359" expanded="true" signature="2894:3501" ph="select m.idm... " />
-                <marker date="1510960189359" expanded="true" signature="2894:3556" ph="select \n\tm... messages" />
-                <marker date="1510960189359" expanded="true" signature="5284:5947" ph="select m.idm... messages" />
-                <marker date="1510960189359" expanded="true" signature="5284:5949" ph="select m.idm... messages" />
-                <marker date="1510960189359" expanded="true" signature="5284:5967" ph="select m.idm... messages" />
-                <marker date="1510960189359" expanded="true" signature="5284:5996" ph="select m.idm... messages" />
-                <marker date="1510960189359" expanded="true" signature="5284:6034" ph="select m.idm... messages" />
-                <marker date="1510960189359" expanded="true" signature="5284:6052" ph="select m.idm... messages" />
-                <marker date="1510960189359" expanded="true" signature="5284:6093" ph="select m.idm... messages" />
-                <marker date="1510960189359" expanded="true" signature="5284:6095" ph="select m.idm... messages" />
-                <marker date="1510960189359" expanded="true" signature="5284:6110" ph="select m.idm... messages" />
-                <marker date="1510960189359" expanded="true" signature="5284:6155" ph="select m.idm... messages" />
-                <marker date="1510960189359" expanded="true" signature="5284:6156" ph="select m.idm... messages" />
-                <marker date="1510960189359" expanded="true" signature="7879:8732" ph="select m.idm... messages" />
+                <marker date="1510995521976" expanded="true" signature="1824:2404" ph="insert into messages... " />
+                <marker date="1510995521976" expanded="true" signature="2018:2117" ph="select iduse... users" />
+                <marker date="1510995521976" expanded="true" signature="2210:2314" ph="select iduse... users" />
+                <marker date="1510995521976" expanded="true" signature="2894:3501" ph="select m.idm... " />
+                <marker date="1510995521976" expanded="true" signature="2894:3559" ph="select \n\tm... messages" />
+                <marker date="1510995521976" expanded="true" signature="5287:5950" ph="select m.idm... messages" />
+                <marker date="1510995521976" expanded="true" signature="5287:5952" ph="select m.idm... messages" />
+                <marker date="1510995521976" expanded="true" signature="5287:5970" ph="select m.idm... messages" />
+                <marker date="1510995521976" expanded="true" signature="5287:5999" ph="select m.idm... messages" />
+                <marker date="1510995521976" expanded="true" signature="5287:6037" ph="select m.idm... messages" />
+                <marker date="1510995521976" expanded="true" signature="5287:6055" ph="select m.idm... messages" />
+                <marker date="1510995521976" expanded="true" signature="5287:6096" ph="select m.idm... messages" />
+                <marker date="1510995521976" expanded="true" signature="5287:6098" ph="select m.idm... messages" />
+                <marker date="1510995521976" expanded="true" signature="5287:6113" ph="select m.idm... messages" />
+                <marker date="1510995521976" expanded="true" signature="5287:6158" ph="select m.idm... messages" />
+                <marker date="1510995521976" expanded="true" signature="5287:6159" ph="select m.idm... messages" />
+                <marker date="1510995521976" expanded="true" signature="7882:8765" ph="select m.idm... messages" />
               </folding>
             </state>
           </provider>
@@ -166,7 +180,7 @@
             <state relative-caret-position="17">
               <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <marker date="1510963019620" expanded="true" signature="51:114" ph="..." />
               </folding>
             </state>
           </provider>
@@ -238,9 +252,9 @@
         <option value="$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/webservice/response/StatusResponse.java" />
         <option value="$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/webservice/controller/BuddiesController.java" />
         <option value="$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/webservice/controller/MessagesController.java" />
-        <option value="$PROJECT_DIR$/NeChatCore/src/main/java/io/github/shamrice/nechat/core/db/MessageService.java" />
         <option value="$PROJECT_DIR$/NeChatCore/src/main/java/io/github/shamrice/nechat/core/db/DbService.java" />
         <option value="$PROJECT_DIR$/NeChatCore/src/main/java/io/github/shamrice/nechat/core/CoreContext.java" />
+        <option value="$PROJECT_DIR$/NeChatCore/src/main/java/io/github/shamrice/nechat/core/db/MessageService.java" />
       </list>
     </option>
   </component>
@@ -898,8 +912,9 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="settings.editor.selected.configurable" value="SQL Dialects" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -1387,12 +1402,12 @@
       <workItem from="1508448928519" duration="270000" />
       <workItem from="1508449263854" duration="41257000" />
       <workItem from="1509177513909" duration="8569000" />
-      <workItem from="1510801280711" duration="12686000" />
+      <workItem from="1510801280711" duration="14909000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62782000" />
+    <option name="totallyTimeSpent" value="65005000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1415,7 +1430,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3314993" sideWeight="0.3705036" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3314993" sideWeight="0.6294964" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3314993" sideWeight="0.6294964" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292517" sideWeight="0.49427754" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292517" sideWeight="0.4914163" order="10" side_tool="false" content_ui="tabs" />
@@ -1808,7 +1823,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="48" column="24" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="24" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1825,7 +1842,8 @@
         <state relative-caret-position="-34">
           <caret line="73" column="59" selection-start-line="73" selection-start-column="49" selection-end-line="73" selection-end-column="59" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#420#421#0" expanded="false" />
+            <element signature="e#454#455#0" expanded="false" />
             <marker date="1509176928558" expanded="true" signature="638:643" ph="select m.idm... messages" />
             <marker date="1509176928558" expanded="true" signature="638:976" ph="SELECT \n\tu... buddies" />
             <marker date="1509176928558" expanded="true" signature="638:1057" ph="SELECT \n\tu... buddies" />
@@ -1846,8 +1864,12 @@
         <state relative-caret-position="306">
           <caret line="24" column="21" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
           <folding>
-            <element signature="e#505#506#0" expanded="true" />
-            <element signature="e#533#534#0" expanded="true" />
+            <element signature="e#247#248#0" expanded="false" />
+            <element signature="e#281#282#0" expanded="false" />
+            <element signature="e#345#346#0" expanded="false" />
+            <element signature="e#391#392#0" expanded="false" />
+            <element signature="e#439#440#0" expanded="false" />
+            <element signature="e#473#474#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1856,9 +1878,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-340">
           <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1867,7 +1887,7 @@
         <state relative-caret-position="281">
           <caret line="101" column="67" selection-start-line="101" selection-start-column="67" selection-end-line="101" selection-end-column="67" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <marker date="1510958660841" expanded="true" signature="3896:4496" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1877,35 +1897,8 @@
         <state relative-caret-position="221">
           <caret line="15" column="27" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
           <folding>
-            <element signature="e#417#418#0" expanded="true" />
-            <element signature="e#455#456#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NeChatCore/src/main/java/io/github/shamrice/nechat/core/db/MessageService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3298">
-          <caret line="256" column="0" selection-start-line="256" selection-start-column="0" selection-end-line="256" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1510960189359" expanded="true" signature="1824:2404" ph="insert into messages... " />
-            <marker date="1510960189359" expanded="true" signature="2018:2117" ph="select iduse... users" />
-            <marker date="1510960189359" expanded="true" signature="2210:2314" ph="select iduse... users" />
-            <marker date="1510960189359" expanded="true" signature="2894:3501" ph="select m.idm... " />
-            <marker date="1510960189359" expanded="true" signature="2894:3556" ph="select \n\tm... messages" />
-            <marker date="1510960189359" expanded="true" signature="5284:5947" ph="select m.idm... messages" />
-            <marker date="1510960189359" expanded="true" signature="5284:5949" ph="select m.idm... messages" />
-            <marker date="1510960189359" expanded="true" signature="5284:5967" ph="select m.idm... messages" />
-            <marker date="1510960189359" expanded="true" signature="5284:5996" ph="select m.idm... messages" />
-            <marker date="1510960189359" expanded="true" signature="5284:6034" ph="select m.idm... messages" />
-            <marker date="1510960189359" expanded="true" signature="5284:6052" ph="select m.idm... messages" />
-            <marker date="1510960189359" expanded="true" signature="5284:6093" ph="select m.idm... messages" />
-            <marker date="1510960189359" expanded="true" signature="5284:6095" ph="select m.idm... messages" />
-            <marker date="1510960189359" expanded="true" signature="5284:6110" ph="select m.idm... messages" />
-            <marker date="1510960189359" expanded="true" signature="5284:6155" ph="select m.idm... messages" />
-            <marker date="1510960189359" expanded="true" signature="5284:6156" ph="select m.idm... messages" />
-            <marker date="1510960189359" expanded="true" signature="7879:8732" ph="select m.idm... messages" />
+            <element signature="e#312#313#0" expanded="false" />
+            <element signature="e#366#367#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1915,7 +1908,7 @@
         <state relative-caret-position="17">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <marker date="1510963019620" expanded="true" signature="51:114" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1925,8 +1918,36 @@
         <state relative-caret-position="34">
           <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
           <folding>
-            <element signature="e#1908#1909#0" expanded="true" />
-            <element signature="e#1941#1942#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1819#1820#0" expanded="false" />
+            <element signature="e#1859#1860#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NeChatCore/src/main/java/io/github/shamrice/nechat/core/db/MessageService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="266" column="48" selection-start-line="266" selection-start-column="48" selection-end-line="266" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1510995521976" expanded="true" signature="1824:2404" ph="insert into messages... " />
+            <marker date="1510995521976" expanded="true" signature="2018:2117" ph="select iduse... users" />
+            <marker date="1510995521976" expanded="true" signature="2210:2314" ph="select iduse... users" />
+            <marker date="1510995521976" expanded="true" signature="2894:3501" ph="select m.idm... " />
+            <marker date="1510995521976" expanded="true" signature="2894:3559" ph="select \n\tm... messages" />
+            <marker date="1510995521976" expanded="true" signature="5287:5950" ph="select m.idm... messages" />
+            <marker date="1510995521976" expanded="true" signature="5287:5952" ph="select m.idm... messages" />
+            <marker date="1510995521976" expanded="true" signature="5287:5970" ph="select m.idm... messages" />
+            <marker date="1510995521976" expanded="true" signature="5287:5999" ph="select m.idm... messages" />
+            <marker date="1510995521976" expanded="true" signature="5287:6037" ph="select m.idm... messages" />
+            <marker date="1510995521976" expanded="true" signature="5287:6055" ph="select m.idm... messages" />
+            <marker date="1510995521976" expanded="true" signature="5287:6096" ph="select m.idm... messages" />
+            <marker date="1510995521976" expanded="true" signature="5287:6098" ph="select m.idm... messages" />
+            <marker date="1510995521976" expanded="true" signature="5287:6113" ph="select m.idm... messages" />
+            <marker date="1510995521976" expanded="true" signature="5287:6158" ph="select m.idm... messages" />
+            <marker date="1510995521976" expanded="true" signature="5287:6159" ph="select m.idm... messages" />
+            <marker date="1510995521976" expanded="true" signature="7882:8765" ph="select m.idm... messages" />
           </folding>
         </state>
       </provider>

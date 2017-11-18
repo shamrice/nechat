@@ -111,7 +111,7 @@ public class MessageService extends DbService {
                 "  on uf.idusers = m.from_idusers " +
                 "where " +
                 "    u.login = '" + login + "' " +
-                "    and is_read = 0 ";
+                "    and is_read_to = 0 ";
 
         if (null != conn) {
             Statement statement = null;
@@ -250,9 +250,10 @@ public class MessageService extends DbService {
                 "    (u.login = ? " +
                 "     and uf.login = ? " +
                 "     and m.is_read = 0 ) " +
-                "    or " +
+               /* "    or " +
                 "    (u.login = ? " +
-                "     and uf.login = ? ) " +
+                "     and uf.login = ? " +
+                "     )" + */
                 "order by idmessages asc ";
 
         if (null != conn) {
@@ -262,8 +263,8 @@ public class MessageService extends DbService {
                 statement = conn.prepareStatement(query);
                 statement.setString(1, login);
                 statement.setString(2, withLogin);
-                statement.setString(3, withLogin);
-                statement.setString(4, login);
+                /*statement.setString(3, withLogin);
+                statement.setString(4, login);*/
                 ResultSet resultSet = statement.executeQuery();
 
                 //get last token

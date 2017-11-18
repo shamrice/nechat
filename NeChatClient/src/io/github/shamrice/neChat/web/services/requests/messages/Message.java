@@ -1,5 +1,6 @@
 package io.github.shamrice.neChat.web.services.requests.messages;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**

@@ -2,6 +2,7 @@ package io.github.shamrice.neChat.web.services.configuration;
 
 import io.github.shamrice.neChat.web.services.configuration.constants.ConfigurationConstants;
 import io.github.shamrice.neChat.web.services.configuration.service.ServiceConfiguration;
+import io.github.shamrice.neChat.web.services.credentials.UserCredentials;
 
 import javax.naming.ConfigurationException;
 import java.io.File;
@@ -23,9 +24,9 @@ public class ConfigurationBuilder {
         String configPath = configFile.getPath();
 
         if (!configFile.exists() || configFile.isDirectory()) {
-            configPath = "resources/config.properties";
             System.out.println("Cannot find config file at default location: " + configPath +
                 ". Trying: " + configPath);
+            configPath = "resources/config.properties";
         }
 
         try {
@@ -48,8 +49,17 @@ public class ConfigurationBuilder {
             System.exit(-2);
         }
 
-        return new ClientConfiguration(serviceConfiguration);
+        return new ClientConfiguration(serviceConfiguration, buildUserCredentials());
 
+    }
+
+    private static UserCredentials buildUserCredentials() {
+        String login = configProperties.getProperty(
+                ConfigurationConstants.USER_PREFIX + ConfigurationConstants.USER_LOGIN);
+        String password = configProperties.getProperty(
+                ConfigurationConstants.USER_PREFIX + ConfigurationConstants.USER_PASSWORD);
+
+        return new UserCredentials(login, password);
     }
 
     private static ServiceConfiguration buildServiceConfiguration() throws ConfigurationException {

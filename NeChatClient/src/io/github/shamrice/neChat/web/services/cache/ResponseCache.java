@@ -42,4 +42,10 @@ public class ResponseCache {
     public List<Message> getUserMessages(String login) {
         return userMessageList.get(login);
     }
+
+    public void addUserMessages(String login, List<Message> messages) {
+        for (Message message : messages) {
+            userMessageList.get(login).add(message);
+        }
+    }
 }

@@ -71,9 +71,12 @@ public class Main extends Application {
     }
 
     private boolean setUpRestClient() {
+
+        /* set by config builder from config for testing
         ApplicationContext.get().getNeChatRestClient().setUserCredentials(
                 new UserCredentials("test", "password")
         );
+        */
 
         AuthorizationResponse response = (AuthorizationResponse) ApplicationContext.get().getNeChatRestClient().getAuthToken();
         if (response.getAuthToken().length() > 0) {

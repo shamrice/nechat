@@ -8,6 +8,8 @@ import io.github.shamrice.neChat.web.services.requests.buddies.BuddiesResponse;
 import io.github.shamrice.neChat.web.services.requests.buddies.Buddy;
 import io.github.shamrice.neChat.web.services.requests.messages.Message;
 import io.github.shamrice.neChat.web.services.requests.messages.MessagesResponse;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,6 +19,7 @@ import javafx.scene.control.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by Erik on 11/16/2017.
@@ -50,6 +53,13 @@ public class MainController {
         buddyModelTableView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> setSelectedBuddy(newValue)
         );
+
+        chatTextArea.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                chatTextArea.setScrollTop(Double.MAX_VALUE);
+            }
+        });
     }
 
     public void sendMessageKeyboardInput() {
@@ -103,20 +113,26 @@ public class MainController {
         MessagesResponse messagesResponse =
                 (MessagesResponse) ApplicationContext.get()
                         .getNeChatRestClient()
-                        .getChronologicalMessageHistoryWithUser(
+                        .getMessagesWithUser(
                                 ApplicationContext.get().getSelectedBuddyLogin()
                         );
 
         if (messagesResponse != null) {
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy hh:mm:ss a");
+
             for (Message message : messagesResponse.getMessageList()) {
-                //System.out.println("To Login: " + message.getLogin() + " From: " + message.getFromLogin() + " Message: " + message.getMessage());
-                chatText += message.getFromLogin() + ": " + message.getMessage();
+
+                chatText +=  "(" + dateFormat.format(message.getCreateDate()) + ") "
+                        + message.getFromLogin() + ": "
+                        + message.getMessage();
                 chatText += "\n";
             }
         }
 
         //System.out.println(chatText);
         chatTextArea.setText(chatText);
+        chatTextArea.appendText(""); //forces the change listener to scroll text area to bottom.
     }
 
     public void test() {

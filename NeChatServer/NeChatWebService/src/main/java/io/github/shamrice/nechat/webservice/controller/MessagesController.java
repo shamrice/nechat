@@ -8,6 +8,8 @@ import io.github.shamrice.nechat.core.db.dto.MessagesDto;
 import io.github.shamrice.nechat.webservice.response.Status;
 import io.github.shamrice.nechat.webservice.response.StatusResponse;
 import io.github.shamrice.nechat.webservice.security.util.AuthAccessUtil;
+import jdk.nashorn.internal.objects.Global;
+import jdk.nashorn.internal.parser.JSONParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
@@ -63,7 +65,7 @@ public class MessagesController {
         return new StatusResponse(Status.INVALID, "FORBIDDEN");
     }
 
-    @RequestMapping(value = "messages/{login}", method = RequestMethod.GET)
+    @RequestMapping(value = "messages/history/{login}", method = RequestMethod.GET)
     public @ResponseBody
     MessagesDto getChronologicalMessageHistoryWithUser(
             @RequestHeader(value = "token", required =  true) String token,
@@ -81,5 +83,54 @@ public class MessagesController {
         }
 
         return messagesDto;
+    }
+
+    @RequestMapping(value = "messages/{login}", method = RequestMethod.GET)
+    public @ResponseBody
+    MessagesDto getUnreadMessagesWithUser(
+            @RequestHeader(value = "token", required =  true) String token,
+            @PathVariable(value = "login") String withLogin
+    ) {
+        MessagesDto messagesDto = null;
+        String currentLogin = AuthAccessUtil.getCurrentLoginPrincipal();
+
+        TokenAuthService tokenAuthService = new TokenAuthService(CoreContext.getInstance());
+        if (tokenAuthService.authorizeToken(token, currentLogin)) {
+            MessageService messageService = new MessageService(CoreContext.getInstance());
+            messagesDto = messageService.getUnreadMessagesWithUser(currentLogin, withLogin);
+        } else {
+            throw new AccessDeniedException("Unable to authenticate token.");
+        }
+
+        return messagesDto;
+    }
+
+    @RequestMapping(value = "messages/read", method = RequestMethod.POST)
+    public @ResponseBody
+    StatusResponse markMessagesAsRead(
+            @RequestHeader(value = "token", required = true) String token,
+            @RequestBody String body
+    ) {
+
+        String currentLogin = AuthAccessUtil.getCurrentLoginPrincipal();
+
+        TokenAuthService tokenAuthService = new TokenAuthService(CoreContext.getInstance());
+        if (tokenAuthService.authorizeToken(token, currentLogin)) {
+            MessageService messageService = new MessageService(CoreContext.getInstance());
+
+            String[] messageIdStrings = body.split(",");
+            int messageIds[] = new int[messageIdStrings.length];
+            for (int i = 0; i < messageIdStrings.length; i++) {
+                messageIds[i] = Integer.parseInt(messageIdStrings[i]);
+            }
+
+            if (messageService.markMessagesAsRead(currentLogin, messageIds)) {
+                return new StatusResponse(Status.SUCCESS, "Message(s) marked as read.");
+            } else {
+                return new StatusResponse(Status.FAILURE, "Message(s) failed to be marked as read");
+            }
+        }
+
+        return new StatusResponse(Status.INVALID, "FORBIDDEN");
     }
 }

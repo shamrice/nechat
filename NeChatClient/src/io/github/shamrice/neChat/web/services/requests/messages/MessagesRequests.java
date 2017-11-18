@@ -7,6 +7,7 @@ import io.github.shamrice.neChat.web.services.requests.StatusResponse;
 import org.json.JSONObject;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,27 @@ public class MessagesRequests extends RequestsBase {
         );
     }
 
+    public StatusResponse markMessagesAsRead(List<Message> messages) {
+
+        StringBuilder sb = new StringBuilder();
+        for (Message message : messages) {
+            sb.append(message.getId());
+            sb.append(",");
+        }
+
+        JSONObject response = executeRequest(
+                "POST",
+                "messages/read",
+                getTokenRequestHeader(),
+                sb.toString()
+        );
+
+        return new StatusResponse(
+                response.getString("status"),
+                response.getString("message")
+        );
+    }
+
     public MessagesResponse getMessages() {
 
         JSONObject response = executeRequest(
@@ -53,7 +75,38 @@ public class MessagesRequests extends RequestsBase {
                     messageObj.getInt("fromUserId"),
                     messageObj.getString("fromLogin"),
                     messageObj.getString("message"),
-                    new Date(messageObj.getInt("createDate")), //does not work!
+                    new Date(messageObj.getLong("createDate") + (System.currentTimeMillis()/1000)),
+                    messageObj.getBoolean("read")
+            );
+            messageList.add(message);
+        }
+
+
+        return new MessagesResponse(
+                response.getString("login"),
+                messageList
+        );
+    }
+
+    public MessagesResponse getChronologicalMessageHistory(String withLogin) {
+        JSONObject response = executeRequest(
+                "GET",
+                "messages/history/" + withLogin,
+                getTokenRequestHeader()
+        );
+
+        List<Message> messageList = new ArrayList<>();
+
+        for(Object responseObj : response.getJSONArray("messageDtos")) {
+            JSONObject messageObj = (JSONObject)responseObj;
+            Message message = new Message(
+                    messageObj.getInt("id"),
+                    messageObj.getInt("userId"),
+                    messageObj.getString("login"),
+                    messageObj.getInt("fromUserId"),
+                    messageObj.getString("fromLogin"),
+                    messageObj.getString("message"),
+                    new Date(messageObj.getLong("createDate") + (System.currentTimeMillis()/1000)),
                     messageObj.getBoolean("read")
             );
             messageList.add(message);
@@ -65,7 +118,7 @@ public class MessagesRequests extends RequestsBase {
         );
     }
 
-    public MessagesResponse getChronologicalMessageHistory(String withLogin) {
+    public MessagesResponse getUnreadMessagesWithUser(String withLogin) {
         JSONObject response = executeRequest(
                 "GET",
                 "messages/" + withLogin,
@@ -83,7 +136,7 @@ public class MessagesRequests extends RequestsBase {
                     messageObj.getInt("fromUserId"),
                     messageObj.getString("fromLogin"),
                     messageObj.getString("message"),
-                    new Date(messageObj.getInt("createDate")), //does not work!
+                    new Date(messageObj.getLong("createDate") + (System.currentTimeMillis()/1000)),
                     messageObj.getBoolean("read")
             );
             messageList.add(message);

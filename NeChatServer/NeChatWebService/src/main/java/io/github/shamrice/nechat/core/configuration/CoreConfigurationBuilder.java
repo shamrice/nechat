@@ -32,13 +32,16 @@ public class CoreConfigurationBuilder {
 
         if (!dbConfigFile.exists() && !dbConfigFile.isDirectory()) {
             System.out.println("Failed config location: " + dbConfigPath);
-            System.out.println("Cannot find default db configuration location. Trying ./conf/db-config.properties");
-            dbConfigPath = "conf/db-config.properties";
+            System.out.println("Cannot find default db configuration location. Trying db-config.properties");
+            dbConfigPath = "/db-config.properties";
+            System.out.println(CoreConfigurationBuilder.class.getResourceAsStream(dbConfigPath).toString());
+
         }
 
         try {
             InputStream configInput = new FileInputStream(dbConfigPath);
-            dbConfigProperties.load(configInput);
+            //dbConfigProperties.load(configInput);
+            dbConfigProperties.load(CoreConfigurationBuilder.class.getResourceAsStream(dbConfigPath));
             configInput.close();
         } catch (IOException ioExc) {
             ioExc.printStackTrace();

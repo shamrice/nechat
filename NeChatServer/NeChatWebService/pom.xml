@@ -10,6 +10,10 @@
     <artifactId>nechat-web-service</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <start-class>io.github.shamrice.nechat.webservice.Application</start-class>
+    </properties>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -64,7 +68,6 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-
 
     </dependencies>
 

@@ -11,8 +11,9 @@ import javax.persistence.Id;
  * Created by Erik on 10/21/2017.
  */
 
-@Entity
+//@Entity
 public class User {
+    /*
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idusers;
@@ -51,5 +52,5 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
+*/
 }

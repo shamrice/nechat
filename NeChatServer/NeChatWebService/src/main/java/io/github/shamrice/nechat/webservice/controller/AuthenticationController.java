@@ -17,8 +17,9 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 
 @RestController
+@RequestMapping(value = "/")
 public class AuthenticationController {
-
+/*
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
@@ -28,7 +29,7 @@ public class AuthenticationController {
 
         return new Greeting(counter.incrementAndGet(), String.format(template, name));
     }
-
+*/
     @RequestMapping(value = "/auth/user", method = RequestMethod.GET)
     public UserDto getUser(
             @RequestHeader(value = "token") String token,

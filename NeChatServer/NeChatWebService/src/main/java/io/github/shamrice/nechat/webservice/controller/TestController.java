@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping(path = "/test")
 public class TestController {
-
+/*
     @Autowired
     private UserRepository userRepository;
 
@@ -46,5 +46,6 @@ public class TestController {
         //return userRepository.findAll(spec);
 
     }
+    */
 
 }

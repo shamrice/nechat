@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
  */
 
 @RestController
+@RequestMapping(value = "/")
 public class BuddiesController {
 
     @RequestMapping(value = "/buddies", method = RequestMethod.GET)

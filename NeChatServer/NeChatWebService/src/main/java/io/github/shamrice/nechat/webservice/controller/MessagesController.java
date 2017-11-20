@@ -21,6 +21,7 @@ import java.util.List;
  */
 
 @RestController
+@RequestMapping(value = "/")
 public class MessagesController {
 
     @RequestMapping(value = "/messages", method = RequestMethod.GET)

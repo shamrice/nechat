@@ -6,5 +6,5 @@ package io.github.shamrice.nechat.core.configuration.Definitions;
 public class ConfigurationFiles {
 
     /* TODO : Fix this */
-    public static final String DB_CONFIGURATION_FILE_LOCATION = "C:/Erik-GitHub/nechat-github/nechat/NeChatServer/NeChatWebService/src/main/resources/db-config.properties";
+    public static final String DB_CONFIGURATION_FILE = "db-config.properties";
 }

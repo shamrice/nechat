@@ -26,27 +26,13 @@ public class CoreConfigurationBuilder {
 
         Properties dbConfigProperties = new Properties();
 
-        File dbConfigFile = new File(ConfigurationFiles.DB_CONFIGURATION_FILE_LOCATION);
-        String dbConfigPath = dbConfigFile.getPath();
-
-
-        if (!dbConfigFile.exists() && !dbConfigFile.isDirectory()) {
-            System.out.println("Failed config location: " + dbConfigPath);
-            System.out.println("Cannot find default db configuration location. Trying db-config.properties");
-            dbConfigPath = "/db-config.properties";
-            System.out.println(CoreConfigurationBuilder.class.getResourceAsStream(dbConfigPath).toString());
-
-        }
-
         try {
-            InputStream configInput = new FileInputStream(dbConfigPath);
-            //dbConfigProperties.load(configInput);
-            dbConfigProperties.load(CoreConfigurationBuilder.class.getResourceAsStream(dbConfigPath));
-            configInput.close();
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            InputStream input = classLoader.getResourceAsStream(ConfigurationFiles.DB_CONFIGURATION_FILE);
+            dbConfigProperties.load(input);
+            input.close();
         } catch (IOException ioExc) {
             ioExc.printStackTrace();
-            System.out.println("Failed to find db config... exiting.");
-            //System.exit(-1);
         }
 
         String instance = dbConfigProperties.getProperty("db.instance");
@@ -57,6 +43,5 @@ public class CoreConfigurationBuilder {
         DbCredentials dbCredentials = new DbCredentials(instance, schema, username, password);
 
         return new DbConfiguration(dbCredentials);
-
     }
 }

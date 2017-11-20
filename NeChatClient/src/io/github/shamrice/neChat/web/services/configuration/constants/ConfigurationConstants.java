@@ -11,6 +11,7 @@ public class ConfigurationConstants {
     public static final String WEBSERVICES_HOST = "host";
     public static final String WEBSERVICES_PORT = "port";
     public static final String WEBSERVICES_PROTOCOL = "protocol";
+    public static final String WEBSERVICES_WEBAPP = "webapp";
 
     public static final String USER_PREFIX = "user.";
     public static final String USER_LOGIN = "login";

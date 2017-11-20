@@ -74,6 +74,10 @@ public class ConfigurationBuilder {
                 ConfigurationConstants.WEBSERVICES_PREFIX + ConfigurationConstants.WEBSERVICES_PROTOCOL,
                 "https");
 
+        String serviceWebApp = configProperties.getProperty(
+                ConfigurationConstants.WEBSERVICES_PREFIX + ConfigurationConstants.WEBSERVICES_WEBAPP,
+                "");
+
         if (serviceHost == null || servicePort == null) {
             throw new ConfigurationException("webservice.host or webservice.port is null in configuration");
         }
@@ -88,7 +92,7 @@ public class ConfigurationBuilder {
             throw ex;
         }
 
-        return new ServiceConfiguration(serviceHost, servicePortInt, serviceProtocol);
+        return new ServiceConfiguration(serviceHost, servicePortInt, serviceProtocol, serviceWebApp);
 
     }
 }

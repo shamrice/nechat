@@ -8,11 +8,13 @@ public class ServiceConfiguration {
     private String serviceProtocol;
     private String serviceHost;
     private int servicePort;
+    private String serviceWebApp;
 
-    public ServiceConfiguration(String serviceHost, int servicePort, String serviceProtocol) {
+    public ServiceConfiguration(String serviceHost, int servicePort, String serviceProtocol, String serviceWebApp) {
         this.serviceHost = serviceHost;
         this.servicePort = servicePort;
         this.serviceProtocol = serviceProtocol;
+        this.serviceWebApp = serviceWebApp;
     }
 
     public String getServiceHost() {
@@ -27,7 +29,12 @@ public class ServiceConfiguration {
         return servicePort;
     }
 
-    public String getServiceUrl() {
-        return serviceProtocol + "://" + serviceHost + ":" + servicePort + "/";
+    public String getServiceWebApp() {
+        return serviceWebApp;
     }
+
+    public String getServiceUrl() {
+        return serviceProtocol + "://" + serviceHost + ":" + servicePort + "/" + serviceWebApp + "/";
+    }
+
 }

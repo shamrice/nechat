@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by Erik on 10/20/2017.
  */
-public class TokenDto {
+public class TokenDto  implements DbDto {
 
     private int tokenAuthId;
     private int userId;

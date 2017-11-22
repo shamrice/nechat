@@ -2,11 +2,13 @@ package io.github.shamrice.nechat.core.db;
 
 import io.github.shamrice.nechat.core.CoreContext;
 import io.github.shamrice.nechat.core.db.dto.BuddiesDto;
+import io.github.shamrice.nechat.core.db.dto.DbDto;
 import io.github.shamrice.nechat.core.db.dto.UserDto;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Erik on 10/28/2017.
@@ -145,4 +147,10 @@ public class BuddiesService extends DbService {
 
         return result;
     }
+
+    @Override
+    protected DbDto executePreparedStatement(String query, Map<Integer, Object> queryParameters) {
+        return null;
+    }
+
 }

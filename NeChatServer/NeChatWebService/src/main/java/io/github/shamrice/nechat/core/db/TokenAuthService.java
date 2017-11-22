@@ -1,12 +1,14 @@
 package io.github.shamrice.nechat.core.db;
 
 import io.github.shamrice.nechat.core.CoreContext;
+import io.github.shamrice.nechat.core.db.dto.DbDto;
 import io.github.shamrice.nechat.core.db.dto.TokenDto;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -158,5 +160,10 @@ public class TokenAuthService extends DbService {
             }
         }
         return tokenDao;
+    }
+
+    @Override
+    protected DbDto executePreparedStatement(String query, Map<Integer, Object> queryParameters) {
+        return null;
     }
 }

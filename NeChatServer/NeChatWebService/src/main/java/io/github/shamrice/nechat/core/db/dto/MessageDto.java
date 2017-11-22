@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Created by Erik on 10/20/2017.
  */
-public class MessageDto {
+public class MessageDto implements DbDto {
 
     private int id;
     private int userId;

@@ -1,11 +1,13 @@
 package io.github.shamrice.nechat.core.db;
 
 import io.github.shamrice.nechat.core.CoreContext;
+import io.github.shamrice.nechat.core.db.dto.DbDto;
 import io.github.shamrice.nechat.core.db.dto.UserDto;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Map;
 
 /**
  * Created by Erik on 10/20/2017.
@@ -46,5 +48,10 @@ public class UserService extends DbService {
             }
         }
         return userDao;
+    }
+
+    @Override
+    protected DbDto executePreparedStatement(String query, Map<Integer, Object> queryParameters) {
+        return null;
     }
 }

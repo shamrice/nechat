@@ -1,8 +1,10 @@
 package io.github.shamrice.nechat.core.db;
 
 import io.github.shamrice.nechat.core.CoreContext;
+import io.github.shamrice.nechat.core.db.dto.DbDto;
 
 import java.sql.*;
+import java.util.Map;
 
 /**
  * Created by Erik on 10/19/2017.
@@ -17,6 +19,8 @@ public abstract class DbService {
             System.out.println("Core Connection is null! Database connection not possible!!!");
         }
     }
+
+    protected abstract DbDto executePreparedStatement(String query, Map<Integer, Object> queryParameters);
 
     protected boolean executeCommand(PreparedStatement statement) {
         boolean result = false;

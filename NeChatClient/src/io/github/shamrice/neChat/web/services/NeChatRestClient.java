@@ -55,13 +55,13 @@ public class NeChatRestClient {
         responseCache.setBuddyList(response.getBuddyList());
         return response;
     }
-
+/*
     public Response getMessages() {
         MessagesResponse response = new MessagesRequests(userCredentials, clientConfiguration).getMessages();
         responseCache.setMessageList(response.getMessageList());
         return response;
     }
-
+*/
     public Response getMessagesWithUser(String withLogin) {
         if (responseCache.getUserMessages(withLogin) == null) {
             return getChronologicalMessageHistoryWithUser(withLogin);
@@ -98,8 +98,19 @@ public class NeChatRestClient {
     }
 
     private MessagesResponse getUnreadMessagesWithUser(String withLogin) {
+        /*
         MessagesResponse response = new MessagesRequests(userCredentials, clientConfiguration)
                 .getUnreadMessagesWithUser(withLogin);
+        */
+
+        //woo this is some fun nested method calls....
+        MessagesResponse response = new MessagesRequests(userCredentials, clientConfiguration)
+                .getMessageHistoryAfterMessageId(
+                        withLogin,
+                        responseCache.getUserMessages(withLogin)
+                                .get(responseCache.getUserMessages(withLogin).size() - 1)
+                                .getId()
+                );
 
         //add unread messages to cache.
         if (response.getMessageList().size() > 0) {

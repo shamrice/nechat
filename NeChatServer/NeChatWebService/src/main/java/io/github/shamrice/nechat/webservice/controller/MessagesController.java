@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.ws.Action;
 import java.util.List;
 
 /**
@@ -70,15 +71,26 @@ public class MessagesController {
     public @ResponseBody
     MessagesDto getChronologicalMessageHistoryWithUser(
             @RequestHeader(value = "token", required =  true) String token,
-            @PathVariable(value = "login") String withLogin
+            @PathVariable(value = "login") String withLogin,
+            @RequestParam(value = "after", required = false) String afterMessageId
     ) {
         MessagesDto messagesDto = null;
         String currentLogin = AuthAccessUtil.getCurrentLoginPrincipal();
 
         TokenAuthService tokenAuthService = new TokenAuthService(CoreContext.getInstance());
         if (tokenAuthService.authorizeToken(token, currentLogin)) {
+            int startMessageId = 0;
+            if (afterMessageId != null && !afterMessageId.isEmpty()) {
+                try {
+                    startMessageId = Integer.parseInt(afterMessageId);
+                } catch (NumberFormatException formatExc) {
+                    System.out.println(afterMessageId + " is not a valid number. Setting to 0.");
+                    formatExc.printStackTrace();
+                }
+            }
+
             MessageService messageService = new MessageService(CoreContext.getInstance());
-            messagesDto = messageService.getChronologicalMessageHistory(currentLogin, withLogin);
+            messagesDto = messageService.getChronologicalMessageHistory(currentLogin, withLogin, startMessageId);
         } else {
             throw new AccessDeniedException("Unable to authenticate token.");
         }

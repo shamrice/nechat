@@ -16,10 +16,10 @@ import java.util.Map;
  */
 public class ResponseCache {
 
-    private List<Message> messageList = new ArrayList<>();
+    //private List<Message> messageList = new ArrayList<>();
     private Map<String, List<Conversation>> userMessageList = new HashMap<>();
     private List<Buddy> buddyList = new ArrayList<>();
-
+/*
     public void setMessageList(List<Message> messageList) {
         this.messageList = messageList;
     }
@@ -27,7 +27,7 @@ public class ResponseCache {
     public List<Message> getMessageList() {
         return messageList;
     }
-
+*/
     public void setBuddyList(List<Buddy> buddyList) {
         this.buddyList = buddyList;
     }

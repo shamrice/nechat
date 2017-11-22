@@ -89,9 +89,19 @@ public class MessagesRequests extends RequestsBase {
     }
 
     public MessagesResponse getChronologicalMessageHistory(String withLogin) {
+        return getMessageHistoryAfterMessageId(withLogin, 0);
+    }
+
+    public MessagesResponse getMessageHistoryAfterMessageId(String withLogin, int afterMessageId) {
+
+        String resourceLocation = "messages/history/" + withLogin;
+        if (afterMessageId > 0) {
+            resourceLocation += "?after=" + afterMessageId;
+        }
+
         JSONObject response = executeRequest(
                 "GET",
-                "messages/history/" + withLogin,
+                resourceLocation,
                 getTokenRequestHeader()
         );
 

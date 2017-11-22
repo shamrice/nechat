@@ -157,7 +157,7 @@ public class MessageService extends DbService {
         return messagesDto;
     }
 
-    public MessagesDto getChronologicalMessageHistory(String login, String withLogin) {
+    public MessagesDto getChronologicalMessageHistory(String login, String withLogin, int startMessageId) {
         List<MessageDto> messageDtos = new ArrayList<>();
 
         String query =  "" +
@@ -176,11 +176,12 @@ public class MessageService extends DbService {
                 "join users uf " +
                 "  on uf.idusers = m.from_idusers " +
                 "where " +
-                "    (u.login = '" + login + "' " +
+                "    ((u.login = '" + login + "' " +
                 "     and uf.login = '" + withLogin + "') " +
                 "    or " +
                 "    (u.login = '" + withLogin + "' " +
-                "     and uf.login = '" + login + "') " +
+                "     and uf.login = '" + login + "')) " +
+                "    and m.idmessages > " + startMessageId + " " +
                 "order by idmessages asc ";
 
         if (null != conn) {

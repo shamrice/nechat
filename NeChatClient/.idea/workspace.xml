@@ -77,24 +77,24 @@
       <file leaf-file-name="MessagesRequests.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/io/github/shamrice/neChat/web/services/requests/messages/MessagesRequests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="80" column="37" selection-start-line="80" selection-start-column="37" selection-end-line="80" selection-end-column="37" />
+            <state relative-caret-position="272">
+              <caret line="103" column="33" selection-start-line="103" selection-start-column="33" selection-end-line="103" selection-end-column="33" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NeChatRestClient.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NeChatRestClient.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/io/github/shamrice/neChat/web/services/NeChatRestClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-315">
-              <caret line="68" column="44" selection-start-line="68" selection-start-column="19" selection-end-line="68" selection-end-column="44" />
+            <state relative-caret-position="145">
+              <caret line="110" column="88" selection-start-line="110" selection-start-column="88" selection-end-line="110" selection-end-column="88" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.properties" pinned="false" current-in-tab="true">
+      <file leaf-file-name="config.properties" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/config.properties">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
@@ -150,9 +150,12 @@
       <file leaf-file-name="ResponseCache.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/io/github/shamrice/neChat/web/services/cache/ResponseCache.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="60" column="20" selection-start-line="60" selection-start-column="20" selection-end-line="60" selection-end-column="20" />
-              <folding />
+            <state relative-caret-position="-331">
+              <caret line="19" column="59" selection-start-line="19" selection-start-column="59" selection-end-line="19" selection-end-column="59" />
+              <folding>
+                <marker date="1511333200095" expanded="false" signature="913:924" ph=" { " />
+                <marker date="1511333200095" expanded="false" signature="943:949" ph=" }" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -212,15 +215,15 @@
         <option value="$PROJECT_DIR$/src/io/github/shamrice/neChat/web/services/configuration/ClientConfiguration.java" />
         <option value="$PROJECT_DIR$/src/io/github/shamrice/neChat/client/Main.java" />
         <option value="$PROJECT_DIR$/src/io/github/shamrice/neChat/web/services/requests/messages/Message.java" />
-        <option value="$PROJECT_DIR$/src/io/github/shamrice/neChat/web/services/requests/messages/MessagesRequests.java" />
         <option value="$PROJECT_DIR$/src/io/github/shamrice/neChat/web/services/cache/conversation/Conversation.java" />
-        <option value="$PROJECT_DIR$/src/io/github/shamrice/neChat/web/services/NeChatRestClient.java" />
-        <option value="$PROJECT_DIR$/src/io/github/shamrice/neChat/web/services/cache/ResponseCache.java" />
         <option value="$PROJECT_DIR$/src/io/github/shamrice/neChat/client/ui/main/MainController.java" />
         <option value="$PROJECT_DIR$/src/io/github/shamrice/neChat/web/services/configuration/constants/ConfigurationConstants.java" />
         <option value="$PROJECT_DIR$/src/io/github/shamrice/neChat/web/services/configuration/service/ServiceConfiguration.java" />
         <option value="$PROJECT_DIR$/src/io/github/shamrice/neChat/web/services/configuration/ConfigurationBuilder.java" />
         <option value="$PROJECT_DIR$/resources/config.properties" />
+        <option value="$PROJECT_DIR$/src/io/github/shamrice/neChat/web/services/requests/messages/MessagesRequests.java" />
+        <option value="$PROJECT_DIR$/src/io/github/shamrice/neChat/web/services/cache/ResponseCache.java" />
+        <option value="$PROJECT_DIR$/src/io/github/shamrice/neChat/web/services/NeChatRestClient.java" />
       </list>
     </option>
   </component>
@@ -239,10 +242,9 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-4" />
-    <option name="y" value="24" />
-    <option name="width" value="1608" />
-    <option name="height" value="880" />
+    <option name="y" value="28" />
+    <option name="width" value="1440" />
+    <option name="height" value="872" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -339,7 +341,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="configuration" />
+              <option name="myItemId" value="requests" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -365,41 +367,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="configuration" />
+              <option name="myItemId" value="requests" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NeChatClient" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NeChatClient" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="neChat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="services" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="configuration" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="constants" />
+              <option name="myItemId" value="messages" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1142,15 +1114,15 @@
       <option name="presentableId" value="Default" />
       <updated>1359379246138</updated>
       <workItem from="1359379250712" duration="1302000" />
-      <workItem from="1510802592688" duration="30438000" />
+      <workItem from="1510802592688" duration="32512000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31740000" />
+    <option name="totallyTimeSpent" value="33814000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="24" width="1608" height="880" extended-state="6" />
+    <frame x="0" y="28" width="1440" height="872" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1160,12 +1132,12 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32789117" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33058986" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24967907" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27985612" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1388,7 +1360,7 @@
         <state relative-caret-position="152">
           <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1414,7 +1386,7 @@
         <state relative-caret-position="43">
           <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1426,14 +1398,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/shamrice/neChat/web/services/requests/messages/MessagesRequests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="80" column="37" selection-start-line="80" selection-start-column="37" selection-end-line="80" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1450,14 +1414,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/shamrice/neChat/web/services/cache/ResponseCache.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="60" column="20" selection-start-line="60" selection-start-column="20" selection-end-line="60" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/io/github/shamrice/neChat/client/ui/main/MainController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-875">
@@ -1467,14 +1423,6 @@
             <element signature="e#3075#3076#0" expanded="true" />
             <element signature="e#3134#3135#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/shamrice/neChat/web/services/NeChatRestClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-315">
-          <caret line="68" column="44" selection-start-line="68" selection-start-column="19" selection-end-line="68" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1517,6 +1465,33 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/shamrice/neChat/web/services/requests/messages/MessagesRequests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="103" column="33" selection-start-line="103" selection-start-column="33" selection-end-line="103" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/shamrice/neChat/web/services/cache/ResponseCache.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-331">
+          <caret line="19" column="59" selection-start-line="19" selection-start-column="59" selection-end-line="19" selection-end-column="59" />
+          <folding>
+            <marker date="1511333200095" expanded="false" signature="913:924" ph=" { " />
+            <marker date="1511333200095" expanded="false" signature="943:949" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/shamrice/neChat/web/services/NeChatRestClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="110" column="88" selection-start-line="110" selection-start-column="88" selection-end-line="110" selection-end-column="88" />
           <folding />
         </state>
       </provider>

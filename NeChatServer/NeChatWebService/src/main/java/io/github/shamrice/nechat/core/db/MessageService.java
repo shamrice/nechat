@@ -3,11 +3,11 @@ package io.github.shamrice.nechat.core.db;
 import io.github.shamrice.nechat.core.CoreContext;
 import io.github.shamrice.nechat.core.db.dto.MessageDto;
 import io.github.shamrice.nechat.core.db.dto.MessagesDto;
+import org.aspectj.apache.bcel.util.ClassLoaderRepository;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Erik on 10/20/2017.
@@ -92,7 +92,7 @@ public class MessageService extends DbService {
     }
 
     public MessagesDto getUnreadMessages(String login) {
-        List<MessageDto> messageDtos = new ArrayList<>();
+    //    List<MessageDto> messageDtos = new ArrayList<>();
 
         String query =  "" +
                 "select " +
@@ -110,17 +110,21 @@ public class MessageService extends DbService {
                 "join users uf " +
                 "  on uf.idusers = m.from_idusers " +
                 "where " +
-                "    u.login = '" + login + "' " +
+                "    u.login = ? " +
                 "    and is_read_to = 0 ";
 
+        Map<Integer, Object> queryParams = new HashMap<>();
+        queryParams.put(1, login);
+        return executePreparedStatement(query, queryParams);
+/*
         if (null != conn) {
-            Statement statement = null;
+            PreparedStatement statement = null;
 
             try {
-                statement = conn.createStatement();
-                ResultSet resultSet = statement.executeQuery(query);
+                statement = conn.prepareStatement(query);
+                statement.setString(1, login);
+                ResultSet resultSet = statement.executeQuery();
 
-                //get last token
                 while (resultSet.next()) {
 
                     Timestamp createTimestamp = resultSet.getTimestamp("create_dt");
@@ -155,10 +159,11 @@ public class MessageService extends DbService {
         MessagesDto messagesDto = new MessagesDto(login);
         messagesDto.setMessageDtos(messageDtos);
         return messagesDto;
+        */
     }
 
     public MessagesDto getChronologicalMessageHistory(String login, String withLogin, int startMessageId) {
-        List<MessageDto> messageDtos = new ArrayList<>();
+        //List<MessageDto> messageDtos = new ArrayList<>();
 
         String query =  "" +
                 "select " +
@@ -176,87 +181,23 @@ public class MessageService extends DbService {
                 "join users uf " +
                 "  on uf.idusers = m.from_idusers " +
                 "where " +
-                "    ((u.login = '" + login + "' " +
-                "     and uf.login = '" + withLogin + "') " +
+                "    ((u.login = ? " +
+                "     and uf.login = ? ) " +
                 "    or " +
-                "    (u.login = '" + withLogin + "' " +
-                "     and uf.login = '" + login + "')) " +
-                "    and m.idmessages > " + startMessageId + " " +
-                "order by idmessages asc ";
-
-        if (null != conn) {
-            Statement statement = null;
-
-            try {
-                statement = conn.createStatement();
-                ResultSet resultSet = statement.executeQuery(query);
-
-                //get last token
-                while (resultSet.next()) {
-
-                    Timestamp createTimestamp = resultSet.getTimestamp("create_dt");
-                    Date createDate = new Date(createTimestamp.getTime());
-
-                    MessageDto messageDao = new MessageDto(
-                            resultSet.getInt("idmessages"),
-                            resultSet.getInt("idusers"),
-                            resultSet.getString("login"),
-                            resultSet.getInt("from_idusers"),
-                            resultSet.getString("from_login"),
-                            resultSet.getString("message"),
-                            resultSet.getBoolean("is_read"),
-                            createDate
-                    );
-
-                    messageDtos.add(messageDao);
-                }
-
-            } catch (SQLException sqlExc) {
-                sqlExc.printStackTrace();
-            } finally {
-                if (statement != null) {
-                    try {
-                        statement.close();
-                    } catch (SQLException ex) {}
-                    statement = null;
-                }
-            }
-        }
-
-        MessagesDto messagesDto = new MessagesDto(login);
-        messagesDto.setMessageDtos(messageDtos);
-        return messagesDto;
-
-    }
-
-    public MessagesDto getUnreadMessagesWithUser(String login, String withLogin) {
-        List<MessageDto> messageDtos = new ArrayList<>();
-
-        String query =  "" +
-                "select " +
-                "    m.idmessages, " +
-                "    m.idusers, " +
-                "    u.login, " +
-                "    m.from_idusers, " +
-                "    uf.login as from_login, " +
-                "    m.message, " +
-                "    m.is_read, " +
-                "    m.create_dt " +
-                "from messages m " +
-                "join users u " +
-                "  on u.idusers = m.idusers " +
-                "join users uf " +
-                "  on uf.idusers = m.from_idusers " +
-                "where " +
                 "    (u.login = ? " +
-                "     and uf.login = ? " +
-                "     and m.is_read = 0 ) " +
-               /* "    or " +
-                "    (u.login = ? " +
-                "     and uf.login = ? " +
-                "     )" + */
-                "order by idmessages asc ";
+                "     and uf.login = ? )) " +
+                "    and m.idmessages > ? " +
+                "order by idmessages asc; ";
 
+        Map<Integer, Object> queryParams = new HashMap<>();
+        queryParams.put(1, login);
+        queryParams.put(2, withLogin);
+        queryParams.put(3, withLogin);
+        queryParams.put(4, login);
+        queryParams.put(5, startMessageId);
+
+        return executePreparedStatement(query, queryParams);
+/*
         if (null != conn) {
             PreparedStatement statement = null;
 
@@ -264,8 +205,9 @@ public class MessageService extends DbService {
                 statement = conn.prepareStatement(query);
                 statement.setString(1, login);
                 statement.setString(2, withLogin);
-                /*statement.setString(3, withLogin);
-                statement.setString(4, login);*/
+                statement.setString(3, withLogin);
+                statement.setString(4, login);
+                statement.setInt(5, startMessageId);
                 ResultSet resultSet = statement.executeQuery();
 
                 //get last token
@@ -303,6 +245,137 @@ public class MessageService extends DbService {
         MessagesDto messagesDto = new MessagesDto(login);
         messagesDto.setMessageDtos(messageDtos);
         return messagesDto;
+*/
+    }
 
+    public MessagesDto getUnreadMessagesWithUser(String login, String withLogin) {
+        //List<MessageDto> messageDtos = new ArrayList<>();
+
+        String query =  "" +
+                "select " +
+                "    m.idmessages, " +
+                "    m.idusers, " +
+                "    u.login, " +
+                "    m.from_idusers, " +
+                "    uf.login as from_login, " +
+                "    m.message, " +
+                "    m.is_read, " +
+                "    m.create_dt " +
+                "from messages m " +
+                "join users u " +
+                "  on u.idusers = m.idusers " +
+                "join users uf " +
+                "  on uf.idusers = m.from_idusers " +
+                "where " +
+                "    (u.login = ? " +
+                "     and uf.login = ? " +
+                "     and m.is_read = 0 ) " +
+                "order by idmessages asc ";
+
+        Map<Integer, Object> queryParams = new HashMap<>();
+        queryParams.put(1, login);
+        queryParams.put(2, withLogin);
+
+        return executePreparedStatement(query, queryParams);
+/*
+        if (null != conn) {
+            PreparedStatement statement = null;
+
+            try {
+                statement = conn.prepareStatement(query);
+                statement.setString(1, login);
+                statement.setString(2, withLogin);
+
+                ResultSet resultSet = statement.executeQuery();
+
+                //get last token
+                while (resultSet.next()) {
+
+                    Timestamp createTimestamp = resultSet.getTimestamp("create_dt");
+                    Date createDate = new Date(createTimestamp.getTime());
+
+                    MessageDto messageDao = new MessageDto(
+                            resultSet.getInt("idmessages"),
+                            resultSet.getInt("idusers"),
+                            resultSet.getString("login"),
+                            resultSet.getInt("from_idusers"),
+                            resultSet.getString("from_login"),
+                            resultSet.getString("message"),
+                            resultSet.getBoolean("is_read"),
+                            createDate
+                    );
+
+                    messageDtos.add(messageDao);
+                }
+
+            } catch (SQLException sqlExc) {
+                sqlExc.printStackTrace();
+            } finally {
+                if (statement != null) {
+                    try {
+                        statement.close();
+                    } catch (SQLException ex) {}
+                    statement = null;
+                }
+            }
+        }
+
+        MessagesDto messagesDto = new MessagesDto(login);
+        messagesDto.setMessageDtos(messageDtos);
+        return messagesDto;
+*/
+    }
+
+    private MessagesDto executePreparedStatement(String query, Map<Integer, Object> queryParameters) {
+        List<MessageDto> messageDtos = new ArrayList<>();
+
+        if (null != conn) {
+            PreparedStatement statement = null;
+
+            try {
+
+                statement = conn.prepareStatement(query);
+
+                //set params if any
+                for (int queryIndex : queryParameters.keySet()) {
+                    statement.setObject(queryIndex, queryParameters.get(queryIndex));
+                }
+
+                ResultSet resultSet = statement.executeQuery();
+
+                while (resultSet.next()) {
+
+                    Timestamp createTimestamp = resultSet.getTimestamp("create_dt");
+                    Date createDate = new Date(createTimestamp.getTime());
+
+                    MessageDto messageDao = new MessageDto(
+                            resultSet.getInt("idmessages"),
+                            resultSet.getInt("idusers"),
+                            resultSet.getString("login"),
+                            resultSet.getInt("from_idusers"),
+                            resultSet.getString("from_login"),
+                            resultSet.getString("message"),
+                            resultSet.getBoolean("is_read"),
+                            createDate
+                    );
+
+                    messageDtos.add(messageDao);
+                }
+
+            } catch (SQLException sqlExc) {
+                sqlExc.printStackTrace();
+            } finally {
+                if (statement != null) {
+                    try {
+                        statement.close();
+                    } catch (SQLException ex) {}
+                    statement = null;
+                }
+            }
+        }
+
+        MessagesDto messagesDto = new MessagesDto("barf");
+        messagesDto.setMessageDtos(messageDtos);
+        return messagesDto;
     }
 }

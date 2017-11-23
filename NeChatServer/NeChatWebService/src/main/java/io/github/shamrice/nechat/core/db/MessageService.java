@@ -12,6 +12,8 @@ import java.util.Date;
  */
 public class MessageService extends DbService {
 
+    private String login;
+
     public MessageService(CoreContext coreContext) {
         super(coreContext);
     }
@@ -91,6 +93,8 @@ public class MessageService extends DbService {
 
     public MessagesDto getUnreadMessages(String login) {
 
+        this.login = login;
+
         String query =  "" +
                 "select " +
                 "    m.idmessages, " +
@@ -117,6 +121,8 @@ public class MessageService extends DbService {
     }
 
     public MessagesDto getChronologicalMessageHistory(String login, String withLogin, int startMessageId) {
+
+        this.login = login;
 
         String query =  "" +
                 "select " +
@@ -153,6 +159,8 @@ public class MessageService extends DbService {
     }
 
     public MessagesDto getUnreadMessagesWithUser(String login, String withLogin) {
+
+        this.login = login;
 
         String query =  "" +
                 "select " +
@@ -231,7 +239,7 @@ public class MessageService extends DbService {
             }
         }
 
-        MessagesDto messagesDto = new MessagesDto("barf");
+        MessagesDto messagesDto = new MessagesDto(this.login);
         messagesDto.setMessageDtos(messageDtos);
         return messagesDto;
     }

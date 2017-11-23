@@ -31,7 +31,7 @@ public class UserService extends DbService {
     @Override
     protected DbDto executePreparedStatement(String query, Map<Integer, Object> queryParameters) {
 
-        UserDto userDao = null;
+        UserDto userDao = new UserDto(-1, null, null);
 
         if (null != conn) {
             PreparedStatement statement = null;

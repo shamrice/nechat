@@ -19,17 +19,7 @@ import java.util.concurrent.atomic.AtomicLong;
 @RestController
 @RequestMapping(value = "/")
 public class AuthenticationController {
-/*
-    private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
 
-    @RequestMapping("/greeting")
-    public Greeting greeting(
-            @RequestParam(value = "name", defaultValue = "World") String name) {
-
-        return new Greeting(counter.incrementAndGet(), String.format(template, name));
-    }
-*/
     @RequestMapping(value = "/auth/user", method = RequestMethod.GET)
     public UserDto getUser(
             @RequestHeader(value = "token") String token,
@@ -62,7 +52,7 @@ public class AuthenticationController {
 
             TokenDto token = tokenAuthService.getToken(user.getUserId());
 
-            if (token == null) {
+            if (token.getAuthToken() == null || token.getAuthToken().isEmpty()) {
                 System.out.println("token was null. Creating new token");
                 tokenAuthService.createToken(user.getUserId());
                 System.out.println("created token");

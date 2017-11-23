@@ -132,7 +132,7 @@ public class TokenAuthService extends DbService {
     @Override
     protected DbDto executePreparedStatement(String query, Map<Integer, Object> queryParameters) {
 
-        TokenDto tokenDao = null;
+        TokenDto tokenDao = new TokenDto(-1, -1, null, null, null);
         PreparedStatement preparedStatement = null;
 
         if (null != conn) {

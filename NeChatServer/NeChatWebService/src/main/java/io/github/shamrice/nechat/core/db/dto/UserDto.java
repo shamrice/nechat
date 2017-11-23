@@ -3,7 +3,7 @@ package io.github.shamrice.nechat.core.db.dto;
 /**
  * Created by Erik on 10/19/2017.
  */
-public class UserDto implements DbDto {
+public class UserDto extends BaseDto implements DbDto {
 
     private int userId;
     private String login;

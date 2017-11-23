@@ -2,7 +2,6 @@ package io.github.shamrice.nechat.core.db;
 
 import io.github.shamrice.nechat.core.CoreContext;
 import io.github.shamrice.nechat.core.db.dto.*;
-import io.github.shamrice.nechat.core.db.dto.util.DtoConverterUtil;
 
 import java.sql.*;
 import java.util.*;
@@ -113,8 +112,8 @@ public class MessageService extends DbService {
 
         Map<Integer, Object> queryParams = new HashMap<>();
         queryParams.put(1, login);
-        return MessagesDto.safeCast(executePreparedStatement(query, queryParams));
 
+        return executePreparedStatement(query, queryParams).toType(MessagesDto.class);
     }
 
     public MessagesDto getChronologicalMessageHistory(String login, String withLogin, int startMessageId) {
@@ -150,13 +149,7 @@ public class MessageService extends DbService {
         queryParams.put(4, login);
         queryParams.put(5, startMessageId);
 
-
-        DbDto buddies = new BuddiesDto("test");
-        DtoConverterUtil<MessagesDto> dtoDtoConverterUtil = new DtoConverterUtil<>();
-        MessagesDto lala = dtoDtoConverterUtil.something(buddies);
-
-        return MessagesDto.safeCast(executePreparedStatement(query, queryParams));
-
+        return executePreparedStatement(query, queryParams).toType(MessagesDto.class);
     }
 
     public MessagesDto getUnreadMessagesWithUser(String login, String withLogin) {
@@ -186,8 +179,7 @@ public class MessageService extends DbService {
         queryParams.put(1, login);
         queryParams.put(2, withLogin);
 
-        return MessagesDto.safeCast(executePreparedStatement(query, queryParams));
-
+        return executePreparedStatement(query, queryParams).toType(MessagesDto.class);
     }
 
     @Override

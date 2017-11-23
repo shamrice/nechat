@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -24,6 +25,7 @@ public class TokenAuthService extends DbService {
 
         boolean result = false;
         String tokenFound = "";
+
         PreparedStatement preparedStatement = null;
 
         if (conn != null) {
@@ -110,30 +112,36 @@ public class TokenAuthService extends DbService {
         }
 
         return false;
-        /*
-        String insertCommand = "INSERT INTO auth_tokens " +
-                "(idusers, auth_token, expire_dt) " +
-                "VALUES(" + userId + ", '" + newToken + "', '" + expireDate +"')";
 
-        return executeCommand(insertCommand);
-        */
     }
 
     public TokenDto getToken(int userId) {
+
+        String query =  "SELECT idauth_tokens, idusers, auth_token, create_dt, expire_dt " +
+                " FROM auth_tokens " +
+                " WHERE idusers = ? " +
+                "    and expire_dt > current_timestamp() " +
+                "    and create_dt <= current_timestamp(); ";
+
+        Map<Integer, Object> queryParams = new HashMap<>();
+        queryParams.put(1, userId);
+
+        return executePreparedStatement(query, queryParams).toType(TokenDto.class);
+    }
+
+    @Override
+    protected DbDto executePreparedStatement(String query, Map<Integer, Object> queryParameters) {
+
         TokenDto tokenDao = null;
         PreparedStatement preparedStatement = null;
 
         if (null != conn) {
             try {
-                preparedStatement = conn.prepareStatement(
-                        "SELECT idauth_tokens, idusers, auth_token, create_dt, expire_dt " +
-                                " FROM auth_tokens " +
-                                " WHERE idusers = ? " +
-                                "    and expire_dt > current_timestamp() " +
-                                "    and create_dt <= current_timestamp(); "
-                );
+                preparedStatement = conn.prepareStatement(query);
 
-                preparedStatement.setInt(1, userId);
+                for (int paramIndex : queryParameters.keySet()) {
+                    preparedStatement.setObject(paramIndex, queryParameters.get(paramIndex));
+                }
 
                 ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -160,10 +168,5 @@ public class TokenAuthService extends DbService {
             }
         }
         return tokenDao;
-    }
-
-    @Override
-    protected DbDto executePreparedStatement(String query, Map<Integer, Object> queryParameters) {
-        return null;
     }
 }

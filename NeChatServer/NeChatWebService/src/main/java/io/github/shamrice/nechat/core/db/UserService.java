@@ -4,9 +4,10 @@ import io.github.shamrice.nechat.core.CoreContext;
 import io.github.shamrice.nechat.core.db.dto.DbDto;
 import io.github.shamrice.nechat.core.db.dto.UserDto;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -19,14 +20,28 @@ public class UserService extends DbService {
     }
 
     public UserDto getUser(String login) {
+
+        String query = "SELECT idusers, login, password FROM users WHERE login = ?";
+        Map<Integer, Object> queryParams = new HashMap<>();
+        queryParams.put(1, login);
+
+        return executePreparedStatement(query, queryParams).toType(UserDto.class);
+    }
+
+    @Override
+    protected DbDto executePreparedStatement(String query, Map<Integer, Object> queryParameters) {
+
         UserDto userDao = null;
 
         if (null != conn) {
-            Statement statement = null;
+            PreparedStatement statement = null;
 
             try {
-                statement = conn.createStatement();
-                ResultSet resultSet = statement.executeQuery("SELECT idusers, login, password FROM users WHERE login = '" + login + "'");
+                statement = conn.prepareStatement(query);
+                for (int queryIndex : queryParameters.keySet()) {
+                    statement.setObject(queryIndex, queryParameters.get(queryIndex));
+                }
+                ResultSet resultSet = statement.executeQuery();
 
                 while (resultSet.next()) {
                     userDao = new UserDto(
@@ -48,10 +63,5 @@ public class UserService extends DbService {
             }
         }
         return userDao;
-    }
-
-    @Override
-    protected DbDto executePreparedStatement(String query, Map<Integer, Object> queryParameters) {
-        return null;
     }
 }

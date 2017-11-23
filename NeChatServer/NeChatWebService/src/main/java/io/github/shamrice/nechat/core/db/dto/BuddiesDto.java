@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by Erik on 10/28/2017.
  */
-public class BuddiesDto implements DbDto {
+public class BuddiesDto extends BaseDto implements DbDto {
 
     private String login;
     private List<UserDto> buddies = new ArrayList<>();

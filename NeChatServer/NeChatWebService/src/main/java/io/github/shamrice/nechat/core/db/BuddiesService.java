@@ -7,6 +7,7 @@ import io.github.shamrice.nechat.core.db.dto.UserDto;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,13 +16,15 @@ import java.util.Map;
  */
 public class BuddiesService extends DbService {
 
+    private String login;
+
     public BuddiesService(CoreContext coreContext) {
         super(coreContext);
     }
 
     public BuddiesDto getBuddyList(String login) {
-        BuddiesDto results = new BuddiesDto(login);
-        PreparedStatement preparedStatement = null;
+
+        this.login = login;
 
         String query =  "" +
                 "SELECT  " +
@@ -36,41 +39,10 @@ public class BuddiesService extends DbService {
                 "    u.login = ? " +
                 "    and ub.deleted = 0;";
 
-        if (null != conn) {
-            try {
-                preparedStatement = conn.prepareStatement(query);
-                preparedStatement.setString(1, login);
+        Map<Integer, Object> queryParams = new HashMap<>();
+        queryParams.put(1, login);
 
-                ResultSet resultSet = preparedStatement.executeQuery();
-
-                List<UserDto> buddies = new ArrayList<>();
-
-                //get last token
-                while (resultSet.next()) {
-
-                    UserDto buddy = new UserDto(
-                            resultSet.getInt("idusers"),
-                            resultSet.getString("login")
-                    );
-
-                    buddies.add(buddy);
-                }
-
-                results.setIdBuddies(buddies);
-
-            } catch (SQLException sqlExc) {
-                sqlExc.printStackTrace();
-            } finally {
-                if (preparedStatement != null) {
-                    try {
-                        preparedStatement.close();
-                    } catch (SQLException ex) {}
-                    preparedStatement = null;
-                }
-            }
-        }
-
-        return results;
+        return executePreparedStatement(query, queryParams).toType(BuddiesDto.class);
     }
 
     public boolean addBuddy(String login, String buddyLogin) {
@@ -150,7 +122,47 @@ public class BuddiesService extends DbService {
 
     @Override
     protected DbDto executePreparedStatement(String query, Map<Integer, Object> queryParameters) {
-        return null;
+        BuddiesDto results = new BuddiesDto(this.login);
+        PreparedStatement preparedStatement = null;
+
+        if (null != conn) {
+            try {
+                preparedStatement = conn.prepareStatement(query);
+
+                for (int paramIndex : queryParameters.keySet()) {
+                    preparedStatement.setObject(paramIndex, queryParameters.get(paramIndex));
+                }
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                List<UserDto> buddies = new ArrayList<>();
+
+                //get last token
+                while (resultSet.next()) {
+
+                    UserDto buddy = new UserDto(
+                            resultSet.getInt("idusers"),
+                            resultSet.getString("login")
+                    );
+
+                    buddies.add(buddy);
+                }
+
+                results.setIdBuddies(buddies);
+
+            } catch (SQLException sqlExc) {
+                sqlExc.printStackTrace();
+            } finally {
+                if (preparedStatement != null) {
+                    try {
+                        preparedStatement.close();
+                    } catch (SQLException ex) {}
+                    preparedStatement = null;
+                }
+            }
+        }
+
+        return results;
     }
 
 }

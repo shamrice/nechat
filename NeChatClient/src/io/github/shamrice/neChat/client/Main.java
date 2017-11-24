@@ -77,12 +77,23 @@ public class Main extends Application {
                 new UserCredentials("test", "password")
         );
         */
+        if (ApplicationContext.get().getCurrentLogin() == null || ApplicationContext.get().getCurrentLogin().isEmpty()) {
+            //TODO : Display dialog window to prompt for username / password.
+            System.out.println("No login in config.");
+            return false;
+        }
 
-        AuthorizationResponse response = (AuthorizationResponse) ApplicationContext.get().getNeChatRestClient().getAuthToken();
-        if (response.getAuthToken().length() > 0) {
-            return true;
-        } else {
-            System.out.println("Unable to log in with credentials.");
+        try {
+            AuthorizationResponse response = (AuthorizationResponse) ApplicationContext.get().getNeChatRestClient().getAuthToken();
+            if (response.getAuthToken().length() > 0) {
+                return true;
+            } else {
+                System.out.println("Unable to log in with credentials.");
+                return false;
+            }
+        } catch (NullPointerException nullPointerExc) {
+            System.out.println("Null response we encountered getting token. Failing.");
+            nullPointerExc.printStackTrace();
             return false;
         }
     }

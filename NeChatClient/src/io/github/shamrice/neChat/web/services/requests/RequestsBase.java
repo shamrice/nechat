@@ -64,20 +64,19 @@ public abstract class RequestsBase {
                 os.flush();
                 os.close();
             }
+            StringBuilder response = new StringBuilder();
 
             InputStream content = connection.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(content));
-            StringBuilder response = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
                 response.append(line);
                 response.append('\r');
             }
             reader.close();
+            jsonObject = new JSONObject(response.toString());
 
             System.out.println(resource + "-RESPONSE: " + response.toString());
-
-            jsonObject = new JSONObject(response.toString());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -85,6 +84,4 @@ public abstract class RequestsBase {
 
         return jsonObject;
     }
-
-
 }

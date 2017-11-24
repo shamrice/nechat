@@ -8,20 +8,16 @@ import io.github.shamrice.neChat.web.services.requests.buddies.BuddiesResponse;
 import io.github.shamrice.neChat.web.services.requests.buddies.Buddy;
 import io.github.shamrice.neChat.web.services.requests.messages.Message;
 import io.github.shamrice.neChat.web.services.requests.messages.MessagesResponse;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeListener;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Optional;
 
 /**
  * Created by Erik on 11/16/2017.
@@ -43,6 +39,13 @@ public class MainController {
     @FXML
     private TextField sendMessageTextField;
 
+    @FXML
+    private Button addBuddyButton;
+
+    @FXML
+    private Button removeBuddyButton;
+
+
     private Main main;
     private Object chatTextAreaLockObj = null;
 
@@ -56,15 +59,81 @@ public class MainController {
         buddyModelTableView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> setSelectedBuddy(newValue)
         );
-/*
-        chatTextArea.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                chatTextArea.setScrollTop(Double.MAX_VALUE);
-            }
-        });
-        */
     }
+
+    public void addBuddyButtonClicked() {
+        TextInputDialog textInputDialog = new TextInputDialog();
+        textInputDialog.setGraphic(null);
+        textInputDialog.setTitle("Add Buddy");
+        textInputDialog.setHeaderText("New buddy name to add:");
+        Optional<String> result = textInputDialog.showAndWait();
+        if (result.isPresent()) {
+            System.out.println("New buddy to add: " + result.get());
+            String buddyToAdd = result.get().replace(" ", "");
+
+            if (!buddyToAdd.toLowerCase().equals(ApplicationContext.get().getCurrentLogin().toLowerCase())) {
+
+                StatusResponse response = (StatusResponse) ApplicationContext.get()
+                        .getNeChatRestClient()
+                        .addBuddy(buddyToAdd);
+
+                if (response.isSuccess()) {
+                    refreshBuddyList();
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Buddy Added");
+                    alert.setHeaderText(buddyToAdd + " has been added to your buddy list.");
+                    alert.show();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Buddy Add Failure");
+                    alert.setHeaderText("Buddy " + buddyToAdd + " was not able to be added.");
+                    alert.setContentText(response.getMessage());
+                    alert.show();
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Buddy Add Failure");
+                alert.setHeaderText("You cannot add yourself to your buddy list.");
+                alert.show();
+            }
+        }
+    }
+
+    public void removeBuddyButtonClicked() {
+        String buddyToRemove = ApplicationContext.get().getSelectedBuddyLogin();
+        if (buddyToRemove != null) {
+            StatusResponse response = (StatusResponse) ApplicationContext.get()
+                    .getNeChatRestClient()
+                    .removeBuddy(buddyToRemove);
+            if (response.isSuccess()) {
+                //refresh buddy list, select first cell, set selected buddy if any left and refresh the chat area.
+                refreshBuddyList();
+                buddyModelTableView.getSelectionModel().selectFirst();
+                BuddyModel selectedBuddy =buddyModelTableView.getSelectionModel().getSelectedItem();
+                if (selectedBuddy != null) {
+                    ApplicationContext.get().setSelectedBuddyLogin(
+                            selectedBuddy.getBuddyLogin().getValue()
+                    );
+                } else {
+                    ApplicationContext.get().setSelectedBuddyLogin(null);
+                }
+                refreshChatTextArea();
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Buddy Removed");
+                alert.setHeaderText(buddyToRemove + " has been removed from your buddy list.");
+                alert.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Buddy Removal Error");
+                alert.setHeaderText("Buddy " + buddyToRemove + " was not able to be removed.");
+                alert.setContentText(response.getMessage());
+                alert.show();
+            }
+        }
+    }
+
 
     public void sendMessageKeyboardInput() {
         sendMessageButtonClicked();
@@ -83,7 +152,11 @@ public class MainController {
                 refreshChatTextArea();
                 chatTextAreaChanged();
             } else {
-                JOptionPane.showMessageDialog(null, "Error sending message: " + response.getMessage(), "ERROR", 1);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Send Message Error");
+                alert.setHeaderText("Unable to send message to " + toLogin);
+                alert.setContentText(response.getMessage());
+                alert.show();
             }
         }
         sendMessageTextField.setText("");
@@ -96,6 +169,10 @@ public class MainController {
     public void setMain(Main main) {
         this.main = main;
 
+        refreshBuddyList();
+    }
+
+    private void refreshBuddyList() {
         ObservableList<BuddyModel> buddyData = FXCollections.observableArrayList();
 
         BuddiesResponse buddiesResponse = (BuddiesResponse) ApplicationContext.get().getNeChatRestClient().getBuddies();
@@ -105,24 +182,24 @@ public class MainController {
         }
 
         buddyModelTableView.setItems(buddyData);
-
     }
 
     private void setSelectedBuddy(BuddyModel buddy) {
-        System.out.println("Buddy selected = " + buddy.getBuddyLogin());
-        ApplicationContext.get().setSelectedBuddyLogin(buddy.getBuddyLogin().getValue());
+        if (buddy != null) {
+            System.out.println("Buddy selected = " + buddy.getBuddyLogin());
+            ApplicationContext.get().setSelectedBuddyLogin(buddy.getBuddyLogin().getValue());
 
-        refreshChatTextArea();
+            refreshChatTextArea();
 
-        Timer timer = new Timer(3000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                refreshChatTextArea();
-                chatTextAreaChanged();
-            }
-        });
-        timer.start();
-
+            Timer timer = new Timer(3000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    refreshChatTextArea();
+                    chatTextAreaChanged();
+                }
+            });
+            timer.start();
+        }
 
     }
 

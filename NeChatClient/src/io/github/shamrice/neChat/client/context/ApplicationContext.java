@@ -12,7 +12,6 @@ public class ApplicationContext {
 
     private static ApplicationContext applicationContext;
     private NeChatRestClient neChatRestClient;
-    private UserCredentials userCredentials;
     private String selectedBuddyLogin = "";
 
     public static ApplicationContext get() {
@@ -27,13 +26,12 @@ public class ApplicationContext {
         neChatRestClient = new NeChatRestClient(ConfigurationBuilder.build());
     }
 
-    public NeChatRestClient getNeChatRestClient() {
-        return neChatRestClient;
+    public String getCurrentLogin() {
+        return neChatRestClient.getCurrentLogin();
     }
 
-    public void setUserCredentials(UserCredentials userCredentials) {
-        this.userCredentials = userCredentials;
-        this.neChatRestClient.setUserCredentials(userCredentials);
+    public NeChatRestClient getNeChatRestClient() {
+        return neChatRestClient;
     }
 
     public void setSelectedBuddyLogin(String selectedBuddyLogin) {

@@ -36,6 +36,14 @@ public class NeChatRestClient {
         this.userCredentials = userCredentials;
     }
 
+    public String getCurrentLogin() {
+        if (userCredentials != null) {
+            return userCredentials.getLogin();
+        } else {
+            return null;
+        }
+    }
+
     public Response getAuthToken() {
         AuthorizationResponse response = new AuthorizationRequests(userCredentials, clientConfiguration).getAuthToken();
         userCredentials.setAuthToken(response.getAuthToken());

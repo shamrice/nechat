@@ -29,10 +29,14 @@ public class MessagesRequests extends RequestsBase {
                 message
         );
 
-        return new StatusResponse(
-                response.getString("status"),
-                response.getString("message")
-        );
+        if (response != null) {
+            return new StatusResponse(
+                    response.getString("status"),
+                    response.getString("message")
+            );
+        } else {
+            return  new StatusResponse("failure", "No response was returned from server.");
+        }
     }
 
     public StatusResponse markMessagesAsRead(List<Message> messages) {
@@ -107,19 +111,21 @@ public class MessagesRequests extends RequestsBase {
 
         List<Message> messageList = new ArrayList<>();
 
-        for(Object responseObj : response.getJSONArray("messageDtos")) {
-            JSONObject messageObj = (JSONObject)responseObj;
-            Message message = new Message(
-                    messageObj.getInt("id"),
-                    messageObj.getInt("userId"),
-                    messageObj.getString("login"),
-                    messageObj.getInt("fromUserId"),
-                    messageObj.getString("fromLogin"),
-                    messageObj.getString("message"),
-                    new Date(messageObj.getLong("createDate") + (System.currentTimeMillis()/1000)),
-                    messageObj.getBoolean("read")
-            );
-            messageList.add(message);
+        if (response.getJSONArray("messageDtos") != null) {
+            for (Object responseObj : response.getJSONArray("messageDtos")) {
+                JSONObject messageObj = (JSONObject) responseObj;
+                Message message = new Message(
+                        messageObj.getInt("id"),
+                        messageObj.getInt("userId"),
+                        messageObj.getString("login"),
+                        messageObj.getInt("fromUserId"),
+                        messageObj.getString("fromLogin"),
+                        messageObj.getString("message"),
+                        new Date(messageObj.getLong("createDate") + (System.currentTimeMillis() / 1000)),
+                        messageObj.getBoolean("read")
+                );
+                messageList.add(message);
+            }
         }
 
         return new MessagesResponse(

@@ -21,28 +21,54 @@ public class BuddiesRequests extends RequestsBase {
 
     public StatusResponse addBuddy(String buddyLogin) {
 
-        JSONObject response = executeRequest(
-                "PUT",
-                "buddies/" + buddyLogin + "/",
-                getTokenRequestHeader()
-        );
+        if (buddyLogin != null) {
+            JSONObject response = executeRequest(
+                    "PUT",
+                    "buddies/" + buddyLogin + "/",
+                    getTokenRequestHeader()
+            );
 
+            if (response != null) {
+                return new StatusResponse(
+                        response.getString("status"),
+                        response.getString("message")
+                );
+            } else {
+                return new StatusResponse(
+                        "failure",
+                        "Unable to add buddy " + buddyLogin + ". Server did not respond to the request."
+                );
+            }
+        }
         return new StatusResponse(
-                response.getString("status"),
-                response.getString("message")
+                "failure",
+                "Buddy must be named in order to be added."
         );
     }
 
     public StatusResponse removeBuddy(String buddyLogin) {
-        JSONObject response = executeRequest(
-                "DELETE",
-                "buddies/" + buddyLogin + "/",
-                getTokenRequestHeader()
-        );
+        if (buddyLogin != null) {
+            JSONObject response = executeRequest(
+                    "DELETE",
+                    "buddies/" + buddyLogin + "/",
+                    getTokenRequestHeader()
+            );
 
+            if (response != null) {
+                return new StatusResponse(
+                        response.getString("status"),
+                        response.getString("message")
+                );
+            } else {
+                return new StatusResponse(
+                        "failure",
+                        "Unable to remove buddy. Server did not response to the request."
+                );
+            }
+        }
         return new StatusResponse(
-                response.getString("status"),
-                response.getString("message")
+                "failure",
+                "Must name a buddy to be removed."
         );
     }
 

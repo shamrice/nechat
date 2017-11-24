@@ -53,7 +53,7 @@ public class BuddiesController {
             if (buddiesService.addBuddy(login, buddy)) {
                 return new StatusResponse(Status.SUCCESS, "Buddy added");
             } else {
-                return new StatusResponse(Status.FAILURE, "Buddy exists");
+                return new StatusResponse(Status.FAILURE, "Buddy is either already added or user does not exist.");
             }
         }
 

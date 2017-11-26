@@ -1,9 +1,7 @@
 package io.github.shamrice.neChat.client;
 
-import io.github.shamrice.neChat.client.context.ApplicationContext;
+import io.github.shamrice.neChat.client.ui.login.LoginController;
 import io.github.shamrice.neChat.client.ui.main.MainController;
-import io.github.shamrice.neChat.web.services.credentials.UserCredentials;
-import io.github.shamrice.neChat.web.services.requests.authorization.AuthorizationResponse;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,15 +19,15 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        if (!setUpRestClient()) {
-            System.exit(-1);
+        //TODO : login pane should only show up if saved u/p fails to authenticate.
+        //TODO : login pane should also have a "create account" option.
+
+        if (showLoginPaneAndSignIn()) {
+            this.primaryStage = primaryStage;
+            this.primaryStage.setTitle("NeChat");
+            initRootLayout();
+            showMainPane();
         }
-
-        this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("NeChat");
-
-        initRootLayout();
-        showMainPane();
     }
 
     private void initRootLayout() {
@@ -62,6 +60,30 @@ public class Main extends Application {
         }
     }
 
+    private boolean showLoginPaneAndSignIn() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("ui/login/Login.fxml"));
+            AnchorPane loginPane = loader.load();
+
+            LoginController loginController = loader.getController();
+
+            Scene scene = new Scene(loginPane);
+            Stage loginStage = new Stage();
+            loginStage.setTitle("NeChat - Sign In");
+
+            loginStage.setScene(scene);
+            loginStage.showAndWait();
+
+            return loginController.isAuthenticated();
+
+        } catch (IOException ioExc) {
+            ioExc.printStackTrace();
+        }
+
+        return false;
+    }
+
     public Stage getPrimaryStage() {
         return primaryStage;
     }
@@ -70,31 +92,4 @@ public class Main extends Application {
         launch(args);
     }
 
-    private boolean setUpRestClient() {
-
-        /* set by config builder from config for testing
-        ApplicationContext.get().getNeChatRestClient().setUserCredentials(
-                new UserCredentials("test", "password")
-        );
-        */
-        if (ApplicationContext.get().getCurrentLogin() == null || ApplicationContext.get().getCurrentLogin().isEmpty()) {
-            //TODO : Display dialog window to prompt for username / password.
-            System.out.println("No login in config.");
-            return false;
-        }
-
-        try {
-            AuthorizationResponse response = (AuthorizationResponse) ApplicationContext.get().getNeChatRestClient().getAuthToken();
-            if (response.getAuthToken().length() > 0) {
-                return true;
-            } else {
-                System.out.println("Unable to log in with credentials.");
-                return false;
-            }
-        } catch (NullPointerException nullPointerExc) {
-            System.out.println("Null response we encountered getting token. Failing.");
-            nullPointerExc.printStackTrace();
-            return false;
-        }
-    }
 }

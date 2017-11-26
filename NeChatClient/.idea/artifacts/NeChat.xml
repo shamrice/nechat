@@ -17,8 +17,8 @@
       </element>
       <element id="directory" name="resources">
         <element id="dir-copy" path="$PROJECT_DIR$/resources" />
+        <element id="file-copy" path="$PROJECT_DIR$/lib/json-20171018.jar" />
       </element>
-      <element id="library" level="project" name="org.json:json:20171018" />
     </root>
   </artifact>
 </component>

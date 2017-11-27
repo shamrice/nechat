@@ -29,16 +29,22 @@ public class CoreContext {
 
                 System.out.println("create sql connection to " + dbCredentials.getInstance());
 
-                connection = DriverManager.getConnection(
-                        "jdbc:mysql://" +
-                                dbCredentials.getInstance() +
-                                "/" +
-                                dbCredentials.getSchema() +
-                                "?user=" +
-                                dbCredentials.getUsername() +
-                                "&password=" +
-                                dbCredentials.getPassword()
-                );
+                String connectionString = "jdbc:mysql://" +
+                        dbCredentials.getInstance() +
+                        "/" +
+                        dbCredentials.getSchema() +
+                        "?user=" +
+                        dbCredentials.getUsername() +
+                        "&password=" +
+                        dbCredentials.getPassword();
+
+                if (coreConfiguration.getDbConfiguration().isAutoReconnect()) {
+                    System.out.println("Auto reconnect = true");
+                    connectionString += "&autoReconnect=true";
+                }
+
+                connection = DriverManager.getConnection(connectionString);
+
             } catch (Exception exc) {
                 exc.printStackTrace();
             }

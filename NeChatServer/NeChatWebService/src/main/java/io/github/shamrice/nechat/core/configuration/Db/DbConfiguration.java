@@ -6,12 +6,18 @@ package io.github.shamrice.nechat.core.configuration.Db;
 public class DbConfiguration {
 
     private DbCredentials dbCredentials;
+    private boolean autoReconnect;
 
-    public DbConfiguration(DbCredentials dbCredentials) {
+    public DbConfiguration(DbCredentials dbCredentials, boolean autoReconnect) {
         this.dbCredentials = dbCredentials;
+        this.autoReconnect = autoReconnect;
     }
 
     public DbCredentials getDbCredentials() {
         return dbCredentials;
+    }
+
+    public boolean isAutoReconnect() {
+        return autoReconnect;
     }
 }

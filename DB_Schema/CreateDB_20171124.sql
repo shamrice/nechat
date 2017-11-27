@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `nechat`.`messages` (
   `idmessages` INT(11) NOT NULL AUTO_INCREMENT,
   `idusers` INT(11) NOT NULL,
   `from_idusers` INT(11) NOT NULL,
-  `message` VARCHAR(100) NULL DEFAULT NULL,
+  `message` VARCHAR(255) NULL DEFAULT NULL,
   `is_read` BIT(1) NOT NULL DEFAULT b'0',
   `create_dt` DATETIME NOT NULL,
   PRIMARY KEY (`idmessages`),

@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import static java.lang.Boolean.parseBoolean;
+
 /**
  * Created by Erik on 10/19/2017.
  */
@@ -35,13 +37,17 @@ public class CoreConfigurationBuilder {
             ioExc.printStackTrace();
         }
 
+        //TODO : use defined constant strings instead.
         String instance = dbConfigProperties.getProperty("db.instance");
         String schema = dbConfigProperties.getProperty("db.schema");
         String username = dbConfigProperties.getProperty("db.username");
         String password = dbConfigProperties.getProperty("db.password");
+        String autoReconnectString = dbConfigProperties.getProperty("db.autoreconnect");
+
+        boolean autoReconnect = Boolean.parseBoolean(autoReconnectString);
 
         DbCredentials dbCredentials = new DbCredentials(instance, schema, username, password);
 
-        return new DbConfiguration(dbCredentials);
+        return new DbConfiguration(dbCredentials, autoReconnect);
     }
 }

@@ -39,58 +39,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MessageDto.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/core/db/dto/MessageDto.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-14">
-              <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MessageService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/core/db/MessageService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="152" column="38" selection-start-line="152" selection-start-column="38" selection-end-line="152" selection-end-column="38" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#376#377#0" expanded="true" />
-                <element signature="e#410#411#0" expanded="true" />
-                <marker date="1511422860195" expanded="true" signature="1753:2333" ph="insert into messages... " />
-                <marker date="1511422860195" expanded="true" signature="1947:2046" ph="select iduse... users" />
-                <marker date="1511422860195" expanded="true" signature="2139:2243" ph="select iduse... users" />
-                <marker date="1511422860195" expanded="true" signature="2794:3400" ph="select m.idm... " />
-                <marker date="1511422860195" expanded="true" signature="2794:3445" ph="select \n\tm... messages" />
-                <marker date="1511422860195" expanded="true" signature="3803:4453" ph="select m.idm... messages" />
-                <marker date="1511422860195" expanded="true" signature="3803:4485" ph="select m.idm... messages" />
-                <marker date="1511422860195" expanded="true" signature="3803:4522" ph="select m.idm... messages" />
-                <marker date="1511422860195" expanded="true" signature="3803:4564" ph="select m.idm... messages" />
-                <marker date="1511422860195" expanded="true" signature="3803:4565" ph="select m.idm... messages" />
-                <marker date="1511422860195" expanded="true" signature="3803:4568" ph="select m.idm... messages" />
-                <marker date="1511422860195" expanded="true" signature="3803:4614" ph="select m.idm... messages" />
-                <marker date="1511422860195" expanded="true" signature="3803:4660" ph="select m.idm... messages" />
-                <marker date="1511422860195" expanded="true" signature="3803:4662" ph="select m.idm... messages" />
-                <marker date="1511422860195" expanded="true" signature="5151:5893" ph="select m.idm... messages" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DbService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/core/db/DbService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CoreContext.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CoreContext.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/core/CoreContext.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
@@ -110,12 +59,57 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="BuddiesService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/core/db/BuddiesService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="47" column="19" selection-start-line="47" selection-start-column="19" selection-end-line="47" selection-end-column="19" />
+              <folding>
+                <marker date="1511421752366" expanded="true" signature="690:695" ph="select m.idm... messages" />
+                <marker date="1511421752366" expanded="true" signature="690:1028" ph="SELECT \n\tu... buddies" />
+                <marker date="1511421752366" expanded="true" signature="690:1109" ph="SELECT \n\tu... buddies" />
+                <marker date="1511421752366" expanded="true" signature="1581:2245" ph="INSERT INTO buddies... " />
+                <marker date="1511421752366" expanded="true" signature="1791:1913" ph="SELECT iduse... users" />
+                <marker date="1511421752366" expanded="true" signature="1791:1914" ph="SELECT iduse... users" />
+                <marker date="1511421752366" expanded="true" signature="2041:2163" ph="SELECT iduse... users" />
+                <marker date="1511421752366" expanded="true" signature="2041:2164" ph="SELECT iduse... users" />
+                <marker date="1511421752366" expanded="true" signature="3084:3367" ph="DELETE FROM " />
+                <marker date="1511421752366" expanded="true" signature="3205:3327" ph="SELECT iduse... users" />
+                <marker date="1511421752366" expanded="true" signature="3205:3328" ph="SELECT iduse... users" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="ConfigurationFiles.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/core/configuration/Definitions/ConfigurationFiles.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
               <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BuddiesController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/webservice/controller/BuddiesController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="30" column="36" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TokenAuthService.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/core/db/TokenAuthService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+              <folding>
+                <marker date="1512762067700" expanded="true" signature="870:1339" ph="select t.aut... auth_tokens" />
+                <marker date="1512762067700" expanded="true" signature="2782:2928" ph="INSERT INTO auth_tokens... " />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -227,7 +221,6 @@
         <option value="$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/core/db/dto/DbDto.java" />
         <option value="$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/core/db/BuddiesService.java" />
         <option value="$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/core/db/dto/BaseDto.java" />
-        <option value="$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/core/db/TokenAuthService.java" />
         <option value="$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/webservice/controller/AuthenticationController.java" />
         <option value="$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/core/db/MessageService.java" />
         <option value="$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/core/db/UserService.java" />
@@ -236,6 +229,7 @@
         <option value="$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/core/configuration/Db/DbConfiguration.java" />
         <option value="$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/core/configuration/CoreConfigurationBuilder.java" />
         <option value="$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/core/CoreContext.java" />
+        <option value="$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/core/db/TokenAuthService.java" />
       </list>
     </option>
   </component>
@@ -334,28 +328,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="target" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NeChatServer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NeChatServer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NeChatWebService" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="target" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="classes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1364,12 +1336,12 @@
       <workItem from="1508448928519" duration="270000" />
       <workItem from="1508449263854" duration="41257000" />
       <workItem from="1509177513909" duration="8569000" />
-      <workItem from="1510801280711" duration="47042000" />
+      <workItem from="1510801280711" duration="47448000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="97138000" />
+    <option name="totallyTimeSpent" value="97544000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1398,7 +1370,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292517" sideWeight="0.4914163" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25107914" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25107914" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1742,51 +1714,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/core/db/TokenAuthService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="136" column="0" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
-          <folding>
-            <marker date="1511422860151" expanded="true" signature="870:1338" ph="select t.aut... auth_tokens" />
-            <marker date="1511422860151" expanded="true" signature="2781:2927" ph="INSERT INTO auth_tokens... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/core/db/UserService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
           <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/webservice/controller/BuddiesController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="52" column="33" selection-start-line="52" selection-start-column="33" selection-end-line="52" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/core/db/BuddiesService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6">
-          <caret line="47" column="19" selection-start-line="47" selection-start-column="19" selection-end-line="47" selection-end-column="19" />
-          <folding>
-            <marker date="1511421752366" expanded="true" signature="690:695" ph="select m.idm... messages" />
-            <marker date="1511421752366" expanded="true" signature="690:1028" ph="SELECT \n\tu... buddies" />
-            <marker date="1511421752366" expanded="true" signature="690:1109" ph="SELECT \n\tu... buddies" />
-            <marker date="1511421752366" expanded="true" signature="1581:2245" ph="INSERT INTO buddies... " />
-            <marker date="1511421752366" expanded="true" signature="1791:1913" ph="SELECT iduse... users" />
-            <marker date="1511421752366" expanded="true" signature="1791:1914" ph="SELECT iduse... users" />
-            <marker date="1511421752366" expanded="true" signature="2041:2163" ph="SELECT iduse... users" />
-            <marker date="1511421752366" expanded="true" signature="2041:2164" ph="SELECT iduse... users" />
-            <marker date="1511421752366" expanded="true" signature="3084:3367" ph="DELETE FROM " />
-            <marker date="1511421752366" expanded="true" signature="3205:3327" ph="SELECT iduse... users" />
-            <marker date="1511421752366" expanded="true" signature="3205:3328" ph="SELECT iduse... users" />
           </folding>
         </state>
       </provider>
@@ -1903,6 +1836,45 @@
         <state relative-caret-position="306">
           <caret line="41" column="64" selection-start-line="41" selection-start-column="64" selection-end-line="41" selection-end-column="64" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/core/db/BuddiesService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="47" column="19" selection-start-line="47" selection-start-column="19" selection-end-line="47" selection-end-column="19" />
+          <folding>
+            <marker date="1511421752366" expanded="true" signature="690:695" ph="select m.idm... messages" />
+            <marker date="1511421752366" expanded="true" signature="690:1028" ph="SELECT \n\tu... buddies" />
+            <marker date="1511421752366" expanded="true" signature="690:1109" ph="SELECT \n\tu... buddies" />
+            <marker date="1511421752366" expanded="true" signature="1581:2245" ph="INSERT INTO buddies... " />
+            <marker date="1511421752366" expanded="true" signature="1791:1913" ph="SELECT iduse... users" />
+            <marker date="1511421752366" expanded="true" signature="1791:1914" ph="SELECT iduse... users" />
+            <marker date="1511421752366" expanded="true" signature="2041:2163" ph="SELECT iduse... users" />
+            <marker date="1511421752366" expanded="true" signature="2041:2164" ph="SELECT iduse... users" />
+            <marker date="1511421752366" expanded="true" signature="3084:3367" ph="DELETE FROM " />
+            <marker date="1511421752366" expanded="true" signature="3205:3327" ph="SELECT iduse... users" />
+            <marker date="1511421752366" expanded="true" signature="3205:3328" ph="SELECT iduse... users" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/webservice/controller/BuddiesController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="30" column="36" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NeChatWebService/src/main/java/io/github/shamrice/nechat/core/db/TokenAuthService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding>
+            <marker date="1512762067700" expanded="true" signature="870:1339" ph="select t.aut... auth_tokens" />
+            <marker date="1512762067700" expanded="true" signature="2782:2928" ph="INSERT INTO auth_tokens... " />
+          </folding>
         </state>
       </provider>
     </entry>

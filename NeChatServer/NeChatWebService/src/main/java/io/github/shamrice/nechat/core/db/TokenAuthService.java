@@ -39,7 +39,7 @@ public class TokenAuthService extends DbService {
                         "    u.login = ? " +
                         "    and t.auth_token = ? " +
                         "    and t.expire_dt > current_timestamp() " +
-                        "    and t.create_dt < current_timestamp(); "
+                        "    and t.create_dt <= current_timestamp(); "
                 );
 
                 preparedStatement.setString(1, login);

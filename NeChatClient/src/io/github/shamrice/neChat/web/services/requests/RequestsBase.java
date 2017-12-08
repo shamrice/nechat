@@ -37,6 +37,14 @@ public abstract class RequestsBase {
         JSONObject jsonObject = null;
         HttpURLConnection connection = null;
 
+        //debug
+        System.out.println("METHOD: " + method + "\nRESOURCE: " + resource);
+        if (requestHeaders != null) {
+            for (String key : requestHeaders.keySet()) {
+                System.out.println(key + " : " + requestHeaders.get(key));
+            }
+        }
+
         try {
 
             String encoding = Base64.getEncoder().encodeToString(

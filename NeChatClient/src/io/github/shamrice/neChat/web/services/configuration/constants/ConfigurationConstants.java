@@ -13,6 +13,9 @@ public class ConfigurationConstants {
     public static final String WEBSERVICES_PROTOCOL = "protocol";
     public static final String WEBSERVICES_WEBAPP = "webapp";
 
+    public static final String WEBSERVICES_LOCATOR_URL = "locator.url";
+    public static final String WEBSERVICES_LOCATOR_ENABLED = "locator.enabled";
+
     public static final String USER_PREFIX = "user.";
     public static final String USER_LOGIN = "login";
     public static final String USER_PASSWORD = "password";

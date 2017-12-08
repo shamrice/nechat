@@ -3,6 +3,7 @@ package io.github.shamrice.neChat.client.ui.main;
 import io.github.shamrice.neChat.client.Main;
 import io.github.shamrice.neChat.client.context.ApplicationContext;
 import io.github.shamrice.neChat.client.ui.main.buddy.BuddyModel;
+import io.github.shamrice.neChat.web.services.requests.Response;
 import io.github.shamrice.neChat.web.services.requests.StatusResponse;
 import io.github.shamrice.neChat.web.services.requests.buddies.BuddiesResponse;
 import io.github.shamrice.neChat.web.services.requests.buddies.Buddy;
@@ -175,13 +176,17 @@ public class MainController {
     private void refreshBuddyList() {
         ObservableList<BuddyModel> buddyData = FXCollections.observableArrayList();
 
-        BuddiesResponse buddiesResponse = (BuddiesResponse) ApplicationContext.get().getNeChatRestClient().getBuddies();
+        Response response = ApplicationContext.get().getNeChatRestClient().getBuddies();
 
-        for (Buddy buddy : buddiesResponse.getBuddyList()) {
-            buddyData.add(new BuddyModel(buddy.getLogin()));
+        if (response != null) {
+            BuddiesResponse buddiesResponse = (BuddiesResponse) response;
+
+            for (Buddy buddy : buddiesResponse.getBuddyList()) {
+                buddyData.add(new BuddyModel(buddy.getLogin()));
+            }
+
+            buddyModelTableView.setItems(buddyData);
         }
-
-        buddyModelTableView.setItems(buddyData);
     }
 
     private void setSelectedBuddy(BuddyModel buddy) {

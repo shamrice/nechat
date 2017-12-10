@@ -1,6 +1,7 @@
 package io.github.shamrice.neChat.application.client.context;
 
 import io.github.shamrice.neChat.application.rest.client.NeChatRestClient;
+import io.github.shamrice.neChat.application.rest.client.NeChatRestClientImpl;
 import io.github.shamrice.neChat.application.rest.client.configuration.ConfigurationBuilder;
 
 /**
@@ -21,7 +22,7 @@ public class ApplicationContext {
     }
 
     private ApplicationContext() {
-        neChatRestClient = new NeChatRestClient(ConfigurationBuilder.build());
+        neChatRestClient = new NeChatRestClientImpl(ConfigurationBuilder.build());
     }
 
     public String getCurrentLogin() {

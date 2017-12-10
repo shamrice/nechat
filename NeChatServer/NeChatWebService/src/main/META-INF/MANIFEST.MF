@@ -14,5 +14,5 @@ Class-Path: spring-boot-autoconfigure-1.5.8.RELEASE.jar validation-api
  ter-logging-1.5.8.RELEASE.jar logback-classic-1.1.11.jar jackson-core
  -2.8.10.jar logback-core-1.1.11.jar spring-boot-starter-web-1.5.8.REL
  EASE.jar
-Main-Class: io.github.shamrice.nechat.webservice.Application
+Main-Class: io.github.shamrice.nechat.server.webservice.Application
 

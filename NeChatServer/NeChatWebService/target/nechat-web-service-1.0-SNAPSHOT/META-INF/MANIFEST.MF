@@ -4,5 +4,5 @@ Built-By: Erik
 Implementation-Vendor-Id: io.github.shamrice.neChat
 Created-By: IntelliJ IDEA
 Build-Jdk: 1.8.0_92
-Main-Class: io.github.shamrice.nechat.webservice.Application
+Main-Class: io.github.shamrice.nechat.server.webservice.Application
 

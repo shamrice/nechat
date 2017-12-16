@@ -1,8 +1,10 @@
-package io.github.shamrice.nechat.server.webservice.security.services;
+package io.github.shamrice.nechat.server.web.service.security.services;
 
 import io.github.shamrice.nechat.server.core.CoreContext;
 import io.github.shamrice.nechat.server.core.db.dto.UserDto;
 import io.github.shamrice.nechat.server.core.db.UserService;
+import io.github.shamrice.nechat.server.logging.Log;
+import io.github.shamrice.nechat.server.logging.LogLevel;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -32,7 +34,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (user != null && user.getLogin() != null && user.getUserId() >= 0) {
             return new User(user.getLogin(), user.getPassword(), grantedAuthorityHashSet);
         } else {
-            System.out.println("User returned null and potentially does not exist.");
+            Log.get().logMessage(LogLevel.INFORMATION, "User: '" + userName + "' returned null and potentially does not exist.");
             return null;
         }
     }

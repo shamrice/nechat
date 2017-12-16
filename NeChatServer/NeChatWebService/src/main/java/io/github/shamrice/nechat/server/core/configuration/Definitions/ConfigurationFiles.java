@@ -5,6 +5,5 @@ package io.github.shamrice.nechat.server.core.configuration.Definitions;
  */
 public class ConfigurationFiles {
 
-    /* TODO : Fix this */
     public static final String DB_CONFIGURATION_FILE = "db-config.properties";
 }

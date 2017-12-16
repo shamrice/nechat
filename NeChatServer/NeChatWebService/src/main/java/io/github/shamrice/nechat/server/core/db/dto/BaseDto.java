@@ -1,5 +1,7 @@
 package io.github.shamrice.nechat.server.core.db.dto;
 
+import io.github.shamrice.nechat.server.logging.Log;
+
 /**
  * Created by Erik on 11/22/2017.
  */
@@ -10,7 +12,7 @@ public abstract class BaseDto implements DbDto {
             try {
                 return toType.isInstance(this) ? toType.cast(this) : null;
             } catch (Exception e) {
-                e.printStackTrace();
+                Log.get().logException(e);
             }
         }
         return null;

@@ -1,12 +1,14 @@
-package io.github.shamrice.nechat.server.webservice.controller;
+package io.github.shamrice.nechat.server.web.service.controller;
 
 import io.github.shamrice.nechat.server.core.CoreContext;
 import io.github.shamrice.nechat.server.core.db.MessageService;
 import io.github.shamrice.nechat.server.core.db.TokenAuthService;
 import io.github.shamrice.nechat.server.core.db.dto.MessagesDto;
-import io.github.shamrice.nechat.server.webservice.response.Status;
-import io.github.shamrice.nechat.server.webservice.response.StatusResponse;
-import io.github.shamrice.nechat.server.webservice.security.util.AuthAccessUtil;
+import io.github.shamrice.nechat.server.logging.Log;
+import io.github.shamrice.nechat.server.logging.LogLevel;
+import io.github.shamrice.nechat.server.web.service.response.Status;
+import io.github.shamrice.nechat.server.web.service.response.StatusResponse;
+import io.github.shamrice.nechat.server.web.service.security.util.AuthAccessUtil;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +33,8 @@ public class MessagesController {
             MessageService messageService = new MessageService(CoreContext.getInstance());
             messages = messageService.getUnreadMessages(login);
         } else {
-            throw new AccessDeniedException("Unable to authenticate using token.");
+            Log.get().logMessage(LogLevel.INFORMATION, this.getClass().getSimpleName() + ": " +
+                    "Unable to authenticate using token: " + token);
         }
 
         return messages;
@@ -77,15 +80,19 @@ public class MessagesController {
                 try {
                     startMessageId = Integer.parseInt(afterMessageId);
                 } catch (NumberFormatException formatExc) {
-                    System.out.println(afterMessageId + " is not a valid number. Setting to 0.");
-                    formatExc.printStackTrace();
+                    Log.get().logExceptionWithMessage(
+                            this.getClass().getSimpleName() +
+                                    ": " + afterMessageId + " is not a valid number. Setting to 0.",
+                            formatExc
+                    );
                 }
             }
 
             MessageService messageService = new MessageService(CoreContext.getInstance());
             messagesDto = messageService.getChronologicalMessageHistory(currentLogin, withLogin, startMessageId);
         } else {
-            throw new AccessDeniedException("Unable to authenticate token.");
+            Log.get().logMessage(LogLevel.INFORMATION, this.getClass().getSimpleName() + ": " +
+                    "Unable to authenticate using token: " + token);
         }
 
         return messagesDto;
@@ -105,7 +112,8 @@ public class MessagesController {
             MessageService messageService = new MessageService(CoreContext.getInstance());
             messagesDto = messageService.getUnreadMessagesWithUser(currentLogin, withLogin);
         } else {
-            throw new AccessDeniedException("Unable to authenticate token.");
+            Log.get().logMessage(LogLevel.INFORMATION, this.getClass().getSimpleName() + ": " +
+                    "Unable to authenticate using token: " + token);
         }
 
         return messagesDto;

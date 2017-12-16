@@ -1,4 +1,4 @@
-package io.github.shamrice.nechat.server.webservice.testDB;
+package io.github.shamrice.nechat.server.web.service.testDB;
 
 /**
  * Created by Erik on 10/21/2017.

@@ -3,6 +3,8 @@ package io.github.shamrice.nechat.server.core.db;
 import io.github.shamrice.nechat.server.core.CoreContext;
 import io.github.shamrice.nechat.server.core.db.dto.DbDto;
 import io.github.shamrice.nechat.server.core.db.dto.TokenDto;
+import io.github.shamrice.nechat.server.logging.Log;
+import io.github.shamrice.nechat.server.logging.LogLevel;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -57,12 +59,19 @@ public class TokenAuthService extends DbService {
 
                 }
             } catch (SQLException sqlExc) {
-                sqlExc.printStackTrace();
+                Log.get().logException(sqlExc);
             } finally {
                 if (preparedStatement != null) {
                     try {
                         preparedStatement.close();
                     } catch (SQLException ex) {
+
+                        Log.get().logMessage(
+                                LogLevel.DEBUG,
+                                this.getClass().getSimpleName() +
+                                        " : Error closing statement. This can be ignored. " +
+                                        ex.getMessage()
+                        );
                     }
                     preparedStatement = null;
                 }
@@ -70,7 +79,12 @@ public class TokenAuthService extends DbService {
         }
 
         if (!result) {
-            System.out.println("Failed to validate token " + token + " for " + login);
+            Log.get().logMessage(
+                    LogLevel.DEBUG,
+                    this.getClass().getSimpleName() +
+                            " : Failed to validate token " + token + " for " + login
+            );
+
         }
 
         return result;
@@ -100,12 +114,18 @@ public class TokenAuthService extends DbService {
                 return executeCommand(preparedStatement);
 
             } catch (SQLException sqlExc) {
-                sqlExc.printStackTrace();
+                Log.get().logException(sqlExc);
             } finally {
                 if (preparedStatement != null) {
                     try {
                         preparedStatement.close();
                     } catch (SQLException ex) {
+                        Log.get().logMessage(
+                                LogLevel.DEBUG,
+                                this.getClass().getSimpleName() +
+                                        " : Error closing statement. This can be ignored. " +
+                                        ex.getMessage()
+                        );
                     }
                 }
             }
@@ -156,12 +176,18 @@ public class TokenAuthService extends DbService {
                     );
                 }
             } catch (SQLException sqlExc) {
-                sqlExc.printStackTrace();
+                Log.get().logException(sqlExc);
             } finally {
                 if (preparedStatement != null) {
                     try {
                         preparedStatement.close();
                     } catch (SQLException ex) {
+                        Log.get().logMessage(
+                                LogLevel.DEBUG,
+                                this.getClass().getSimpleName() +
+                                        " : Error closing statement. This can be ignored. " +
+                                        ex.getMessage()
+                        );
                     }
                     preparedStatement = null;
                 }

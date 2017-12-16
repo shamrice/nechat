@@ -1,4 +1,4 @@
-package io.github.shamrice.nechat.server.webservice.security.util;
+package io.github.shamrice.nechat.server.web.service.security.util;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;

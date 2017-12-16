@@ -1,6 +1,6 @@
-package io.github.shamrice.nechat.server.webservice.security;
+package io.github.shamrice.nechat.server.web.service.security;
 
-import io.github.shamrice.nechat.server.webservice.security.services.CustomUserDetailsService;
+import io.github.shamrice.nechat.server.web.service.security.services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

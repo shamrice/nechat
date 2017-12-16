@@ -1,11 +1,13 @@
-package io.github.shamrice.nechat.server.webservice.controller;
+package io.github.shamrice.nechat.server.web.service.controller;
 
 import io.github.shamrice.nechat.server.core.CoreContext;
 import io.github.shamrice.nechat.server.core.db.dto.TokenDto;
 import io.github.shamrice.nechat.server.core.db.dto.UserDto;
 import io.github.shamrice.nechat.server.core.db.TokenAuthService;
 import io.github.shamrice.nechat.server.core.db.UserService;
-import io.github.shamrice.nechat.server.webservice.security.util.AuthAccessUtil;
+import io.github.shamrice.nechat.server.logging.Log;
+import io.github.shamrice.nechat.server.logging.LogLevel;
+import io.github.shamrice.nechat.server.web.service.security.util.AuthAccessUtil;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +32,11 @@ public class AuthenticationController {
             UserService userService = new UserService(CoreContext.getInstance());
             return userService.getUser(login);
         }
-        throw new AccessDeniedException("Invalid token.");
+
+        Log.get().logMessage(LogLevel.INFORMATION, this.getClass().getSimpleName() + ": " +
+                "Unable to authenticate using token: " + token);
+
+        return null;
     }
 
     @RequestMapping(value = "/auth/token/{login}", method = RequestMethod.GET)
@@ -50,12 +56,20 @@ public class AuthenticationController {
             TokenDto token = tokenAuthService.getToken(user.getUserId());
 
             if (token.getAuthToken() == null || token.getAuthToken().isEmpty()) {
-                System.out.println("token was null. Creating new token");
+                Log.get().logMessage(LogLevel.INFORMATION, this.getClass().getSimpleName() + ": " +
+                        "token was null. Creating new token");
+
                 tokenAuthService.createToken(user.getUserId());
-                System.out.println("created token");
+                Log.get().logMessage(LogLevel.INFORMATION, this.getClass().getSimpleName() + ": " +
+                        "Created token");
+
                 token = tokenAuthService.getToken(user.getUserId());
-                System.out.println("Token is now " + token + ". returning that to user.");
+
             }
+
+            Log.get().logMessage(LogLevel.INFORMATION, this.getClass().getSimpleName() + ": " +
+                    "getTokens - Returning token " + token.getAuthToken() + ". to " + login + "."
+            );
 
             return token;
         }

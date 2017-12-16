@@ -3,6 +3,8 @@ package io.github.shamrice.nechat.server.core.configuration;
 import io.github.shamrice.nechat.server.core.configuration.Db.DbConfiguration;
 import io.github.shamrice.nechat.server.core.configuration.Db.DbCredentials;
 import io.github.shamrice.nechat.server.core.configuration.Definitions.ConfigurationFiles;
+import io.github.shamrice.nechat.server.logging.Log;
+import io.github.shamrice.nechat.server.logging.loggers.ConsoleLoggerImpl;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,7 +32,7 @@ public class CoreConfigurationBuilder {
             dbConfigProperties.load(input);
             input.close();
         } catch (IOException ioExc) {
-            ioExc.printStackTrace();
+            Log.get().logException(ioExc);
         }
 
         //TODO : use defined constant strings instead.

@@ -11,7 +11,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <start-class>io.github.shamrice.nechat.server.webservice.Application</start-class>
+        <start-class>io.github.shamrice.nechat.server.web.service.Application</start-class>
     </properties>
 
     <parent>

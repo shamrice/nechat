@@ -2,6 +2,8 @@ package io.github.shamrice.nechat.server.core.db;
 
 import io.github.shamrice.nechat.server.core.CoreContext;
 import io.github.shamrice.nechat.server.core.db.dto.*;
+import io.github.shamrice.nechat.server.logging.Log;
+import io.github.shamrice.nechat.server.logging.LogLevel;
 
 import java.sql.*;
 import java.util.*;
@@ -50,7 +52,7 @@ public class MessageService extends DbService {
             return executeCommand(preparedStatement);
 
         } catch (SQLException sqlExc) {
-            sqlExc.printStackTrace();
+            Log.get().logException(sqlExc);
         }
 
         return false;
@@ -84,7 +86,7 @@ public class MessageService extends DbService {
             return executeCommand(preparedStatement);
 
         } catch (SQLException sqlExc) {
-            sqlExc.printStackTrace();
+            Log.get().logException(sqlExc);
         }
 
         return false;
@@ -228,12 +230,19 @@ public class MessageService extends DbService {
                 }
 
             } catch (SQLException sqlExc) {
-                sqlExc.printStackTrace();
+                Log.get().logException(sqlExc);
             } finally {
                 if (statement != null) {
                     try {
                         statement.close();
-                    } catch (SQLException ex) {}
+                    } catch (SQLException ex) {
+                        Log.get().logMessage(
+                                LogLevel.DEBUG,
+                                this.getClass().getSimpleName() +
+                                        " : Error closing statement. This can be ignored. " +
+                                        ex.getMessage()
+                        );
+                    }
                     statement = null;
                 }
             }

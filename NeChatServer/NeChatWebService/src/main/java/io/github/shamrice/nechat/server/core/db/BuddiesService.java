@@ -4,6 +4,8 @@ import io.github.shamrice.nechat.server.core.CoreContext;
 import io.github.shamrice.nechat.server.core.db.dto.BuddiesDto;
 import io.github.shamrice.nechat.server.core.db.dto.DbDto;
 import io.github.shamrice.nechat.server.core.db.dto.UserDto;
+import io.github.shamrice.nechat.server.logging.Log;
+import io.github.shamrice.nechat.server.logging.LogLevel;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -73,12 +75,18 @@ public class BuddiesService extends DbService {
                 result = executeCommand(preparedStatement);
 
             } catch (SQLException sqlExc) {
-                sqlExc.printStackTrace();
+                Log.get().logException(sqlExc);
             } finally {
                 if (preparedStatement != null) {
                     try {
                         preparedStatement.close();
                     } catch (SQLException ex) {
+                        Log.get().logMessage(
+                                LogLevel.DEBUG,
+                                this.getClass().getSimpleName() +
+                                        " : Error closing statement. This can be ignored. " +
+                                        ex.getMessage()
+                        );
                     }
                 }
             }
@@ -106,12 +114,18 @@ public class BuddiesService extends DbService {
                 result = executeCommand(preparedStatement);
 
             } catch (SQLException sqlExc) {
-                sqlExc.printStackTrace();
+                Log.get().logException(sqlExc);
             } finally {
                 if (preparedStatement != null) {
                     try {
                         preparedStatement.close();
                     } catch (SQLException ex) {
+                        Log.get().logMessage(
+                                LogLevel.DEBUG,
+                                this.getClass().getSimpleName() +
+                                        " : Error closing statement. This can be ignored. " +
+                                        ex.getMessage()
+                        );
                     }
                 }
             }
@@ -151,12 +165,19 @@ public class BuddiesService extends DbService {
                 results.setIdBuddies(buddies);
 
             } catch (SQLException sqlExc) {
-                sqlExc.printStackTrace();
+                Log.get().logException(sqlExc);
             } finally {
                 if (preparedStatement != null) {
                     try {
                         preparedStatement.close();
-                    } catch (SQLException ex) {}
+                    } catch (SQLException ex) {
+                        Log.get().logMessage(
+                                LogLevel.DEBUG,
+                                this.getClass().getSimpleName() +
+                                        " : Error closing statement. This can be ignored. " +
+                                        ex.getMessage()
+                        );
+                    }
                     preparedStatement = null;
                 }
             }

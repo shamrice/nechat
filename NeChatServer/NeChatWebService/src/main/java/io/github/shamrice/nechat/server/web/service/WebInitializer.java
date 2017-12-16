@@ -1,4 +1,4 @@
-package io.github.shamrice.nechat.server.webservice;
+package io.github.shamrice.nechat.server.web.service;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;

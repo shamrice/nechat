@@ -1,6 +1,8 @@
-package io.github.shamrice.nechat.server.webservice.security;
+package io.github.shamrice.nechat.server.web.service.security;
 
 
+import io.github.shamrice.nechat.server.logging.Log;
+import io.github.shamrice.nechat.server.logging.LogLevel;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 
@@ -19,10 +21,13 @@ public class CustomBasicAuthenticationEntryPoint extends BasicAuthenticationEntr
             HttpServletRequest request,
             HttpServletResponse response,
             AuthenticationException authException) throws IOException, ServletException {
+
         //auth failed
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.addHeader("WWW-Authenticate", "Basic realm=" + getRealmName() + "");
-        System.out.println("HTTP Status 401 : " + authException.getMessage());
+
+        Log.get().logMessage(LogLevel.INFORMATION, "HTTP Status 401 : " + authException.getMessage());
+
     }
 
     @Override

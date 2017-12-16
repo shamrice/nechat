@@ -3,6 +3,7 @@ package io.github.shamrice.nechat.server.core;
 import io.github.shamrice.nechat.server.core.configuration.CoreConfiguration;
 import io.github.shamrice.nechat.server.core.configuration.CoreConfigurationBuilder;
 import io.github.shamrice.nechat.server.core.configuration.Db.DbCredentials;
+import io.github.shamrice.nechat.server.logging.Log;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -46,7 +47,11 @@ public class CoreContext {
                 connection = DriverManager.getConnection(connectionString);
 
             } catch (Exception exc) {
-                exc.printStackTrace();
+                Log.get().logExceptionWithMessage(
+                        this.getClass().getSimpleName() + " : " +
+                                "Unable to configure database connection. Connection is now null.",
+                        exc
+                );
             }
         }
     }

@@ -1,12 +1,14 @@
-package io.github.shamrice.nechat.server.webservice.controller;
+package io.github.shamrice.nechat.server.web.service.controller;
 
 import io.github.shamrice.nechat.server.core.CoreContext;
 import io.github.shamrice.nechat.server.core.db.BuddiesService;
 import io.github.shamrice.nechat.server.core.db.dto.BuddiesDto;
 import io.github.shamrice.nechat.server.core.db.TokenAuthService;
-import io.github.shamrice.nechat.server.webservice.response.Status;
-import io.github.shamrice.nechat.server.webservice.response.StatusResponse;
-import io.github.shamrice.nechat.server.webservice.security.util.AuthAccessUtil;
+import io.github.shamrice.nechat.server.logging.Log;
+import io.github.shamrice.nechat.server.logging.LogLevel;
+import io.github.shamrice.nechat.server.web.service.response.Status;
+import io.github.shamrice.nechat.server.web.service.response.StatusResponse;
+import io.github.shamrice.nechat.server.web.service.security.util.AuthAccessUtil;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +33,10 @@ public class BuddiesController {
         if (tokenAuthService.authorizeToken(token, login)) {
             BuddiesService buddiesService = new BuddiesService(CoreContext.getInstance());
             buddiesDto = buddiesService.getBuddyList(login);
-        } else throw new AccessDeniedException("Unable to authenticate using token.");
+        } else {
+            Log.get().logMessage(LogLevel.INFORMATION, this.getClass().getSimpleName() + ": " +
+                    "Unable to authenticate using token: " + token);
+        }
 
         return buddiesDto;
     }

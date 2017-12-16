@@ -2,6 +2,8 @@ package io.github.shamrice.nechat.server.core.db;
 
 import io.github.shamrice.nechat.server.core.CoreContext;
 import io.github.shamrice.nechat.server.core.db.dto.DbDto;
+import io.github.shamrice.nechat.server.logging.Log;
+import io.github.shamrice.nechat.server.logging.LogLevel;
 
 import java.sql.*;
 import java.util.Map;
@@ -16,7 +18,7 @@ public abstract class DbService {
     public DbService(CoreContext coreContext) {
         conn = coreContext.getDatabaseConnection();
         if (conn == null) {
-            System.out.println("Core Connection is null! Database connection not possible!!!");
+            Log.get().logMessage(LogLevel.ERROR, "Core Connection is null! Database connection not possible!!!");
         }
     }
 
@@ -31,12 +33,19 @@ public abstract class DbService {
                 result = true;
 
             } catch (SQLException sqlExc) {
-                sqlExc.printStackTrace();
+                Log.get().logException(sqlExc);
             } finally {
                 if (statement != null) {
                     try {
                         statement.close();
-                    } catch (SQLException ex) {}
+                    } catch (SQLException ex) {
+                        Log.get().logMessage(
+                                LogLevel.DEBUG,
+                                this.getClass().getSimpleName() +
+                                        " : Error closing statement. This can be ignored. " +
+                                        ex.getMessage()
+                        );
+                    }
                     statement = null;
                 }
             }

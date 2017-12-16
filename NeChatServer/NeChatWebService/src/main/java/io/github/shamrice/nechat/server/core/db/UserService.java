@@ -3,6 +3,8 @@ package io.github.shamrice.nechat.server.core.db;
 import io.github.shamrice.nechat.server.core.CoreContext;
 import io.github.shamrice.nechat.server.core.db.dto.DbDto;
 import io.github.shamrice.nechat.server.core.db.dto.UserDto;
+import io.github.shamrice.nechat.server.logging.Log;
+import io.github.shamrice.nechat.server.logging.LogLevel;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -52,12 +54,19 @@ public class UserService extends DbService {
                 }
 
             } catch (SQLException sqlExc) {
-                sqlExc.printStackTrace();
+                Log.get().logException(sqlExc);
             } finally {
                 if (statement != null) {
                     try {
                         statement.close();
-                    } catch (SQLException ex) {}
+                    } catch (SQLException ex) {
+                        Log.get().logMessage(
+                                LogLevel.DEBUG,
+                                this.getClass().getSimpleName() +
+                                        " : Error closing statement. This can be ignored. " +
+                                        ex.getMessage()
+                        );
+                    }
                     statement = null;
                 }
             }

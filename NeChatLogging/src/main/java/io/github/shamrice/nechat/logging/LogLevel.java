@@ -1,4 +1,4 @@
-package io.github.shamrice.nechat.server.logging;
+package io.github.shamrice.nechat.logging;
 
 /**
  * Created by Erik on 12/16/2017.

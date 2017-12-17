@@ -2,6 +2,8 @@ package io.github.shamrice.neChat.application.rest.client.requests;
 
 import io.github.shamrice.neChat.application.rest.client.configuration.ClientConfiguration;
 import io.github.shamrice.neChat.application.rest.client.credentials.UserCredentials;
+import io.github.shamrice.nechat.logging.Log;
+import io.github.shamrice.nechat.logging.LogLevel;
 import org.json.JSONObject;
 
 import java.io.*;
@@ -38,10 +40,11 @@ public abstract class RequestsBase {
         HttpURLConnection connection = null;
 
         //debug
-        System.out.println("METHOD: " + method + "\nRESOURCE: " + resource);
+        Log.get().logMessage(LogLevel.DEBUG, "METHOD: " + method + " RESOURCE: " + resource);
+
         if (requestHeaders != null) {
             for (String key : requestHeaders.keySet()) {
-                System.out.println(key + " : " + requestHeaders.get(key));
+                Log.get().logMessage(LogLevel.DEBUG, key + " : " + requestHeaders.get(key));
             }
         }
 
@@ -84,10 +87,10 @@ public abstract class RequestsBase {
             reader.close();
             jsonObject = new JSONObject(response.toString());
 
-            System.out.println(resource + "-RESPONSE: " + response.toString());
+            Log.get().logMessage(LogLevel.DEBUG, resource + "-RESPONSE: " + response.toString());
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.get().logException(e);
         }
 
         return jsonObject;

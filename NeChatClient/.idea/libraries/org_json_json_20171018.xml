@@ -3,6 +3,7 @@
     <properties maven-id="org.json:json:20171018" />
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/json-20171018.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/NeChatLogging.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

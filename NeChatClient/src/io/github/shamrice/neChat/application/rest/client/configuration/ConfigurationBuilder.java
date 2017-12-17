@@ -3,6 +3,8 @@ package io.github.shamrice.neChat.application.rest.client.configuration;
 import io.github.shamrice.neChat.application.rest.client.configuration.constants.ConfigurationConstants;
 import io.github.shamrice.neChat.application.rest.client.configuration.service.ServiceConfiguration;
 import io.github.shamrice.neChat.application.rest.client.credentials.UserCredentials;
+import io.github.shamrice.nechat.logging.Log;
+import io.github.shamrice.nechat.logging.LogLevel;
 import org.json.JSONObject;
 
 import javax.naming.ConfigurationException;
@@ -24,7 +26,7 @@ public class ConfigurationBuilder {
         String configPath = configFile.getPath();
 
         if (!configFile.exists() || configFile.isDirectory()) {
-            System.out.println("Cannot find config file at default location: " + configPath +
+            Log.get().logMessage(LogLevel.INFORMATION, "Cannot find config file at default location: " + configPath +
                 ". Trying: " + configPath);
             configPath = "resources/config.properties";
         }
@@ -34,8 +36,9 @@ public class ConfigurationBuilder {
             configProperties.load(configInputStream);
             configInputStream.close();;
         } catch (IOException ioExc) {
-            System.out.println("Unable to load configuration properties from config file");
-            ioExc.printStackTrace();
+            Log.get().logExceptionWithMessage(
+                    "Unable to load configuration properties from config file",
+                    ioExc);
             System.exit(-1);
         }
 
@@ -44,8 +47,10 @@ public class ConfigurationBuilder {
         try {
             serviceConfiguration = buildServiceConfiguration();
         } catch (ConfigurationException configEx) {
-            System.out.println("Unable to build service configuration.");
-            configEx.printStackTrace();
+            Log.get().logExceptionWithMessage(
+                    "Unable to build service configuration.",
+                    configEx
+            );
             System.exit(-2);
         }
 
@@ -74,7 +79,7 @@ public class ConfigurationBuilder {
 
         //use locator service to build config
         if (locatorEnabled.toLowerCase().equals("true")) {
-            System.out.println("Building web service configuration using locator service.");
+            Log.get().logMessage(LogLevel.DEBUG, "Building web service configuration using locator service.");
 
             String locatorUrl = configProperties.getProperty(
                     ConfigurationConstants.WEBSERVICES_PREFIX +
@@ -101,7 +106,7 @@ public class ConfigurationBuilder {
 
                 JSONObject result = new JSONObject(sb.toString());
 
-                System.out.println("Service locator received: " + result.toString());
+                Log.get().logMessage(LogLevel.DEBUG, "Service locator received: " + result.toString());
 
                 serviceProtocol = result.getString("protocol");
                 serviceHost = result.getString("host");
@@ -114,12 +119,14 @@ public class ConfigurationBuilder {
                 }
 
             } catch (Exception ex) {
-                System.out.println("Failed building web service configuration from locator service.");
-                ex.printStackTrace();
+                Log.get().logExceptionWithMessage(
+                        "Failed building web service configuration from locator service.",
+                        ex
+                );
             }
         } else {
             //use local config to build webservice config
-            System.out.println("Building web service configuration using local config values.");
+            Log.get().logMessage(LogLevel.DEBUG, "Building web service configuration using local config values.");
 
             serviceHost = configProperties.getProperty(
                     ConfigurationConstants.WEBSERVICES_PREFIX + ConfigurationConstants.WEBSERVICES_HOST);
@@ -142,8 +149,10 @@ public class ConfigurationBuilder {
             try {
                 servicePort = Integer.parseInt(servicePortString);
             } catch (Throwable ex) {
-                System.out.println("Unable to parse web service port from config: " + servicePort);
-                ex.printStackTrace();
+                Log.get().logExceptionWithMessage(
+                        "Unable to parse web service port from config: " + servicePort,
+                        new Exception(ex)
+                );
                 throw ex;
             }
         }

@@ -1,10 +1,9 @@
-package io.github.shamrice.nechat.server.logging;
+package io.github.shamrice.nechat.logging;
 
-import io.github.shamrice.nechat.server.core.configuration.Definitions.ConfigurationFiles;
-import io.github.shamrice.nechat.server.logging.configuration.LoggerConfigurationStrings;
-import io.github.shamrice.nechat.server.logging.loggers.ConsoleLoggerImpl;
-import io.github.shamrice.nechat.server.logging.loggers.FileLoggerImpl;
-import io.github.shamrice.nechat.server.logging.loggers.Logger;
+import io.github.shamrice.nechat.logging.configuration.LoggerConfigurationStrings;
+import io.github.shamrice.nechat.logging.loggers.ConsoleLoggerImpl;
+import io.github.shamrice.nechat.logging.loggers.FileLoggerImpl;
+import io.github.shamrice.nechat.logging.loggers.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;

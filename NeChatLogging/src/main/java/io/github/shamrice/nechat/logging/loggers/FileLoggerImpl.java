@@ -1,6 +1,6 @@
-package io.github.shamrice.nechat.server.logging.loggers;
+package io.github.shamrice.nechat.logging.loggers;
 
-import io.github.shamrice.nechat.server.logging.LogLevel;
+import io.github.shamrice.nechat.logging.LogLevel;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -31,7 +31,10 @@ public class FileLoggerImpl implements Logger {
 
             //create new directory if it doesn't already exist.
             if (!new File(logFileLocation).mkdirs()) {
-                    System.out.println("ERROR: Unable to create log file directory. Logging will fail!");
+                    if (!new File(logFileLocation).exists()) {
+                        System.out.println("ERROR: Attempted to make logging directory but failed. " +
+                        "Log messages will not be recorded.");
+                    }
             }
 
             this.logFileLocation = logFileLocation;
@@ -68,7 +71,7 @@ public class FileLoggerImpl implements Logger {
         DateFormat df = new SimpleDateFormat("yyyyMMdd");
         String logDate = df.format(new Date());
 
-        String fileName = logFileLocation + "NeChatServer_" + logDate + ".log";
+        String fileName = logFileLocation + "NeChat_" + logDate + ".log";
 
         try {
             File logFile = new File(fileName);

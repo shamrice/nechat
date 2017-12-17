@@ -1,8 +1,8 @@
 package io.github.shamrice.nechat.server.web.service.security;
 
 
-import io.github.shamrice.nechat.server.logging.Log;
-import io.github.shamrice.nechat.server.logging.LogLevel;
+import io.github.shamrice.nechat.logging.Log;
+import io.github.shamrice.nechat.logging.LogLevel;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 

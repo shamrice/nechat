@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="NeChatLogging">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/NeChatWebService/src/main/resources/lib/NeChatLogging.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

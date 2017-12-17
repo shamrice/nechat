@@ -68,6 +68,7 @@
           <element id="library" level="project" name="Maven: javax.transaction:javax.transaction-api:1.2" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aspects:4.3.12.RELEASE" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.44" />
+          <element id="library" level="project" name="NeChatLogging" />
         </element>
       </element>
       <element id="directory" name="META-INF">

@@ -4,8 +4,8 @@ import io.github.shamrice.nechat.server.core.CoreContext;
 import io.github.shamrice.nechat.server.core.db.dto.BuddiesDto;
 import io.github.shamrice.nechat.server.core.db.dto.DbDto;
 import io.github.shamrice.nechat.server.core.db.dto.UserDto;
-import io.github.shamrice.nechat.server.logging.Log;
-import io.github.shamrice.nechat.server.logging.LogLevel;
+import io.github.shamrice.nechat.logging.Log;
+import io.github.shamrice.nechat.logging.LogLevel;
 
 import java.sql.*;
 import java.util.ArrayList;

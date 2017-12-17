@@ -9,6 +9,8 @@ import io.github.shamrice.neChat.application.rest.client.requests.buddies.Buddie
 import io.github.shamrice.neChat.application.rest.client.requests.buddies.Buddy;
 import io.github.shamrice.neChat.application.rest.client.requests.messages.Message;
 import io.github.shamrice.neChat.application.rest.client.requests.messages.MessagesResponse;
+import io.github.shamrice.nechat.logging.Log;
+import io.github.shamrice.nechat.logging.LogLevel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -69,7 +71,8 @@ public class MainController {
         textInputDialog.setHeaderText("New buddy name to add:");
         Optional<String> result = textInputDialog.showAndWait();
         if (result.isPresent()) {
-            System.out.println("New buddy to add: " + result.get());
+            Log.get().logMessage(LogLevel.DEBUG, "New buddy to add: " + result.get());
+
             String buddyToAdd = result.get().replace(" ", "");
 
             if (!buddyToAdd.toLowerCase().equals(ApplicationContext.get().getCurrentLogin().toLowerCase())) {
@@ -107,6 +110,7 @@ public class MainController {
             StatusResponse response = (StatusResponse) ApplicationContext.get()
                     .getNeChatRestClient()
                     .removeBuddy(buddyToRemove);
+
             if (response.isSuccess()) {
                 //refresh buddy list, select first cell, set selected buddy if any left and refresh the chat area.
                 refreshBuddyList();
@@ -191,7 +195,7 @@ public class MainController {
 
     private void setSelectedBuddy(BuddyModel buddy) {
         if (buddy != null) {
-            System.out.println("Buddy selected = " + buddy.getBuddyLogin());
+            Log.get().logMessage(LogLevel.DEBUG, "Buddy selected = " + buddy.getBuddyLogin());
             ApplicationContext.get().setSelectedBuddyLogin(buddy.getBuddyLogin().getValue());
 
             refreshChatTextArea();
@@ -245,6 +249,6 @@ public class MainController {
     }
 
     public void test() {
-        System.out.println("TEST");
+        Log.get().logMessage(LogLevel.DEBUG, "TEST");
     }
 }

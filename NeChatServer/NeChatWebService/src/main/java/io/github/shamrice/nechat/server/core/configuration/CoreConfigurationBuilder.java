@@ -3,8 +3,8 @@ package io.github.shamrice.nechat.server.core.configuration;
 import io.github.shamrice.nechat.server.core.configuration.Db.DbConfiguration;
 import io.github.shamrice.nechat.server.core.configuration.Db.DbCredentials;
 import io.github.shamrice.nechat.server.core.configuration.Definitions.ConfigurationFiles;
-import io.github.shamrice.nechat.server.logging.Log;
-import io.github.shamrice.nechat.server.logging.loggers.ConsoleLoggerImpl;
+import io.github.shamrice.nechat.logging.Log;
+import io.github.shamrice.nechat.logging.loggers.ConsoleLoggerImpl;
 
 import java.io.IOException;
 import java.io.InputStream;

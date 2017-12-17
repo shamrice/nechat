@@ -3,8 +3,8 @@ package io.github.shamrice.nechat.server.core.db;
 import io.github.shamrice.nechat.server.core.CoreContext;
 import io.github.shamrice.nechat.server.core.db.dto.DbDto;
 import io.github.shamrice.nechat.server.core.db.dto.TokenDto;
-import io.github.shamrice.nechat.server.logging.Log;
-import io.github.shamrice.nechat.server.logging.LogLevel;
+import io.github.shamrice.nechat.logging.Log;
+import io.github.shamrice.nechat.logging.LogLevel;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

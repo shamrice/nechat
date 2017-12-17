@@ -1,6 +1,6 @@
 package io.github.shamrice.nechat.server.core.db.dto;
 
-import io.github.shamrice.nechat.server.logging.Log;
+import io.github.shamrice.nechat.logging.Log;
 
 /**
  * Created by Erik on 11/22/2017.

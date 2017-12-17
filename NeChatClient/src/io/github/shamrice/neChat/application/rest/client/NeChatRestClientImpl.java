@@ -12,6 +12,8 @@ import io.github.shamrice.neChat.application.rest.client.requests.buddies.Buddie
 import io.github.shamrice.neChat.application.rest.client.requests.messages.Message;
 import io.github.shamrice.neChat.application.rest.client.requests.messages.MessagesRequests;
 import io.github.shamrice.neChat.application.rest.client.requests.messages.MessagesResponse;
+import io.github.shamrice.nechat.logging.Log;
+import io.github.shamrice.nechat.logging.LogLevel;
 
 import java.util.Date;
 import java.util.List;
@@ -134,7 +136,7 @@ public class NeChatRestClientImpl implements NeChatRestClient {
             responseCache.addUserMessages(withLogin, response.getMessageList());
             StatusResponse markAsRead = markMessagesAsRead(response.getMessageList());
             if (!markAsRead.isSuccess()) {
-                System.out.println(markAsRead.getStatus() + " - " + markAsRead.getMessage());
+                Log.get().logMessage(LogLevel.ERROR, markAsRead.getStatus() + " - " + markAsRead.getMessage());
             }
         }
 

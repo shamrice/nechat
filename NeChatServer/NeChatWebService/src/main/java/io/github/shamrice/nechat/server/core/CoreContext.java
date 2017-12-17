@@ -3,7 +3,7 @@ package io.github.shamrice.nechat.server.core;
 import io.github.shamrice.nechat.server.core.configuration.CoreConfiguration;
 import io.github.shamrice.nechat.server.core.configuration.CoreConfigurationBuilder;
 import io.github.shamrice.nechat.server.core.configuration.Db.DbCredentials;
-import io.github.shamrice.nechat.server.logging.Log;
+import io.github.shamrice.nechat.logging.Log;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

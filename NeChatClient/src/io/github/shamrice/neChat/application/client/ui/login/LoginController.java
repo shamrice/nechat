@@ -3,6 +3,8 @@ package io.github.shamrice.neChat.application.client.ui.login;
 import io.github.shamrice.neChat.application.client.context.ApplicationContext;
 import io.github.shamrice.neChat.application.rest.client.credentials.UserCredentials;
 import io.github.shamrice.neChat.application.rest.client.requests.authorization.AuthorizationResponse;
+import io.github.shamrice.nechat.logging.Log;
+import io.github.shamrice.nechat.logging.LogLevel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -69,13 +71,14 @@ public class LoginController {
             try {
                 AuthorizationResponse response = (AuthorizationResponse) ApplicationContext.get().getNeChatRestClient().getAuthToken();
                 if (response.getAuthToken().length() > 0) {
-                    System.out.println("logged in and received token: " + response.getAuthToken());
+                    Log.get().logMessage(LogLevel.DEBUG, "logged in and received token: " + response.getAuthToken());
+
                     isAuthenticated = true;
                     closeStage();
 
                 } else {
                     showAlert(Alert.AlertType.ERROR, "Invalid Login", "Invalid credentials supplied. Please try again.", null);
-                    System.out.println("Unable to log in with credentials.");
+                    Log.get().logMessage(LogLevel.DEBUG, "Unable to log in with credentials.");
 
                 }
             } catch (NullPointerException nullPointerExc) {
@@ -86,8 +89,10 @@ public class LoginController {
                         null
                 );
 
-                System.out.println("Null response we encountered getting token. Failing.");
-                nullPointerExc.printStackTrace();
+                Log.get().logExceptionWithMessage(
+                        "Null response we encountered getting token. Failing.",
+                        nullPointerExc
+                );
 
             }
         } else {

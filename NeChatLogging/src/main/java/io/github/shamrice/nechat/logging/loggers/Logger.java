@@ -1,6 +1,6 @@
-package io.github.shamrice.nechat.server.logging.loggers;
+package io.github.shamrice.nechat.logging.loggers;
 
-import io.github.shamrice.nechat.server.logging.LogLevel;
+import io.github.shamrice.nechat.logging.LogLevel;
 
 /**
  * Created by Erik on 12/16/2017.

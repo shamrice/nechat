@@ -93,7 +93,7 @@ public class TokenAuthService extends DbService {
     public boolean createToken(int userId) {
 
         String newToken = UUID.randomUUID().toString().replace("-", "");
-        System.out.println("Generated token: " + newToken);
+        Log.get().logMessage(LogLevel.INFORMATION, "Generated token: " + newToken);
 
         LocalDateTime expireDate = LocalDateTime.now().plusDays(1);
 

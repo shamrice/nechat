@@ -20,7 +20,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private static String REALM = "MY_TEST_REALM";
+    private static String REALM = "NeChatRealm";
 
     private CustomUserDetailsService customUserDetailsService;
 
@@ -43,6 +43,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/user/**").hasAnyAuthority("ADMIN") //.hasRole("ADMIN")
+                .and().httpBasic().realmName(REALM).authenticationEntryPoint(getBasicAuthEntryPoint())
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/token/**").hasAnyAuthority("ADMIN") //.hasRole("ADMIN")
                 .and().httpBasic().realmName(REALM).authenticationEntryPoint(getBasicAuthEntryPoint())
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 

@@ -10,9 +10,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashSet;
+import java.util.Random;
 
 /**
  * Created by Erik on 10/20/2017.
@@ -35,7 +38,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             return new User(user.getLogin(), user.getPassword(), grantedAuthorityHashSet);
         } else {
             Log.get().logMessage(LogLevel.INFORMATION, "User: '" + userName + "' returned null and potentially does not exist.");
-            return null;
+            throw new UsernameNotFoundException("User " + userName + " does not exist");
         }
     }
 }

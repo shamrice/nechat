@@ -6,8 +6,8 @@ import io.github.shamrice.neChat.application.rest.client.credentials.UserCredent
 import io.github.shamrice.neChat.application.rest.client.requests.RequestsBase;
 import org.json.JSONObject;
 
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -78,7 +78,7 @@ public class MessagesRequests extends RequestsBase {
                     messageObj.getInt("fromUserId"),
                     messageObj.getString("fromLogin"),
                     messageObj.getString("message"),
-                    new Date(messageObj.getLong("createDate") + (System.currentTimeMillis()/1000)),
+                    new Date(messageObj.getLong("createDate")),
                     messageObj.getBoolean("read")
             );
             messageList.add(message);
@@ -120,7 +120,7 @@ public class MessagesRequests extends RequestsBase {
                         messageObj.getInt("fromUserId"),
                         messageObj.getString("fromLogin"),
                         messageObj.getString("message"),
-                        new Date(messageObj.getLong("createDate") + (System.currentTimeMillis() / 1000)),
+                        new Date(messageObj.getLong("createDate")),
                         messageObj.getBoolean("read")
                 );
                 messageList.add(message);
@@ -151,7 +151,7 @@ public class MessagesRequests extends RequestsBase {
                     messageObj.getInt("fromUserId"),
                     messageObj.getString("fromLogin"),
                     messageObj.getString("message"),
-                    new Date(messageObj.getLong("createDate") + (System.currentTimeMillis()/1000)),
+                    new Date(messageObj.getLong("createDate")),
                     messageObj.getBoolean("read")
             );
             messageList.add(message);

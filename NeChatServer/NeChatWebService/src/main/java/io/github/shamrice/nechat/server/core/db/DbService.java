@@ -29,9 +29,10 @@ public abstract class DbService {
         if (null != conn) {
 
             try {
-                statement.execute();
-                result = true;
-
+                int rowsUpdated = statement.executeUpdate();
+                if (rowsUpdated > 0) {
+                    result = true;
+                }
             } catch (SQLException sqlExc) {
                 Log.get().logException(sqlExc);
             } finally {

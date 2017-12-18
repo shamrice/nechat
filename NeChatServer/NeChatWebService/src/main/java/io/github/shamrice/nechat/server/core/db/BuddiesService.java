@@ -53,26 +53,33 @@ public class BuddiesService extends DbService {
 
         if (null != conn) {
             try {
-                preparedStatement = conn.prepareStatement(
-                        "INSERT INTO buddies " +
-                                "(idusers, idusers_buddy) " +
-                                "VALUES ( " +
-                                "  ( " +
-                                "    SELECT idusers " +
-                                "    FROM users " +
-                                "    WHERE login = ? " +
-                                "  ), " +
-                                "    ( " +
-                                "    SELECT idusers " +
-                                "    FROM users " +
-                                "    WHERE login = ? " +
-                                "  )  " +
-                                ")"
-                );
+                UserService userService = new UserService(CoreContext.getInstance());
+                UserDto buddyDto = userService.getUser(buddyLogin);
 
-                preparedStatement.setString(1, login);
-                preparedStatement.setString(2, buddyLogin);
-                result = executeCommand(preparedStatement);
+                if (buddyDto != null && buddyDto.getUserId() > 0) {
+                    UserDto currentUser = userService.getUser(login);
+
+                    preparedStatement = conn.prepareStatement(
+                            "insert into buddies (idusers, idusers_buddy) " +
+                                    "select ? as idusers, u.idusers as idusers_buddy " +
+                                    "from users u " +
+                                    "where  " +
+                                    "u.idusers = ? " +
+                                    "    and idusers not in ( " +
+                                    "    select idusers_buddy " +
+                                    "        from buddies b " +
+                                    "        where " +
+                                    "            b.idusers = ? " +
+                                    "            and b.idusers_buddy = ? " +
+                                    ")"
+                    );
+
+                    preparedStatement.setInt(1, currentUser.getUserId());
+                    preparedStatement.setInt(2, buddyDto.getUserId());
+                    preparedStatement.setInt(3, currentUser.getUserId());
+                    preparedStatement.setInt(4, buddyDto.getUserId());
+                    result = executeCommand(preparedStatement);
+                }
 
             } catch (SQLException sqlExc) {
                 Log.get().logException(sqlExc);

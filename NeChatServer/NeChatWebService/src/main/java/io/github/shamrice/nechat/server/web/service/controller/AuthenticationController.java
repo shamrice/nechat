@@ -35,8 +35,9 @@ public class AuthenticationController {
 
         Log.get().logMessage(LogLevel.INFORMATION, this.getClass().getSimpleName() + ": " +
                 "Unable to authenticate using token: " + token);
+        throw new AccessDeniedException("Unable to authenticate user "
+                + currentUser + " with token " + token);
 
-        return null;
     }
 
     @RequestMapping(value = "/auth/token/{login}", method = RequestMethod.GET)
@@ -73,7 +74,8 @@ public class AuthenticationController {
 
             return token;
         }
-        return null;
+
+        throw new AccessDeniedException("Unable to get tokens for user " + login);
     }
 
 

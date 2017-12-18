@@ -36,6 +36,8 @@ public class BuddiesController {
         } else {
             Log.get().logMessage(LogLevel.INFORMATION, this.getClass().getSimpleName() + ": " +
                     "Unable to authenticate using token: " + token);
+            throw new AccessDeniedException("Unable to authenticate user "
+                    + login + " with token " + token);
         }
 
         return buddiesDto;

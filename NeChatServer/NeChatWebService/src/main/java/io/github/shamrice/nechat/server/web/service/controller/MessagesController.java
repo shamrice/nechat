@@ -35,6 +35,7 @@ public class MessagesController {
         } else {
             Log.get().logMessage(LogLevel.INFORMATION, this.getClass().getSimpleName() + ": " +
                     "Unable to authenticate using token: " + token);
+            throw new AccessDeniedException("Unable to authenticate token " + token);
         }
 
         return messages;
@@ -93,6 +94,8 @@ public class MessagesController {
         } else {
             Log.get().logMessage(LogLevel.INFORMATION, this.getClass().getSimpleName() + ": " +
                     "Unable to authenticate using token: " + token);
+            throw new AccessDeniedException("Unable to authenticate user "
+                    + currentLogin + " with token " + token);
         }
 
         return messagesDto;
@@ -114,6 +117,8 @@ public class MessagesController {
         } else {
             Log.get().logMessage(LogLevel.INFORMATION, this.getClass().getSimpleName() + ": " +
                     "Unable to authenticate using token: " + token);
+            throw new AccessDeniedException("Unable to authenticate user "
+                    + currentLogin + " with token " + token);
         }
 
         return messagesDto;

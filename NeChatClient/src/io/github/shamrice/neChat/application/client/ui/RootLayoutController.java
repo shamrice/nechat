@@ -2,6 +2,7 @@ package io.github.shamrice.neChat.application.client.ui;
 
 import io.github.shamrice.nechat.logging.Log;
 import io.github.shamrice.nechat.logging.LogLevel;
+import javafx.application.Platform;
 import javafx.scene.control.Alert;
 
 /**
@@ -10,7 +11,8 @@ import javafx.scene.control.Alert;
 public class RootLayoutController {
 
     public void closeMenuItemClicked() {
-        Log.get().logMessage(LogLevel.DEBUG, "Brutal quit.");
+        Log.get().logMessage(LogLevel.DEBUG, "Exiting from menu.");
+        Platform.exit();
         System.exit(0);
     }
 

@@ -16,6 +16,10 @@ public class StatusResponse implements Response {
         return status.toLowerCase().equals("success");
     }
 
+    public boolean isAuthFailure() {
+        return status.toLowerCase().equals("invalid");
+    }
+
     public String getStatus() {
         return status;
     }

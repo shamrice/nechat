@@ -46,20 +46,6 @@ public class LoginController {
 
     public void signInButtonClicked() {
 
-        /* set by config builder from config for testing
-        ApplicationContext.get().getNeChatRestClient().setUserCredentials(
-                new UserCredentials("test", "password")
-        );
-        */
-
-        /*
-        if (ApplicationContext.get().getCurrentLogin() == null || ApplicationContext.get().getCurrentLogin().isEmpty()) {
-            //TODO : Display dialog window to prompt for username / password.
-            System.out.println("No login in config.");
-
-        }
-*/
-
         String login = loginTextField.getText();
         String password = passwordField.getText();
 
@@ -69,7 +55,9 @@ public class LoginController {
             );
 
             try {
-                AuthorizationResponse response = (AuthorizationResponse) ApplicationContext.get().getNeChatRestClient().getAuthToken();
+                AuthorizationResponse response =
+                        (AuthorizationResponse) ApplicationContext.get().getNeChatRestClient().getAuthToken();
+
                 if (response.getAuthToken().length() > 0) {
                     Log.get().logMessage(LogLevel.DEBUG, "logged in and received token: " + response.getAuthToken());
 

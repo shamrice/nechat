@@ -3,6 +3,7 @@ package io.github.shamrice.neChat.application.client.ui.main;
 import io.github.shamrice.neChat.application.client.Main;
 import io.github.shamrice.neChat.application.client.context.ApplicationContext;
 import io.github.shamrice.neChat.application.client.ui.main.buddy.BuddyModel;
+import io.github.shamrice.neChat.application.client.ui.util.PaneUtils;
 import io.github.shamrice.neChat.application.rest.client.requests.Response;
 import io.github.shamrice.neChat.application.rest.client.requests.StatusResponse;
 import io.github.shamrice.neChat.application.rest.client.requests.buddies.BuddiesResponse;
@@ -11,6 +12,8 @@ import io.github.shamrice.neChat.application.rest.client.requests.messages.Messa
 import io.github.shamrice.neChat.application.rest.client.requests.messages.MessagesResponse;
 import io.github.shamrice.nechat.logging.Log;
 import io.github.shamrice.nechat.logging.LogLevel;
+import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -84,27 +87,36 @@ public class MainController {
                 if (response.isSuccess()) {
                     refreshBuddyList();
 
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Buddy Added");
-                    alert.setHeaderText(buddyToAdd + " has been added to your buddy list.");
-                    alert.show();
+                    showAlert(
+                            Alert.AlertType.INFORMATION,
+                            "Buddy Added",
+                            buddyToAdd + " has been added to your buddy list.",
+                            null,
+                            false
+                    );
                 } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Buddy Add Failure");
-                    alert.setHeaderText("Buddy " + buddyToAdd + " was not able to be added.");
-                    alert.setContentText(response.getMessage());
-                    alert.show();
+                    showAlert(
+                            Alert.AlertType.ERROR,
+                            "Buddy Add Failure",
+                            "Buddy " + buddyToAdd + " was not able to be added.",
+                            response.getMessage(),
+                            response.isAuthFailure()
+                    );
                 }
             } else {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Buddy Add Failure");
-                alert.setHeaderText("You cannot add yourself to your buddy list.");
-                alert.show();
+                showAlert(
+                        Alert.AlertType.WARNING,
+                        "Buddy Add Failure",
+                        "You cannot add yourself to your buddy list.",
+                        null,
+                        false
+                );
             }
         }
     }
 
     public void removeBuddyButtonClicked() {
+
         String buddyToRemove = ApplicationContext.get().getSelectedBuddyLogin();
         if (buddyToRemove != null) {
             StatusResponse response = (StatusResponse) ApplicationContext.get()
@@ -130,11 +142,13 @@ public class MainController {
                 alert.setHeaderText(buddyToRemove + " has been removed from your buddy list.");
                 alert.show();
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Buddy Removal Error");
-                alert.setHeaderText("Buddy " + buddyToRemove + " was not able to be removed.");
-                alert.setContentText(response.getMessage());
-                alert.show();
+                showAlert(
+                        Alert.AlertType.ERROR,
+                        "Buddy Removal Error",
+                        "Buddy " + buddyToRemove + " was not able to be removed.",
+                        response.getMessage(),
+                        response.isAuthFailure()
+                );
             }
         }
     }
@@ -157,11 +171,13 @@ public class MainController {
                 refreshChatTextArea();
                 chatTextAreaChanged();
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Send Message Error");
-                alert.setHeaderText("Unable to send message to " + toLogin);
-                alert.setContentText(response.getMessage());
-                alert.show();
+                showAlert(
+                        Alert.AlertType.ERROR,
+                        "Send Message Error",
+                        "Unable to send message to " + toLogin,
+                        response.getMessage(),
+                        response.isAuthFailure()
+                );
             }
         }
         sendMessageTextField.setText("");
@@ -209,7 +225,6 @@ public class MainController {
             });
             timer.start();
         }
-
     }
 
     private void refreshChatTextArea() {
@@ -239,16 +254,42 @@ public class MainController {
                 }
             }
 
-
-            //System.out.println(chatText);
             chatTextArea.setText(chatText);
             chatTextArea.appendText(""); //forces the change listener to scroll text area to bottom.
             chatTextAreaLockObj = null;
+        } else {
+            Log.get().logMessage(LogLevel.INFORMATION, "Attempted to refresh chat area but was blocked by another thread.");
         }
 
     }
 
     public void test() {
         Log.get().logMessage(LogLevel.DEBUG, "TEST");
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String headerText, String contentText, boolean isAuthFailure) {
+
+        Log.get().logMessage(LogLevel.ERROR, "App error: " + headerText + " content: " + contentText);
+
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+        alert.showAndWait();
+
+        if (isAuthFailure) {
+            if (new PaneUtils().showLoginPaneAndSignIn()) {
+                refreshBuddyList();
+                chatTextAreaLockObj = null;
+                refreshChatTextArea();
+                chatTextAreaChanged();
+            } else {
+                //user hit cancel button.
+                Log.get().logMessage(LogLevel.INFORMATION, "User decided to not sign in again after auth error. Closing.");
+
+                Platform.exit();
+                System.exit(0);
+            }
+        }
     }
 }

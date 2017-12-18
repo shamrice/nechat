@@ -13,6 +13,6 @@ Class-Path: spring-boot-autoconfigure-1.5.8.RELEASE.jar validation-api
  r spring-web-4.3.12.RELEASE.jar slf4j-api-1.7.25.jar spring-boot-star
  ter-logging-1.5.8.RELEASE.jar logback-classic-1.1.11.jar jackson-core
  -2.8.10.jar logback-core-1.1.11.jar spring-boot-starter-web-1.5.8.REL
- EASE.jar
+ EASE.jar NeChatLogging.jar
 Main-Class: io.github.shamrice.nechat.server.web.service.Application
 

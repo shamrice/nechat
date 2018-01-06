@@ -27,16 +27,10 @@ public class MessagesController {
         MessagesDto messages = null;
 
         String login = AuthAccessUtil.getCurrentLoginPrincipal();
+        new TokenAuthService(CoreContext.getInstance()).authorizeToken(token, login);
 
-        TokenAuthService tokenAuthService = new TokenAuthService(CoreContext.getInstance());
-        if (tokenAuthService.authorizeToken(token, login)) {
-            MessageService messageService = new MessageService(CoreContext.getInstance());
-            messages = messageService.getUnreadMessages(login);
-        } else {
-            Log.get().logMessage(LogLevel.INFORMATION, this.getClass().getSimpleName() + ": " +
-                    "Unable to authenticate using token: " + token);
-            throw new AccessDeniedException("Unable to authenticate token " + token);
-        }
+        MessageService messageService = new MessageService(CoreContext.getInstance());
+        messages = messageService.getUnreadMessages(login);
 
         return messages;
     }
@@ -50,18 +44,14 @@ public class MessagesController {
     ) {
 
         String fromLogin = AuthAccessUtil.getCurrentLoginPrincipal();
+        new TokenAuthService(CoreContext.getInstance()).authorizeToken(token, fromLogin);
 
-        TokenAuthService tokenAuthService = new TokenAuthService(CoreContext.getInstance());
-        if (tokenAuthService.authorizeToken(token, fromLogin)) {
-            MessageService messageService = new MessageService(CoreContext.getInstance());
-            if (messageService.sendMessageToUser(fromLogin, toLogin, body)) {
-                return new StatusResponse(Status.SUCCESS, "Message sent");
-            } else {
-                return new StatusResponse(Status.FAILURE, "Message failed");
-            }
+        MessageService messageService = new MessageService(CoreContext.getInstance());
+        if (messageService.sendMessageToUser(fromLogin, toLogin, body)) {
+            return new StatusResponse(Status.SUCCESS, "Message sent");
+        } else {
+            return new StatusResponse(Status.FAILURE, "Message failed");
         }
-
-        return new StatusResponse(Status.INVALID, "FORBIDDEN");
     }
 
     @RequestMapping(value = "messages/history/{login}", method = RequestMethod.GET)
@@ -72,31 +62,25 @@ public class MessagesController {
             @RequestParam(value = "after", required = false) String afterMessageId
     ) {
         MessagesDto messagesDto = null;
+
         String currentLogin = AuthAccessUtil.getCurrentLoginPrincipal();
+        new TokenAuthService(CoreContext.getInstance()).authorizeToken(token, currentLogin);
 
-        TokenAuthService tokenAuthService = new TokenAuthService(CoreContext.getInstance());
-        if (tokenAuthService.authorizeToken(token, currentLogin)) {
-            int startMessageId = 0;
-            if (afterMessageId != null && !afterMessageId.isEmpty()) {
-                try {
-                    startMessageId = Integer.parseInt(afterMessageId);
-                } catch (NumberFormatException formatExc) {
-                    Log.get().logExceptionWithMessage(
-                            this.getClass().getSimpleName() +
-                                    ": " + afterMessageId + " is not a valid number. Setting to 0.",
-                            formatExc
-                    );
-                }
+        int startMessageId = 0;
+        if (afterMessageId != null && !afterMessageId.isEmpty()) {
+            try {
+                startMessageId = Integer.parseInt(afterMessageId);
+            } catch (NumberFormatException formatExc) {
+                Log.get().logExceptionWithMessage(
+                        this.getClass().getSimpleName() +
+                                ": " + afterMessageId + " is not a valid number. Setting to 0.",
+                        formatExc
+                );
             }
-
-            MessageService messageService = new MessageService(CoreContext.getInstance());
-            messagesDto = messageService.getChronologicalMessageHistory(currentLogin, withLogin, startMessageId);
-        } else {
-            Log.get().logMessage(LogLevel.INFORMATION, this.getClass().getSimpleName() + ": " +
-                    "Unable to authenticate using token: " + token);
-            throw new AccessDeniedException("Unable to authenticate user "
-                    + currentLogin + " with token " + token);
         }
+
+        MessageService messageService = new MessageService(CoreContext.getInstance());
+        messagesDto = messageService.getChronologicalMessageHistory(currentLogin, withLogin, startMessageId);
 
         return messagesDto;
     }
@@ -108,19 +92,12 @@ public class MessagesController {
             @PathVariable(value = "login") String withLogin
     ) {
         MessagesDto messagesDto = null;
+
         String currentLogin = AuthAccessUtil.getCurrentLoginPrincipal();
+        new TokenAuthService(CoreContext.getInstance()).authorizeToken(token, currentLogin);
 
-        TokenAuthService tokenAuthService = new TokenAuthService(CoreContext.getInstance());
-        if (tokenAuthService.authorizeToken(token, currentLogin)) {
-            MessageService messageService = new MessageService(CoreContext.getInstance());
-            messagesDto = messageService.getUnreadMessagesWithUser(currentLogin, withLogin);
-        } else {
-            Log.get().logMessage(LogLevel.INFORMATION, this.getClass().getSimpleName() + ": " +
-                    "Unable to authenticate using token: " + token);
-            throw new AccessDeniedException("Unable to authenticate user "
-                    + currentLogin + " with token " + token);
-        }
-
+        MessageService messageService = new MessageService(CoreContext.getInstance());
+        messagesDto = messageService.getUnreadMessagesWithUser(currentLogin, withLogin);
         return messagesDto;
     }
 
@@ -132,24 +109,20 @@ public class MessagesController {
     ) {
 
         String currentLogin = AuthAccessUtil.getCurrentLoginPrincipal();
+        new TokenAuthService(CoreContext.getInstance()).authorizeToken(token, currentLogin);
 
-        TokenAuthService tokenAuthService = new TokenAuthService(CoreContext.getInstance());
-        if (tokenAuthService.authorizeToken(token, currentLogin)) {
-            MessageService messageService = new MessageService(CoreContext.getInstance());
+        MessageService messageService = new MessageService(CoreContext.getInstance());
 
-            String[] messageIdStrings = body.split(",");
-            int messageIds[] = new int[messageIdStrings.length];
-            for (int i = 0; i < messageIdStrings.length; i++) {
-                messageIds[i] = Integer.parseInt(messageIdStrings[i]);
-            }
-
-            if (messageService.markMessagesAsRead(currentLogin, messageIds)) {
-                return new StatusResponse(Status.SUCCESS, "Message(s) marked as read.");
-            } else {
-                return new StatusResponse(Status.FAILURE, "Message(s) failed to be marked as read");
-            }
+        String[] messageIdStrings = body.split(",");
+        int messageIds[] = new int[messageIdStrings.length];
+        for (int i = 0; i < messageIdStrings.length; i++) {
+            messageIds[i] = Integer.parseInt(messageIdStrings[i]);
         }
 
-        return new StatusResponse(Status.INVALID, "FORBIDDEN");
+        if (messageService.markMessagesAsRead(currentLogin, messageIds)) {
+            return new StatusResponse(Status.SUCCESS, "Message(s) marked as read.");
+        } else {
+            return new StatusResponse(Status.FAILURE, "Message(s) failed to be marked as read");
+        }
     }
 }

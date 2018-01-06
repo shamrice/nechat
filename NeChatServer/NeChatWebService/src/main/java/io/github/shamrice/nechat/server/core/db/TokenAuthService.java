@@ -5,6 +5,7 @@ import io.github.shamrice.nechat.server.core.db.dto.DbDto;
 import io.github.shamrice.nechat.server.core.db.dto.TokenDto;
 import io.github.shamrice.nechat.logging.Log;
 import io.github.shamrice.nechat.logging.LogLevel;
+import org.springframework.security.access.AccessDeniedException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,7 +24,7 @@ public class TokenAuthService extends DbService {
         super(coreContext);
     }
 
-    public boolean authorizeToken(String token, String login) {
+    public void authorizeToken(String token, String login) {
 
         boolean result = false;
         String tokenFound = "";
@@ -84,10 +85,9 @@ public class TokenAuthService extends DbService {
                     this.getClass().getSimpleName() +
                             " : Failed to validate token " + token + " for " + login
             );
-
+            throw new AccessDeniedException("Unable to authenticate user "
+                    + login + " with token " + token);
         }
-
-        return result;
     }
 
     public boolean createToken(int userId) {

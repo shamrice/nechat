@@ -26,17 +26,10 @@ public class AuthenticationController {
     ) throws AccessDeniedException {
 
         String currentUser = AuthAccessUtil.getCurrentLoginPrincipal();
-        TokenAuthService tokenAuthService = new TokenAuthService(CoreContext.getInstance());
+        new TokenAuthService(CoreContext.getInstance()).authorizeToken(token, currentUser);
 
-        if (tokenAuthService.authorizeToken(token, currentUser)) {
-            UserService userService = new UserService(CoreContext.getInstance());
-            return userService.getUser(login);
-        }
-
-        Log.get().logMessage(LogLevel.INFORMATION, this.getClass().getSimpleName() + ": " +
-                "Unable to authenticate using token: " + token);
-        throw new AccessDeniedException("Unable to authenticate user "
-                + currentUser + " with token " + token);
+        UserService userService = new UserService(CoreContext.getInstance());
+        return userService.getUser(login);
 
     }
 

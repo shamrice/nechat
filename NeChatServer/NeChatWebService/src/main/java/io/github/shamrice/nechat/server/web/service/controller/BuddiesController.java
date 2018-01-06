@@ -28,17 +28,10 @@ public class BuddiesController {
         BuddiesDto buddiesDto = null;
 
         String login = AuthAccessUtil.getCurrentLoginPrincipal();
+        new TokenAuthService(CoreContext.getInstance()).authorizeToken(token, login);
 
-        TokenAuthService tokenAuthService = new TokenAuthService(CoreContext.getInstance());
-        if (tokenAuthService.authorizeToken(token, login)) {
-            BuddiesService buddiesService = new BuddiesService(CoreContext.getInstance());
-            buddiesDto = buddiesService.getBuddyList(login);
-        } else {
-            Log.get().logMessage(LogLevel.INFORMATION, this.getClass().getSimpleName() + ": " +
-                    "Unable to authenticate using token: " + token);
-            throw new AccessDeniedException("Unable to authenticate user "
-                    + login + " with token " + token);
-        }
+        BuddiesService buddiesService = new BuddiesService(CoreContext.getInstance());
+        buddiesDto = buddiesService.getBuddyList(login);
 
         return buddiesDto;
     }
@@ -51,18 +44,14 @@ public class BuddiesController {
     ) {
 
         String login = AuthAccessUtil.getCurrentLoginPrincipal();
+        new TokenAuthService(CoreContext.getInstance()).authorizeToken(token, login);
 
-        TokenAuthService tokenAuthService = new TokenAuthService(CoreContext.getInstance());
-        if (tokenAuthService.authorizeToken(token, login)) {
-            BuddiesService buddiesService = new BuddiesService(CoreContext.getInstance());
-            if (buddiesService.addBuddy(login, buddy)) {
-                return new StatusResponse(Status.SUCCESS, "Buddy added");
-            } else {
-                return new StatusResponse(Status.FAILURE, "Buddy is either already added or user does not exist.");
-            }
+        BuddiesService buddiesService = new BuddiesService(CoreContext.getInstance());
+        if (buddiesService.addBuddy(login, buddy)) {
+            return new StatusResponse(Status.SUCCESS, "Buddy added");
+        } else {
+            return new StatusResponse(Status.FAILURE, "Buddy is either already added or user does not exist.");
         }
-
-        return new StatusResponse(Status.INVALID, "FORBIDDEN");
     }
 
     @RequestMapping(value = "buddies/{buddy}", method = RequestMethod.DELETE)
@@ -73,17 +62,14 @@ public class BuddiesController {
     ) {
 
         String login = AuthAccessUtil.getCurrentLoginPrincipal();
+        new TokenAuthService(CoreContext.getInstance()).authorizeToken(token, login);
 
-        TokenAuthService tokenAuthService = new TokenAuthService(CoreContext.getInstance());
-        if (tokenAuthService.authorizeToken(token, login)) {
-            BuddiesService buddiesService = new BuddiesService(CoreContext.getInstance());
-            if (buddiesService.deleteBuddy(buddy)) {
-                return new StatusResponse(Status.SUCCESS, "Buddy deleted");
-            } else {
-                return new StatusResponse(Status.FAILURE, "Buddy not found.");
-            }
+        BuddiesService buddiesService = new BuddiesService(CoreContext.getInstance());
+        if (buddiesService.deleteBuddy(buddy)) {
+            return new StatusResponse(Status.SUCCESS, "Buddy deleted");
+        } else {
+            return new StatusResponse(Status.FAILURE, "Buddy not found.");
         }
 
-        return new StatusResponse(Status.INVALID, "FORBIDDEN");
     }
 }

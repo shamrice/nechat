@@ -1,0 +1,6 @@
+{
+  "protocol":"http",
+  "host":"12.345.678.90",
+  "port":5678,
+  "webapp":"nechat-web-service-1.0-SNAPSHOT"
+}

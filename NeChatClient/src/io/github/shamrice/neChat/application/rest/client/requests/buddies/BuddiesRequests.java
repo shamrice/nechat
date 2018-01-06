@@ -21,7 +21,7 @@ public class BuddiesRequests extends RequestsBase {
 
     public StatusResponse addBuddy(String buddyLogin) {
 
-        if (buddyLogin != null) {
+        if (buddyLogin != null && !buddyLogin.isEmpty()) {
             JSONObject response = executeRequest(
                     "PUT",
                     "buddies/" + buddyLogin + "/",
@@ -47,7 +47,7 @@ public class BuddiesRequests extends RequestsBase {
     }
 
     public StatusResponse removeBuddy(String buddyLogin) {
-        if (buddyLogin != null) {
+        if (buddyLogin != null && !buddyLogin.isEmpty()) {
             JSONObject response = executeRequest(
                     "DELETE",
                     "buddies/" + buddyLogin + "/",

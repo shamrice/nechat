@@ -22,12 +22,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="NeChatCore" />
         <module name="NeChatWebService" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
-      <module name="NeChatCore" target="1.8" />
       <module name="NeChatServer" target="1.8" />
       <module name="NeChatWebService" target="1.8" />
     </bytecodeTargetLevel>

@@ -24,6 +24,16 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="NeChatLogging" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/main/resources/lib/NeChatLogging.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="library" name="Maven: net.kaczmarzyk:specification-arg-resolver:0.6.0" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-web:4.3.12.RELEASE" level="project" />
@@ -101,16 +111,5 @@
     <orderEntry type="library" name="Maven: javax.transaction:javax.transaction-api:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aspects:4.3.12.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.44" level="project" />
-    <orderEntry type="module" module-name="NeChatCore" />
-    <orderEntry type="library" exported="" name="NeChatLogging" level="project" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/src/main/resources/lib/NeChatLogging.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
   </component>
 </module>

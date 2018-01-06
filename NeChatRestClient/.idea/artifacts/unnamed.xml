@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="unnamed">
-    <output-path>$PROJECT_DIR$/out/artifacts/unnamed</output-path>
-    <root id="archive" name="unnamed.jar">
-      <element id="library" level="project" name="Maven: org.json:json:20171018" />
-      <element id="dir-copy" path="$PROJECT_DIR$/src/main/java/io" />
-    </root>
-  </artifact>
-</component>
